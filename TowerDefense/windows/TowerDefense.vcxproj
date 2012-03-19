@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{29CF0D4C-05C2-4665-B6B9-A34E9339E85F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TowerDefense</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\ARM\Mali Developer Tools\OpenGL ES Emulator v1.3.0\include;C:\Users\Public\boost;$(SolutionDir)..\..\freetype2\freetype2-windows\include;$(SolutionDir)..\..\libpng\libpng-windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>freetype248MT_D.lib;libEGL.lib;libGLESv2.lib;libpng15.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\ARM\Mali Developer Tools\OpenGL ES Emulator v1.3.0\lib;$(SolutionDir)..\..\freetype2\freetype2-windows\objs\win32\vc2010;$(SolutionDir)..\..\libpng\libpng-windows\projects\vstudio\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\ARM\Mali Developer Tools\OpenGL ES Emulator v1.3.0\include;C:\Users\Public\boost;$(SolutionDir)..\..\freetype2\freetype2-windows\include;$(SolutionDir)..\..\libpng\libpng-windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>freetype248MT.lib;libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\ARM\Mali Developer Tools\OpenGL ES Emulator v1.3.0\lib;$(SolutionDir)..\..\libpng\libpng-windows\projects\vstudio\$(Configuration);$(SolutionDir)..\..\freetype2\freetype2-windows\objs\win32\vc2010</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Bitmap.h" />
+    <ClInclude Include="..\src\Block.h" />
+    <ClInclude Include="..\src\Camera.h" />
+    <ClInclude Include="..\src\CheckMacros.h" />
+    <ClInclude Include="..\src\Column.h" />
+    <ClInclude Include="..\src\CommonDefs.h" />
+    <ClInclude Include="..\src\Components\Component.h" />
+    <ClInclude Include="..\src\Components\Graphics\CubeDrawer.h" />
+    <ClInclude Include="..\src\Components\Graphics\Effect.h" />
+    <ClInclude Include="..\src\Components\Graphics\FadeOverlay.h" />
+    <ClInclude Include="..\src\Components\Graphics\Font.h" />
+    <ClInclude Include="..\src\Components\Graphics\PathVisualiser.h" />
+    <ClInclude Include="..\src\Components\Graphics\TextDrawer.h" />
+    <ClInclude Include="..\src\Components\Graphics\Texture.h" />
+    <ClInclude Include="..\src\Components\Graphics\TexturedQuad.h" />
+    <ClInclude Include="..\src\Components\Graphics\WorldDrawer.h" />
+    <ClInclude Include="..\src\Components\GUI\Actions\CameraRotateAction.h" />
+    <ClInclude Include="..\src\Components\GUI\Actions\SignalAction.h" />
+    <ClInclude Include="..\src\Components\GUI\ControlArea.h" />
+    <ClInclude Include="..\src\Components\GUI\ControlEventDistributor.h" />
+    <ClInclude Include="..\src\Components\GUI\ControlEventReceiver.h" />
+    <ClInclude Include="..\src\Components\GUI\ControlOutline.h" />
+    <ClInclude Include="..\src\Components\GUI\ControlText.h" />
+    <ClInclude Include="..\src\Components\GUI\ControlTransition.h" />
+    <ClInclude Include="..\src\Components\GUI\UDim.h" />
+    <ClInclude Include="..\src\Components\Health.h" />
+    <ClInclude Include="..\src\Components\Membership.h" />
+    <ClInclude Include="..\src\Components\Navigator.h" />
+    <ClInclude Include="..\src\Components\Position.h" />
+    <ClInclude Include="..\src\Components\StateListener.h" />
+    <ClInclude Include="..\src\Components\States\BuildGS.h" />
+    <ClInclude Include="..\src\Components\States\DefendGS.h" />
+    <ClInclude Include="..\src\Components\States\MenuGS.h" />
+    <ClInclude Include="..\src\Components\UberComponent.h" />
+    <ClInclude Include="..\src\Components\WorldHandle.h" />
+    <ClInclude Include="..\src\DrawList.h" />
+    <ClInclude Include="..\src\Game.h" />
+    <ClInclude Include="..\src\GameObject.h" />
+    <ClInclude Include="..\src\Input\IInputProcessor.h" />
+    <ClInclude Include="..\src\Input\InputActions.h" />
+    <ClInclude Include="..\src\InvalidationWatcher.h" />
+    <ClInclude Include="..\src\Log.h" />
+    <ClInclude Include="..\src\MembershipManager.h" />
+    <ClInclude Include="..\src\MembershipTypes.h" />
+    <ClInclude Include="..\src\Messaging\GuiTransitionControlMessage.h" />
+    <ClInclude Include="..\src\Messaging\MessageHub.h" />
+    <ClInclude Include="..\src\Messaging\StateChangeMessage.h" />
+    <ClInclude Include="..\src\PlatformSpecific\AndroidFile.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\src\PlatformSpecific\AndroidInputProcessor.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\src\PlatformSpecific\IFile.h" />
+    <ClInclude Include="..\src\PlatformSpecific\PlaybookFile.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\src\PlatformSpecific\PlaybookInputProcessor.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\src\PlatformSpecific\WindowsFile.h" />
+    <ClInclude Include="..\src\PlatformSpecific\WindowsInputProcessor.h" />
+    <ClInclude Include="..\src\pngconf.h" />
+    <ClInclude Include="..\src\png_141.h" />
+    <ClInclude Include="..\src\PotentialMap.h" />
+    <ClInclude Include="..\src\RefCnt.h" />
+    <ClInclude Include="..\src\TickParameters.h" />
+    <ClInclude Include="..\src\vmath.h" />
+    <ClInclude Include="..\src\WorldBlocks.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Bitmap.cpp" />
+    <ClCompile Include="..\src\Block.cpp" />
+    <ClCompile Include="..\src\Camera.cpp" />
+    <ClCompile Include="..\src\Column.cpp" />
+    <ClCompile Include="..\src\Components\Graphics\CubeDrawer.cpp" />
+    <ClCompile Include="..\src\Components\Graphics\Effect.cpp" />
+    <ClCompile Include="..\src\Components\Graphics\FadeOverlay.cpp" />
+    <ClCompile Include="..\src\Components\Graphics\Font.cpp" />
+    <ClCompile Include="..\src\Components\Graphics\PathVisualiser.cpp" />
+    <ClCompile Include="..\src\Components\Graphics\TextDrawer.cpp" />
+    <ClCompile Include="..\src\Components\Graphics\Texture.cpp" />
+    <ClCompile Include="..\src\Components\Graphics\TexturedQuad.cpp" />
+    <ClCompile Include="..\src\Components\Graphics\TextureText.cpp" />
+    <ClCompile Include="..\src\Components\Graphics\WorldDrawer.cpp" />
+    <ClCompile Include="..\src\Components\GUI\Actions\CameraRotateAction.cpp" />
+    <ClCompile Include="..\src\Components\GUI\Actions\SignalAction.cpp" />
+    <ClCompile Include="..\src\Components\GUI\ControlArea.cpp" />
+    <ClCompile Include="..\src\Components\GUI\ControlEventDistributor.cpp" />
+    <ClCompile Include="..\src\Components\GUI\ControlEventReceiver.cpp" />
+    <ClCompile Include="..\src\Components\GUI\ControlOutline.cpp" />
+    <ClCompile Include="..\src\Components\GUI\ControlText.cpp" />
+    <ClCompile Include="..\src\Components\GUI\ControlTransition.cpp" />
+    <ClCompile Include="..\src\Components\GUI\UDim.cpp" />
+    <ClCompile Include="..\src\Components\Health.cpp" />
+    <ClCompile Include="..\src\Components\Navigator.cpp" />
+    <ClCompile Include="..\src\Components\StateListener.cpp" />
+    <ClCompile Include="..\src\Components\States\BuildGS.cpp" />
+    <ClCompile Include="..\src\Components\States\DefendGS.cpp" />
+    <ClCompile Include="..\src\Components\States\MenuGS.cpp" />
+    <ClCompile Include="..\src\DrawList.cpp" />
+    <ClCompile Include="..\src\Game.cpp" />
+    <ClCompile Include="..\src\GameObject.cpp" />
+    <ClCompile Include="..\src\Input\IInputProcessor.cpp" />
+    <ClCompile Include="..\src\InvalidationWatcher.cpp" />
+    <ClCompile Include="..\src\Log.cpp" />
+    <ClCompile Include="..\src\MembershipManager.cpp" />
+    <ClCompile Include="..\src\PlatformSpecific\AndroidFile.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\AndroidInputProcessor.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\NativeActivity.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\Playbook.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\PlaybookFile.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\PlaybookInputProcessor.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\Windows.cpp" />
+    <ClCompile Include="..\src\PlatformSpecific\WindowsFile.cpp" />
+    <ClCompile Include="..\src\PlatformSpecific\WindowsInputProcessor.cpp" />
+    <ClCompile Include="..\src\PotentialMap.cpp" />
+    <ClCompile Include="..\src\TickParameters.cpp" />
+    <ClCompile Include="..\src\WorldBlocks.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

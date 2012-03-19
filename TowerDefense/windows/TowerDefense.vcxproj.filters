@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Components">
+      <UniqueIdentifier>{e19ecaac-0493-4879-b1a1-2c5f4d2878e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Graphics">
+      <UniqueIdentifier>{1f896287-4e83-4423-a4db-a281f466c76b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\GUI">
+      <UniqueIdentifier>{5d111a81-2a5a-41a5-a66d-7b82c7525402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\States">
+      <UniqueIdentifier>{f0b447b5-7a52-4ba0-9ce8-fee8b991118d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{619e8d8b-109c-437a-843f-3d3fda1b7aa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{3c44635c-0496-4eb0-a08f-dd777246d67b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Messaging">
+      <UniqueIdentifier>{fcef4d3a-82ee-4303-9a02-a6cb927f08fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\PlatformSpecific">
+      <UniqueIdentifier>{af6dd324-1d20-436d-bbe1-4156d841f110}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{dc76f6fa-b27a-40e4-a80f-8252727ab855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Messaging">
+      <UniqueIdentifier>{99d07c4e-a0ec-4e6d-85dc-f067241715b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PlatformSpecific">
+      <UniqueIdentifier>{4d26dbeb-7908-4478-9222-e59f99334d73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Graphics">
+      <UniqueIdentifier>{41df8451-e8e3-4fef-b5f5-7cee4f7d64e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\GUI">
+      <UniqueIdentifier>{9b000a6d-e520-465c-a7d7-5bf63e83445a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\States">
+      <UniqueIdentifier>{1a02b7c9-eade-4f08-bc5e-c06468634abc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\GUI\Actions">
+      <UniqueIdentifier>{69bb6370-fb1c-4630-a461-e82ec7b1c2ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\GUI\Actions">
+      <UniqueIdentifier>{8a2bc8d3-da73-4892-8329-ed9deb03449b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Bitmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CheckMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Column.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CommonDefs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DrawList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\InvalidationWatcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MembershipManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MembershipTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\png_141.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\pngconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PotentialMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\RefCnt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TickParameters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\vmath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WorldBlocks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Component.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Health.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Membership.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Navigator.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Position.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\StateListener.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\UberComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\WorldHandle.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Graphics\CubeDrawer.h">
+      <Filter>Header Files\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Graphics\Effect.h">
+      <Filter>Header Files\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Graphics\FadeOverlay.h">
+      <Filter>Header Files\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Graphics\Font.h">
+      <Filter>Header Files\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Graphics\PathVisualiser.h">
+      <Filter>Header Files\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Graphics\TextDrawer.h">
+      <Filter>Header Files\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Graphics\Texture.h">
+      <Filter>Header Files\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Graphics\TexturedQuad.h">
+      <Filter>Header Files\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Graphics\WorldDrawer.h">
+      <Filter>Header Files\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\GUI\ControlArea.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\GUI\ControlEventDistributor.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\GUI\ControlEventReceiver.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\GUI\ControlOutline.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\GUI\ControlText.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\GUI\ControlTransition.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\GUI\UDim.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\States\BuildGS.h">
+      <Filter>Header Files\Components\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\States\DefendGS.h">
+      <Filter>Header Files\Components\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\States\MenuGS.h">
+      <Filter>Header Files\Components\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Input\IInputProcessor.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Input\InputActions.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Messaging\GuiTransitionControlMessage.h">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Messaging\MessageHub.h">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Messaging\StateChangeMessage.h">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PlatformSpecific\AndroidFile.h">
+      <Filter>Header Files\PlatformSpecific</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PlatformSpecific\AndroidInputProcessor.h">
+      <Filter>Header Files\PlatformSpecific</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PlatformSpecific\IFile.h">
+      <Filter>Header Files\PlatformSpecific</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PlatformSpecific\PlaybookFile.h">
+      <Filter>Header Files\PlatformSpecific</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PlatformSpecific\PlaybookInputProcessor.h">
+      <Filter>Header Files\PlatformSpecific</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PlatformSpecific\WindowsFile.h">
+      <Filter>Header Files\PlatformSpecific</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PlatformSpecific\WindowsInputProcessor.h">
+      <Filter>Header Files\PlatformSpecific</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\GUI\Actions\CameraRotateAction.h">
+      <Filter>Header Files\Components\GUI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\GUI\Actions\SignalAction.h">
+      <Filter>Header Files\Components\GUI\Actions</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Components\Graphics\CubeDrawer.cpp">
+      <Filter>Source Files\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Graphics\Effect.cpp">
+      <Filter>Source Files\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Graphics\FadeOverlay.cpp">
+      <Filter>Source Files\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Graphics\Font.cpp">
+      <Filter>Source Files\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Graphics\PathVisualiser.cpp">
+      <Filter>Source Files\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Graphics\TextDrawer.cpp">
+      <Filter>Source Files\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Graphics\Texture.cpp">
+      <Filter>Source Files\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Graphics\TexturedQuad.cpp">
+      <Filter>Source Files\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Graphics\TextureText.cpp">
+      <Filter>Source Files\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Graphics\WorldDrawer.cpp">
+      <Filter>Source Files\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\GUI\ControlArea.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\GUI\ControlEventDistributor.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\GUI\ControlEventReceiver.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\GUI\ControlOutline.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\GUI\ControlText.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\GUI\ControlTransition.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\GUI\UDim.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\States\BuildGS.cpp">
+      <Filter>Source Files\Components\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\States\DefendGS.cpp">
+      <Filter>Source Files\Components\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\States\MenuGS.cpp">
+      <Filter>Source Files\Components\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Input\IInputProcessor.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\AndroidFile.cpp">
+      <Filter>Source Files\PlatformSpecific</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\WindowsInputProcessor.cpp">
+      <Filter>Source Files\PlatformSpecific</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\AndroidInputProcessor.cpp">
+      <Filter>Source Files\PlatformSpecific</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\NativeActivity.cpp">
+      <Filter>Source Files\PlatformSpecific</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\Playbook.cpp">
+      <Filter>Source Files\PlatformSpecific</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\PlaybookFile.cpp">
+      <Filter>Source Files\PlatformSpecific</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\PlaybookInputProcessor.cpp">
+      <Filter>Source Files\PlatformSpecific</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\Windows.cpp">
+      <Filter>Source Files\PlatformSpecific</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PlatformSpecific\WindowsFile.cpp">
+      <Filter>Source Files\PlatformSpecific</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Bitmap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Column.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\DrawList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\InvalidationWatcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MembershipManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PotentialMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TickParameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldBlocks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Health.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Navigator.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\StateListener.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\GUI\Actions\CameraRotateAction.cpp">
+      <Filter>Source Files\Components\GUI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\GUI\Actions\SignalAction.cpp">
+      <Filter>Source Files\Components\GUI\Actions</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
