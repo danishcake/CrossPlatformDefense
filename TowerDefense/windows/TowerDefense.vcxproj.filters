@@ -57,6 +57,21 @@
     <Filter Include="Header Files\Components\GUI\Actions">
       <UniqueIdentifier>{8a2bc8d3-da73-4892-8329-ed9deb03449b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{bc3db397-bbe9-492c-98b1-b95a4fa5d07a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Textures">
+      <UniqueIdentifier>{bc7f6294-3ecc-4d52-b80a-5f5408b2fcc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Fonts">
+      <UniqueIdentifier>{12afda0d-88ba-4c42-ba06-9c8980ed0c8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\glsl">
+      <UniqueIdentifier>{a49d1a8c-8067-472a-9855-f596e79049b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Heightmaps">
+      <UniqueIdentifier>{094af994-eae4-4deb-a4f6-380b9909b1de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Bitmap.h">
@@ -388,5 +403,76 @@
     <ClCompile Include="..\src\Components\GUI\Actions\SignalAction.cpp">
       <Filter>Source Files\Components\GUI\Actions</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\assets\textures\TerrainTexture.png">
+      <Filter>Assets\Textures</Filter>
+    </None>
+    <None Include="..\assets\textures\CubeTexture.png">
+      <Filter>Assets\Textures</Filter>
+    </None>
+    <None Include="..\assets\glsl\CubeFragment.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\CubeVertex.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\Fade.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\FlatTextured.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\FullscreenTexturedVertex.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\FullscreenVertex.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\GUIFragment.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\GUITextFragment.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\GUITextTransform.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\GUITransform.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\SolidRed.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\TextFragment.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\TextTransform.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\Vector4fTransform.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\WorldFragment.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\WorldVertex.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\heightmaps\map1.png">
+      <Filter>Assets\Heightmaps</Filter>
+    </None>
+    <None Include="..\assets\heightmaps\map2.png">
+      <Filter>Assets\Heightmaps</Filter>
+    </None>
+    <None Include="..\assets\fonts\OrbitronBlack.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </None>
+    <None Include="..\assets\fonts\OrbitronBold.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </None>
+    <None Include="..\assets\fonts\OrbitronLight.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </None>
   </ItemGroup>
 </Project>

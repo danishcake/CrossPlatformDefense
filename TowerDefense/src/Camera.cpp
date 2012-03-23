@@ -75,15 +75,66 @@ void Camera::RotateRight()
 
 void Camera::RotateAxis(float x, float y)
 {
-   Quatf rot = Quatf::fromAxisRot(mCameraQuaternion.transform() * Vector3f(0, -1, 0), x * 0.1f) *
-               Quatf::fromAxisRot(mCameraQuaternion.transform() * Vector3f(0, 0, -1), y * 0.1f);
-   //Quatf rot = Quatf::fromAxisRot(Vector3f(0, -1, 0), x * 0.1f) *
+   //Quatf rot = Quatf::fromAxisRot(mCameraQuaternion.transform() * Vector3f(0, -1, 0), x * 0.1f) *
    //            Quatf::fromAxisRot(mCameraQuaternion.transform() * Vector3f(0, 0, -1), y * 0.1f);
+   Quatf rot = Quatf::fromAxisRot(Vector3f(0, -1, 0), x * 0.1f) *
+               Quatf::fromAxisRot(mCameraQuaternion.transform() * Vector3f(0, 0, -1), y * 0.1f);
    mCameraQuaternion = rot * mCameraQuaternion ;
    mCameraQuaternion.normalize();
 
    mCameraQuaternionStart = mCameraQuaternion;
    mCameraQuaternionEnd = mCameraQuaternion;
+}
+
+void Camera::Pan(float x, float y, float dx, float dy)
+{
+   /*
+    * Panning occurs in the x,z plane only
+    * y is zeroed.
+    * To calculate scaling assume 1 pixel moved in each axis from centre
+    * Calculate where that lands relative to the centred value
+    */
+   Matrix4f inv_vp = GetViewProjection().inverse();
+   Vector4f tap_pos_screen = Vector4f((x - mResolution.x * 0.5f) / (mResolution.x * 0.5f), 
+                                     -(y - mResolution.y * 0.5f) / (mResolution.y * 0.5f),
+                                      1.0f, 1.0f);
+   Vector4f tap_pos_world = inv_vp * tap_pos_screen;
+   tap_pos_world /= tap_pos_world.w;
+   Vector4f tap_ray = tap_pos_world - mCameraVector;
+   Vector3f tap_unit = Vector3f(tap_ray.x, tap_ray.y, tap_ray.z);
+   tap_unit.normalize();
+
+   Vector3f tap_intersection = mCameraVector - tap_unit * (mCameraVector.y / tap_unit.y);
+
+
+
+
+   //Calculate world drag end position
+   Vector4f drag_pos_screen = Vector4f(((x - dx) - mResolution.x * 0.5f) / (mResolution.x * 0.5f), 
+                                      -((y - dy) - mResolution.y * 0.5f) / (mResolution.y * 0.5f),
+                                      1.0f, 1.0f);
+   Vector4f drag_pos_world = inv_vp * drag_pos_screen;
+   drag_pos_world /= drag_pos_world.w;
+   Vector4f drag_ray = drag_pos_world - mCameraVector;
+   Vector3f drag_unit = Vector3f(drag_ray.x, drag_ray.y, drag_ray.z);
+   drag_unit.normalize();
+
+   Vector3f drag_intersection = mCameraVector - drag_unit * (mCameraVector.y / drag_unit.y);
+
+
+
+   
+   //Log::Debug(__FILE__, "Tap at (%f, %f)", tap_pos_screen.x, tap_pos_screen.y);
+   //Log::Debug(__FILE__, "Tap unit is (%f, %f, %f)", tap_unit.x, tap_unit.y, tap_unit.z);
+   //Log::Debug(__FILE__, "Ray cast from (%f, %f, %f)", mCameraVector.x, mCameraVector.y, mCameraVector.z);
+   //Log::Debug(__FILE__, "Intersection y=0 at (%f, %f)", tap_intersection.x, tap_intersection.z);
+
+   Vector3f delta = drag_intersection - tap_intersection;
+   Log::Debug(__FILE__, "Intersection y=0 at (%f, %f)", tap_intersection.x, tap_intersection.z);
+   Log::Debug(__FILE__, "Delta (%f, %f)", delta.x, delta.z);
+
+   mCameraOriginEnd += delta;
+   mCameraOriginStart += delta;
 }
 
 void Camera::ZoomIn()
@@ -104,18 +155,27 @@ void Camera::ZoomOut()
 
 void Camera::ZoomToggle()
 {
-   mFOVStart = mFOV;
    mZoomTransitionTimer = 0;
+   mFOVStart = mFOV;
+   mCameraOriginStart = mCameraOrigin;
+   
 
    if(!mZoomedIn)
    {
       mZoomedIn = true;
       mFOVEnd = sFOVNarrow;
+      mCameraOriginEnd = mCameraOrigin;
    } else if(mZoomedIn)
    {
       mZoomedIn = false;
       mFOVEnd = sFOVWide;
+      mCameraOriginEnd = Vector3f();
    }
+}
+
+bool Camera::GetZoomedIn()
+{
+	return mZoomedIn;
 }
 
 void Camera::Tick(TickParameters &tp)
@@ -131,12 +191,6 @@ void Camera::Tick(TickParameters &tp)
    float transition_factor = smootherstep(0, 1, mTransitionTimer / sTransitionTime);
    mCameraQuaternion = mCameraQuaternionStart.slerp(transition_factor, mCameraQuaternionEnd);
 
-   //Now calculate camera position by taking a vector and rotating it by the quaternion
-   Matrix4f transform = mCameraQuaternion.transform();
-   mCameraVector = transform * Vector3f(-WORLD_WIDTH, 0, 0) + Vector3f(0.5f * WORLD_WIDTH, 0, 0.5f * WORLD_BREADTH);
-   mCameraUp = transform * Vector3f(0, 1, 0);
-
-
    //Now handle zooming
    mZoomTransitionTimer += tp.timespan;
 
@@ -144,18 +198,24 @@ void Camera::Tick(TickParameters &tp)
    if(mZoomTransitionTimer >= sTransitionTime)
    {
       mFOVStart = mFOVEnd;
+      mCameraOriginStart = mCameraOriginEnd;
       mZoomTransitionTimer = 0;
    }
 
    zoom_scalar = smootherstep(0, 1, mZoomTransitionTimer / sTransitionTime);
 
+   mCameraOrigin = mCameraOriginStart + (mCameraOriginEnd - mCameraOriginStart) * zoom_scalar;
    mFOV = mFOVStart + (mFOVEnd - mFOVStart) * zoom_scalar;
 
+   //Now calculate camera position by taking a vector and rotating it by the quaternion
+   Matrix4f transform = mCameraQuaternion.transform();
+   mCameraVector = transform * Vector3f(-WORLD_WIDTH, 0, 0) + Vector3f(0.5f * WORLD_WIDTH, 0, 0.5f * WORLD_BREADTH) + mCameraOrigin;
+   mCameraUp = transform * Vector3f(0, 1, 0);
 }
 
 Matrix4f Camera::GetView()
 {
-   return Matrix4f::createLookAt(mCameraVector, Vector3f(0.5f * WORLD_WIDTH, 0, 0.5f * WORLD_BREADTH), mCameraUp);
+   return Matrix4f::createLookAt(mCameraVector, Vector3f(0.5f * WORLD_WIDTH, 0, 0.5f * WORLD_BREADTH) + mCameraOrigin, mCameraUp);
 }
 
 Matrix4f Camera::GetProjection()

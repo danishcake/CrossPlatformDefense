@@ -32,16 +32,23 @@ private:
 
    Vector3f mCameraVector;
    Vector3f mCameraUp;
+
+   Vector3f mCameraOriginStart;
+   Vector3f mCameraOriginEnd;
+   Vector3f mCameraOrigin;
+
 public:
    Camera();
    void Tick(TickParameters& tp);
    void RotateLeft();
    void RotateRight();
    void RotateAxis(float x, float y);
+   void Pan(float x, float y, float dx, float dy);
 
    void ZoomIn();
    void ZoomOut();
    void ZoomToggle();
+   bool GetZoomedIn();
 
    Matrix4f GetView();
    Matrix4f GetProjection();

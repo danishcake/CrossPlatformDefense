@@ -21,7 +21,16 @@ void CameraRotateAction::Tick(TickParameters& tp)
    {
       if(mEventRcvr->GetDrag() && mAction == CameraAction::TurnAxis)
       {
-         tp.camera->RotateAxis(static_cast<float>(mEventRcvr->GetDragDX()), static_cast<float>(mEventRcvr->GetDragDY()));
+         if(tp.camera->GetZoomedIn())
+         {
+            tp.camera->Pan(static_cast<float>(mEventRcvr->GetDragX()),
+                           static_cast<float>(mEventRcvr->GetDragY()),
+                           static_cast<float>(mEventRcvr->GetDragDX()),
+                           static_cast<float>(mEventRcvr->GetDragDY()));
+         } else
+         {
+            tp.camera->RotateAxis(static_cast<float>(mEventRcvr->GetDragDX()), static_cast<float>(mEventRcvr->GetDragDY()));
+         }
       }
       if(mEventRcvr->GetClicked())
       {

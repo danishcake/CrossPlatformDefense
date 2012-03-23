@@ -226,6 +226,31 @@
     <ClCompile Include="..\src\TickParameters.cpp" />
     <ClCompile Include="..\src\WorldBlocks.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\assets\fonts\OrbitronBlack.ttf" />
+    <None Include="..\assets\fonts\OrbitronBold.ttf" />
+    <None Include="..\assets\fonts\OrbitronLight.ttf" />
+    <None Include="..\assets\glsl\CubeFragment.glsl" />
+    <None Include="..\assets\glsl\CubeVertex.glsl" />
+    <None Include="..\assets\glsl\Fade.glsl" />
+    <None Include="..\assets\glsl\FlatTextured.glsl" />
+    <None Include="..\assets\glsl\FullscreenTexturedVertex.glsl" />
+    <None Include="..\assets\glsl\FullscreenVertex.glsl" />
+    <None Include="..\assets\glsl\GUIFragment.glsl" />
+    <None Include="..\assets\glsl\GUITextFragment.glsl" />
+    <None Include="..\assets\glsl\GUITextTransform.glsl" />
+    <None Include="..\assets\glsl\GUITransform.glsl" />
+    <None Include="..\assets\glsl\SolidRed.glsl" />
+    <None Include="..\assets\glsl\TextFragment.glsl" />
+    <None Include="..\assets\glsl\TextTransform.glsl" />
+    <None Include="..\assets\glsl\Vector4fTransform.glsl" />
+    <None Include="..\assets\glsl\WorldFragment.glsl" />
+    <None Include="..\assets\glsl\WorldVertex.glsl" />
+    <None Include="..\assets\heightmaps\map1.png" />
+    <None Include="..\assets\heightmaps\map2.png" />
+    <None Include="..\assets\textures\CubeTexture.png" />
+    <None Include="..\assets\textures\TerrainTexture.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
