@@ -46,4 +46,7 @@ public:
 
    void SetTransform(Matrix4f transform);
    void SetAlpha(float a);
+
+   // Note: Only call when object already initialised. Used for changing only
+   void SetText(TickParameters& tp, std::string text);
 };

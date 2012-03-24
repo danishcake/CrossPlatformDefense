@@ -55,7 +55,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
       //Spawn camera controls
       GameObject* gui_right = new GameObject();
       gui_right->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 1.0f), Vector2f(-10.0f, -10.0f), Edge::BottomRight),
-                                              UDim(Vector2f(0.25f, 0.1f), Vector2f( 0.0f,  10.0f))), tp);
+                                              UDim(Vector2f(0.20f, 0.1f), Vector2f( 0.0f,  10.0f))), tp);
       gui_right->AddComponent(new ControlEventReceiver(), tp);
       gui_right->AddComponent(new ControlOutline(), tp);
       gui_right->AddComponent(new CameraRotateAction(CameraAction::TurnRight), tp);
@@ -65,7 +65,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
 
       GameObject* gui_left = new GameObject();
       gui_left->AddComponent(new ControlArea(UDim(Vector2f(0.0f, 1.0f), Vector2f(10.0f, -10.0f), Edge::BottomLeft),
-                                             UDim(Vector2f(0.25f, 0.1f), Vector2f( 0.0f,  10.0f))), tp);
+                                             UDim(Vector2f(0.20f, 0.1f), Vector2f( 0.0f,  10.0f))), tp);
       gui_left->AddComponent(new ControlEventReceiver(), tp);
       gui_left->AddComponent(new ControlOutline(), tp);
       gui_left->AddComponent(new CameraRotateAction(CameraAction::TurnLeft), tp);
@@ -74,14 +74,25 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
       tp.Spawn(gui_left);
 
       GameObject* gui_zoom = new GameObject();
-      gui_zoom->AddComponent(new ControlArea(UDim(Vector2f(0.5f, 1.0f), Vector2f(10.0f, -10.0f), Edge::CentreBottom),
-                                             UDim(Vector2f(0.25f, 0.1f), Vector2f( 0.0f,  10.0f))), tp);
+      gui_zoom->AddComponent(new ControlArea(UDim(Vector2f(0.2f, 1.0f), Vector2f(20.0f, -10.0f), Edge::BottomLeft),
+                                             UDim(Vector2f(0.20f, 0.1f), Vector2f( 0.0f,  10.0f))), tp);
       gui_zoom->AddComponent(new ControlEventReceiver(), tp);
       gui_zoom->AddComponent(new ControlOutline(), tp);
       gui_zoom->AddComponent(new CameraRotateAction(CameraAction::ZoomToggle), tp);
-      gui_zoom->AddComponent(new ControlText("Z", "fonts/OrbitronLight.ttf", Vector4f(1, 1, 1, 1)), tp);
+      gui_zoom->AddComponent(new ControlText("+", "fonts/OrbitronLight.ttf", Vector4f(1, 1, 1, 1)), tp);
       gui_zoom->AddComponent(new StateListener(GameStates::Build, true), tp);
       tp.Spawn(gui_zoom);
+
+      
+      GameObject* gui_mode = new GameObject();
+      gui_mode->AddComponent(new ControlArea(UDim(Vector2f(0.8f, 1.0f), Vector2f(-20.0f, -10.0f), Edge::BottomRight),
+                                             UDim(Vector2f(0.20f, 0.1f), Vector2f( 0.0f,  10.0f))), tp);
+      gui_mode->AddComponent(new ControlEventReceiver(), tp);
+      gui_mode->AddComponent(new ControlOutline(), tp);
+      gui_mode->AddComponent(new CameraRotateAction(CameraAction::PanRotateToggle), tp);
+      gui_mode->AddComponent(new ControlText("Z", "fonts/OrbitronLight.ttf", Vector4f(1, 1, 1, 1)), tp);
+      gui_mode->AddComponent(new StateListener(GameStates::Build, true), tp);
+      tp.Spawn(gui_mode);
    }
    
 

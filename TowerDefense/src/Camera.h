@@ -37,6 +37,8 @@ private:
    Vector3f mCameraOriginEnd;
    Vector3f mCameraOrigin;
 
+   bool mPanCamera; // If false then will rotate instead
+
 public:
    Camera();
    void Tick(TickParameters& tp);
@@ -44,11 +46,15 @@ public:
    void RotateRight();
    void RotateAxis(float x, float y);
    void Pan(float x, float y, float dx, float dy);
+   void PanOrRotate(float x, float y, float dx, float dy);
 
    void ZoomIn();
    void ZoomOut();
    void ZoomToggle();
-   bool GetZoomedIn();
+   bool IsZoomed();
+
+   void PanRotateToggle();
+   bool IsPanning();
 
    Matrix4f GetView();
    Matrix4f GetProjection();

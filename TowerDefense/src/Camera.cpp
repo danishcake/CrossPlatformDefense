@@ -47,7 +47,8 @@ Camera::Camera() :
    mTransitionTimer(0), mCameraPosition(0),
    mResolution(320, 240),
    mZoomTransitionTimer(0), mZoomedIn(false),
-   mFOVStart(sFOVWide), mFOVEnd(sFOVWide)
+   mFOVStart(sFOVWide), mFOVEnd(sFOVWide),
+   mPanCamera(false)
 {
    mCameraQuaternionStart = sQuats[mCameraPosition];
    mCameraQuaternionEnd   = sQuats[mCameraPosition];
@@ -122,19 +123,30 @@ void Camera::Pan(float x, float y, float dx, float dy)
    Vector3f drag_intersection = mCameraVector - drag_unit * (mCameraVector.y / drag_unit.y);
 
 
-
-   
-   //Log::Debug(__FILE__, "Tap at (%f, %f)", tap_pos_screen.x, tap_pos_screen.y);
-   //Log::Debug(__FILE__, "Tap unit is (%f, %f, %f)", tap_unit.x, tap_unit.y, tap_unit.z);
-   //Log::Debug(__FILE__, "Ray cast from (%f, %f, %f)", mCameraVector.x, mCameraVector.y, mCameraVector.z);
-   //Log::Debug(__FILE__, "Intersection y=0 at (%f, %f)", tap_intersection.x, tap_intersection.z);
-
    Vector3f delta = drag_intersection - tap_intersection;
-   Log::Debug(__FILE__, "Intersection y=0 at (%f, %f)", tap_intersection.x, tap_intersection.z);
-   Log::Debug(__FILE__, "Delta (%f, %f)", delta.x, delta.z);
 
    mCameraOriginEnd += delta;
    mCameraOriginStart += delta;
+   mCameraOriginStart.x = mCameraOriginStart.x < -0.5f * WORLD_WIDTH ? -0.5f * WORLD_WIDTH : mCameraOriginStart.x;
+   mCameraOriginStart.x = mCameraOriginStart.x >  0.5f * WORLD_WIDTH ?  0.5f * WORLD_WIDTH : mCameraOriginStart.x;
+   mCameraOriginStart.z = mCameraOriginStart.z < -0.5f * WORLD_BREADTH ? -0.5f * WORLD_BREADTH : mCameraOriginStart.z;
+   mCameraOriginStart.z = mCameraOriginStart.z >  0.5f * WORLD_BREADTH ?  0.5f * WORLD_BREADTH : mCameraOriginStart.z;
+
+   mCameraOriginEnd.x = mCameraOriginEnd.x < -0.5f * WORLD_WIDTH ? -0.5f * WORLD_WIDTH : mCameraOriginEnd.x;
+   mCameraOriginEnd.x = mCameraOriginEnd.x >  0.5f * WORLD_WIDTH ?  0.5f * WORLD_WIDTH : mCameraOriginEnd.x;
+   mCameraOriginEnd.z = mCameraOriginEnd.z < -0.5f * WORLD_BREADTH ? -0.5f * WORLD_BREADTH : mCameraOriginEnd.z;
+   mCameraOriginEnd.z = mCameraOriginEnd.z >  0.5f * WORLD_BREADTH ?  0.5f * WORLD_BREADTH : mCameraOriginEnd.z;
+}
+
+void Camera::PanOrRotate(float x, float y, float dx, float dy)
+{
+   if(mPanCamera)
+   {
+      Pan(x, y, dx, dy);
+   } else
+   {
+      RotateAxis(dx, dy);
+   }
 }
 
 void Camera::ZoomIn()
@@ -173,9 +185,19 @@ void Camera::ZoomToggle()
    }
 }
 
-bool Camera::GetZoomedIn()
+bool Camera::IsZoomed()
 {
-	return mZoomedIn;
+   return mZoomedIn;
+}
+
+void Camera::PanRotateToggle()
+{
+	mPanCamera = !mPanCamera;
+}
+
+bool Camera::IsPanning()
+{
+   return mPanCamera;
 }
 
 void Camera::Tick(TickParameters &tp)

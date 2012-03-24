@@ -6,17 +6,19 @@ namespace CameraAction
 {
    enum Enum
    {
-      TurnLeft, TurnRight, TurnAxis, ZoomIn, ZoomOut, ZoomToggle
+      TurnLeft, TurnRight, TurnAxis, ZoomIn, ZoomOut, ZoomToggle, PanRotateToggle
    };
 }
 
 class ControlEventReceiver;
+class ControlText;
 
 class CameraRotateAction : public Component
 {
 private:
    CameraAction::Enum mAction;
    ControlEventReceiver* mEventRcvr;
+   ControlText* mText;
 
 public:
    CameraRotateAction(CameraAction::Enum action);

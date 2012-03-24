@@ -132,3 +132,12 @@ void ControlText::SetAlpha(float a)
 {
    mColor.a = a;
 }
+
+void ControlText::SetText(TickParameters& tp, std::string text)
+{
+   mText = text;
+   mTexture = Texture::GetTexture(mText, mFont, mControlArea->GetSize());
+   TeardownGraphics(tp);
+   InitialiseGraphics(tp);
+}
+

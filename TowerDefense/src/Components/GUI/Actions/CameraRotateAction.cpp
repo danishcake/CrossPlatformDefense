@@ -1,5 +1,6 @@
 #include "CameraRotateAction.h"
 #include "../ControlEventReceiver.h"
+#include "../ControlText.h"
 #include "../../../GameObject.h"
 #include "../../../Camera.h"
 
@@ -13,6 +14,7 @@ void CameraRotateAction::Initialise(TickParameters& tp, GameObject* owner)
 {
    Component::Initialise(tp, owner);
    mEventRcvr = owner->GetComponent<ControlEventReceiver>();
+   mText = owner->GetComponent<ControlText>();
 }
 
 void CameraRotateAction::Tick(TickParameters& tp)
@@ -21,16 +23,11 @@ void CameraRotateAction::Tick(TickParameters& tp)
    {
       if(mEventRcvr->GetDrag() && mAction == CameraAction::TurnAxis)
       {
-         if(tp.camera->GetZoomedIn())
-         {
-            tp.camera->Pan(static_cast<float>(mEventRcvr->GetDragX()),
-                           static_cast<float>(mEventRcvr->GetDragY()),
-                           static_cast<float>(mEventRcvr->GetDragDX()),
-                           static_cast<float>(mEventRcvr->GetDragDY()));
-         } else
-         {
-            tp.camera->RotateAxis(static_cast<float>(mEventRcvr->GetDragDX()), static_cast<float>(mEventRcvr->GetDragDY()));
-         }
+         tp.camera->PanOrRotate(static_cast<float>(mEventRcvr->GetDragX()),
+                                static_cast<float>(mEventRcvr->GetDragY()),
+                                static_cast<float>(mEventRcvr->GetDragDX()),
+                                static_cast<float>(mEventRcvr->GetDragDY()));
+
       }
       if(mEventRcvr->GetClicked())
       {
@@ -43,7 +40,34 @@ void CameraRotateAction::Tick(TickParameters& tp)
          else if(mAction == CameraAction::ZoomOut)
             tp.camera->ZoomIn();
          else if(mAction == CameraAction::ZoomToggle)
+         {
             tp.camera->ZoomToggle();
+            if(mText)
+            {
+               if(tp.camera->IsZoomed())
+               {
+                  mText->SetText(tp, "-");
+               } else
+               {
+                  mText->SetText(tp, "+");
+               }
+            }
+         }
+         else if(mAction == CameraAction::PanRotateToggle)
+         {
+            tp.camera->PanRotateToggle();
+            if(mText)
+            {
+               if(tp.camera->IsPanning())
+               {
+                  mText->SetText(tp, "P");
+               } else
+               {
+                  mText->SetText(tp, "R");
+               }
+            }
+         }
+
       }
    }
 }
