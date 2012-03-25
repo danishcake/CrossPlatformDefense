@@ -242,7 +242,7 @@ Matrix4f Camera::GetView()
 
 Matrix4f Camera::GetProjection()
 {
-   return Matrix4f::createPerspective(mFOV, 1.0f, 0.01f, 10240.0f);
+   return Matrix4f::createPerspective(mFOV, static_cast<float>(mResolution.x) / static_cast<float>(mResolution.y), 0.01f, 10240.0f);
 }
 
 Matrix4f Camera::GetViewProjection()

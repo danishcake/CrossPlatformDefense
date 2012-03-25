@@ -32,8 +32,8 @@ Game::Game(TickParameters* tp, screen_context_t ctx)
 #endif
 {
    mDisplay.Drawing = false;
-   mDisplay.Width = 320;
-   mDisplay.Height = 480;
+   mDisplay.Width = 1024;
+   mDisplay.Height = 600;
 #ifdef ANDROID
    mDisplay.app = app;
 #endif
