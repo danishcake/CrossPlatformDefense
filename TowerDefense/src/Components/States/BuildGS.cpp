@@ -4,6 +4,7 @@
 #include "../Graphics/WorldDrawer.h"
 #include "../Graphics/PathVisualiser.h"
 #include "../Graphics/CubeDrawer.h"
+#include "../Graphics/CursorDrawer.h"
 #include "../Position.h"
 #include "../Navigator.h"
 #include "../WorldHandle.h"
@@ -43,7 +44,12 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    //Spawn GUI controls
    if(mFromMenu)
    {
-      //TODO spawn drag area for Camera manipulation, tap detection (with callback)
+      //Spawn cursor
+      GameObject* cursor = new GameObject();
+      cursor->AddComponent(new Position(), tp);
+      cursor->AddComponent(new CursorDrawer(), tp);
+
+      //Spawn drag area for Camera manipulation, tap detection (with callback)
       GameObject* drag_area = new GameObject();
       drag_area->AddComponent(new ControlArea(UDim(Vector2f(0.0f, 0.0f), Vector2f( 0.0f,  0.0f), Edge::TopLeft),
                                               UDim(Vector2f(1.0f, 0.9f), Vector2f( 0.0f, -20.0f))), tp);
@@ -90,7 +96,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
       gui_mode->AddComponent(new ControlEventReceiver(), tp);
       gui_mode->AddComponent(new ControlOutline(), tp);
       gui_mode->AddComponent(new CameraRotateAction(CameraAction::PanRotateToggle), tp);
-      gui_mode->AddComponent(new ControlText("Z", "fonts/OrbitronLight.ttf", Vector4f(1, 1, 1, 1)), tp);
+      gui_mode->AddComponent(new ControlText("R", "fonts/OrbitronLight.ttf", Vector4f(1, 1, 1, 1)), tp);
       gui_mode->AddComponent(new StateListener(GameStates::Build, true), tp);
       tp.Spawn(gui_mode);
    }

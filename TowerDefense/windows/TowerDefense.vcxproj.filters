@@ -257,6 +257,15 @@
     <ClInclude Include="..\src\Components\GUI\Actions\SignalAction.h">
       <Filter>Header Files\Components\GUI\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Components\Graphics\CursorDrawer.h">
+      <Filter>Header Files\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Messaging\CursorMoveMessage.h">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\CursorEventReceiver.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Components\Graphics\CubeDrawer.cpp">
@@ -403,6 +412,12 @@
     <ClCompile Include="..\src\Components\GUI\Actions\SignalAction.cpp">
       <Filter>Source Files\Components\GUI\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Components\Graphics\CursorDrawer.cpp">
+      <Filter>Source Files\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\CursorEventReceiver.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\assets\textures\TerrainTexture.png">
@@ -473,6 +488,12 @@
     </None>
     <None Include="..\assets\fonts\OrbitronLight.ttf">
       <Filter>Assets\Fonts</Filter>
+    </None>
+    <None Include="..\assets\glsl\CursorFragment.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\CursorVertex.glsl">
+      <Filter>Assets\glsl</Filter>
     </None>
   </ItemGroup>
 </Project>

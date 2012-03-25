@@ -91,7 +91,9 @@
     <ClInclude Include="..\src\Column.h" />
     <ClInclude Include="..\src\CommonDefs.h" />
     <ClInclude Include="..\src\Components\Component.h" />
+    <ClInclude Include="..\src\Components\CursorEventReceiver.h" />
     <ClInclude Include="..\src\Components\Graphics\CubeDrawer.h" />
+    <ClInclude Include="..\src\Components\Graphics\CursorDrawer.h" />
     <ClInclude Include="..\src\Components\Graphics\Effect.h" />
     <ClInclude Include="..\src\Components\Graphics\FadeOverlay.h" />
     <ClInclude Include="..\src\Components\Graphics\Font.h" />
@@ -128,6 +130,7 @@
     <ClInclude Include="..\src\Log.h" />
     <ClInclude Include="..\src\MembershipManager.h" />
     <ClInclude Include="..\src\MembershipTypes.h" />
+    <ClInclude Include="..\src\Messaging\CursorMoveMessage.h" />
     <ClInclude Include="..\src\Messaging\GuiTransitionControlMessage.h" />
     <ClInclude Include="..\src\Messaging\MessageHub.h" />
     <ClInclude Include="..\src\Messaging\StateChangeMessage.h" />
@@ -163,7 +166,9 @@
     <ClCompile Include="..\src\Block.cpp" />
     <ClCompile Include="..\src\Camera.cpp" />
     <ClCompile Include="..\src\Column.cpp" />
+    <ClCompile Include="..\src\Components\CursorEventReceiver.cpp" />
     <ClCompile Include="..\src\Components\Graphics\CubeDrawer.cpp" />
+    <ClCompile Include="..\src\Components\Graphics\CursorDrawer.cpp" />
     <ClCompile Include="..\src\Components\Graphics\Effect.cpp" />
     <ClCompile Include="..\src\Components\Graphics\FadeOverlay.cpp" />
     <ClCompile Include="..\src\Components\Graphics\Font.cpp" />
@@ -232,6 +237,8 @@
     <None Include="..\assets\fonts\OrbitronLight.ttf" />
     <None Include="..\assets\glsl\CubeFragment.glsl" />
     <None Include="..\assets\glsl\CubeVertex.glsl" />
+    <None Include="..\assets\glsl\CursorFragment.glsl" />
+    <None Include="..\assets\glsl\CursorVertex.glsl" />
     <None Include="..\assets\glsl\Fade.glsl" />
     <None Include="..\assets\glsl\FlatTextured.glsl" />
     <None Include="..\assets\glsl\FullscreenTexturedVertex.glsl" />
