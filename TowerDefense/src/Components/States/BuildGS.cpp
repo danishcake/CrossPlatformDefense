@@ -8,12 +8,14 @@
 #include "../Position.h"
 #include "../Navigator.h"
 #include "../WorldHandle.h"
+#include "../CursorEventReceiver.h"
 #include "../GUI/ControlArea.h"
 #include "../GUI/ControlOutline.h"
 #include "../GUI/ControlEventReceiver.h"
 #include "../GUI/ControlEventDistributor.h"
 #include "../GUI/ControlText.h"
 #include "../GUI/Actions/CameraRotateAction.h"
+#include "../GUI/Actions/CursorPositioningAction.h"
 #include "../StateListener.h"
 #include "../../WorldBlocks.h"
 
@@ -48,6 +50,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
       GameObject* cursor = new GameObject();
       cursor->AddComponent(new Position(), tp);
       cursor->AddComponent(new CursorDrawer(), tp);
+      cursor->AddComponent(new CursorEventReceiver(), tp);
 
       //Spawn drag area for Camera manipulation, tap detection (with callback)
       GameObject* drag_area = new GameObject();
@@ -55,6 +58,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
                                               UDim(Vector2f(1.0f, 0.9f), Vector2f( 0.0f, -20.0f))), tp);
       drag_area->AddComponent(new ControlEventReceiver(), tp);
       drag_area->AddComponent(new CameraRotateAction(CameraAction::TurnAxis), tp);
+      drag_area->AddComponent(new CursorPositioningAction(), tp);
       drag_area->AddComponent(new StateListener(GameStates::Build, GameStates::Defend, true), tp);
       tp.Spawn(drag_area);
       

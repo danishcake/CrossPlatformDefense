@@ -54,13 +54,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\ARM\Mali Developer Tools\OpenGL ES Emulator v1.3.0\include;C:\Users\Public\boost;$(SolutionDir)..\..\freetype2\freetype2-windows\include;$(SolutionDir)..\..\libpng\libpng-windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\ARM\Mali Developer Tools\OpenGL ES Emulator v1.3.0\include;C:\Users\Public\boost;$(SolutionDir)..\..\freetype2\freetype2-windows\include;$(SolutionDir)..\..\libpng\libpng-windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>freetype248MT_D.lib;libEGL.lib;libGLESv2.lib;libpng15.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\ARM\Mali Developer Tools\OpenGL ES Emulator v1.3.0\lib;$(SolutionDir)..\..\freetype2\freetype2-windows\objs\win32\vc2010;$(SolutionDir)..\..\libpng\libpng-windows\projects\vstudio\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\ARM\Mali Developer Tools\OpenGL ES Emulator v1.3.0\lib;$(SolutionDir)..\..\freetype2\freetype2-windows\objs\win32\vc2010;$(SolutionDir)..\..\libpng\libpng-windows\projects\vstudio\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -103,6 +103,7 @@
     <ClInclude Include="..\src\Components\Graphics\TexturedQuad.h" />
     <ClInclude Include="..\src\Components\Graphics\WorldDrawer.h" />
     <ClInclude Include="..\src\Components\GUI\Actions\CameraRotateAction.h" />
+    <ClInclude Include="..\src\Components\GUI\Actions\CursorPositioningAction.h" />
     <ClInclude Include="..\src\Components\GUI\Actions\SignalAction.h" />
     <ClInclude Include="..\src\Components\GUI\ControlArea.h" />
     <ClInclude Include="..\src\Components\GUI\ControlEventDistributor.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="..\src\Components\Graphics\TextureText.cpp" />
     <ClCompile Include="..\src\Components\Graphics\WorldDrawer.cpp" />
     <ClCompile Include="..\src\Components\GUI\Actions\CameraRotateAction.cpp" />
+    <ClCompile Include="..\src\Components\GUI\Actions\CursorPositioningAction.cpp" />
     <ClCompile Include="..\src\Components\GUI\Actions\SignalAction.cpp" />
     <ClCompile Include="..\src\Components\GUI\ControlArea.cpp" />
     <ClCompile Include="..\src\Components\GUI\ControlEventDistributor.cpp" />
