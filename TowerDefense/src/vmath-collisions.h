@@ -50,7 +50,7 @@ public:
 		T x = a.x - b.x;
 		T y = a.y - b.y;
 
-		return (T)sqrt((double)(x * x + y * y));
+		return (T)std::sqrt((double)(x * x + y * y));
 	}
 
 	/**
@@ -63,7 +63,7 @@ public:
 		T x = a.x - b.x;
 		T y = a.y - b.y;
 
-		return (T)sqrt((double)(x * x + y * y));
+		return (T)std::sqrt((double)(x * x + y * y));
 	}
 
 	/**
@@ -357,7 +357,7 @@ public:
       if(discriminant > 0 && a != 0)
       {
          //Parameterised roots solved, line intersect first at smallest position T
-         T dsqrt = sqrt(discriminant);
+         T dsqrt = std::sqrt(discriminant);
          T t1 = (-b + dsqrt) / (2 * a);
          T t2 = (-b - dsqrt) / (2 * a);
          if(t1 < t2 && t1 >= 0 && t1 <= 1)
@@ -394,7 +394,7 @@ public:
       if(discriminant > 0 && a != 0)
       {
          //Parameterised roots solved, line intersect first at smallest position T
-         T dsqrt = sqrt(discriminant);
+         T dsqrt = std::sqrt(discriminant);
          T t1 = (-b + dsqrt) / (2 * a);
          T t2 = (-b - dsqrt) / (2 * a);
          if(t1 < t2 && t1 >= 0 && t1 <= 1)
