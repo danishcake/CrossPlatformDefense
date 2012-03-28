@@ -10,5 +10,4 @@ attribute vec4 InputPosition;
 
 void main(void) {
     gl_Position = Transform * InputPosition;
-    texCoord = InputTextureCoord;
 }

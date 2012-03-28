@@ -259,3 +259,22 @@ Vector2f Camera::GetResolution() const
 {
    return mResolution;
 }
+
+void Camera::GetRay(Vector2i tap_position, Vector3f& ray_origin, Vector3f& ray_unit)
+{
+   Matrix4f inv_vp = GetViewProjection().inverse();
+   Vector4f tap_pos_screen = Vector4f((tap_position.x - mResolution.x * 0.5f) / (mResolution.x * 0.5f), 
+                                     -(tap_position.y - mResolution.y * 0.5f) / (mResolution.y * 0.5f),
+                                      1.0f, 1.0f);
+   Vector4f tap_pos_world = inv_vp * tap_pos_screen;
+   // Reverse the perspective divide
+   tap_pos_world /= tap_pos_world.w;
+
+   Vector4f tap_ray = tap_pos_world - mCameraVector;
+   Vector3f tap_unit = Vector3f(tap_ray.x, tap_ray.y, tap_ray.z);
+   tap_unit.normalize();
+
+   ray_origin = mCameraVector;
+   ray_unit = tap_unit;
+}
+

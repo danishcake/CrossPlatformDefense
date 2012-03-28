@@ -43,6 +43,18 @@ void BuildGS::Teardown(TickParameters& tp)
 
 void BuildGS::SpawnMenuObjects(TickParameters& tp)
 {
+   //Load the world
+   if(mBlocks == 0)
+   {
+      mBlocks = WorldBlocks::LoadFromPNG(tp, "heightmaps/map2.png");
+
+      //Spawn the world
+      GameObject* world = new GameObject();
+      world->AddComponent(new WorldDrawer(mBlocks), tp);
+      world->AddComponent(new StateListener(GameStates::Build, GameStates::Defend, true), tp);
+      tp.Spawn(world);
+   }
+
    //Spawn GUI controls
    if(mFromMenu)
    {
@@ -51,6 +63,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
       cursor->AddComponent(new Position(), tp);
       cursor->AddComponent(new CursorDrawer(), tp);
       cursor->AddComponent(new CursorEventReceiver(), tp);
+      tp.Spawn(cursor);
 
       //Spawn drag area for Camera manipulation, tap detection (with callback)
       GameObject* drag_area = new GameObject();
@@ -58,7 +71,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
                                               UDim(Vector2f(1.0f, 0.9f), Vector2f( 0.0f, -20.0f))), tp);
       drag_area->AddComponent(new ControlEventReceiver(), tp);
       drag_area->AddComponent(new CameraRotateAction(CameraAction::TurnAxis), tp);
-      drag_area->AddComponent(new CursorPositioningAction(), tp);
+      drag_area->AddComponent(new CursorPositioningAction(mBlocks), tp);
       drag_area->AddComponent(new StateListener(GameStates::Build, GameStates::Defend, true), tp);
       tp.Spawn(drag_area);
       
@@ -103,20 +116,6 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
       gui_mode->AddComponent(new ControlText("R", "fonts/OrbitronLight.ttf", Vector4f(1, 1, 1, 1)), tp);
       gui_mode->AddComponent(new StateListener(GameStates::Build, true), tp);
       tp.Spawn(gui_mode);
-   }
-   
-
-
-   //Load the world
-   if(mBlocks == 0)
-   {
-      mBlocks = WorldBlocks::LoadFromPNG(tp, "heightmaps/map2.png");
-
-      //Spawn the world
-      GameObject* world = new GameObject();
-      world->AddComponent(new WorldDrawer(mBlocks), tp);
-      world->AddComponent(new StateListener(GameStates::Build, GameStates::Defend, true), tp);
-      tp.Spawn(world);
    }
 
    GameObject* path_vis = new GameObject();

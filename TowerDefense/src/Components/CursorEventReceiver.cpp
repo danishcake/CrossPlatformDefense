@@ -1,9 +1,11 @@
 #include "CursorEventReceiver.h"
 #include "Position.h"
+#include "../GameObject.h"
 
-Position* mPosition;
+
 void CursorEventReceiver::Initialise(TickParameters& tp, GameObject* owner)
 {
+   mPosition = owner->GetComponent<Position>();
    mCursorMoveSubscriber.Initialise(&tp.msg);
 }
 

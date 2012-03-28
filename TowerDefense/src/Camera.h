@@ -62,4 +62,6 @@ public:
 
    void SetResolution(Vector2f resolution);
    Vector2f GetResolution() const;
+
+   void GetRay(Vector2i click_position, Vector3f& ray_origin, Vector3f& ray_unit);
 };

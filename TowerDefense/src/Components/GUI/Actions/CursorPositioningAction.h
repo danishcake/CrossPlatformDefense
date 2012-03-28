@@ -2,14 +2,16 @@
 #include "../../Component.h"
 
 class ControlEventReceiver;
+class WorldBlocks;
 
 class CursorPositioningAction : public Component
 {
 private:
    ControlEventReceiver* mEventRcvr;
+   WorldBlocks* mWorld;
 
 public:
-   CursorPositioningAction();
+   CursorPositioningAction(WorldBlocks* world);
 
    virtual void Initialise(TickParameters& tp, GameObject* owner);
    virtual void Tick(TickParameters& tp);

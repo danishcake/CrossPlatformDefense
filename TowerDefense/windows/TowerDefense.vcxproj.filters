@@ -269,6 +269,9 @@
     <ClInclude Include="..\src\Components\GUI\Actions\CursorPositioningAction.h">
       <Filter>Header Files\Components\GUI\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\vmath-collisions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Components\Graphics\CubeDrawer.cpp">

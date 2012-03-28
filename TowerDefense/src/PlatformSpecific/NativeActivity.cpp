@@ -6,7 +6,7 @@
 #include <GLES2/gl2.h>
 
 #include <vector>
-#include "../WorldBlocks.h"
+//#include "../WorldBlocks.h"
 #include "../TickParameters.h"
 #include "../GameObject.h"
 
