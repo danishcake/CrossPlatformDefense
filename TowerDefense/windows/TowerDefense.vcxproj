@@ -54,7 +54,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files\ARM\Mali Developer Tools\OpenGL ES Emulator v1.3.0\include;C:\Users\Public\boost;$(SolutionDir)..\..\freetype2\freetype2-windows\include;$(SolutionDir)..\..\libpng\libpng-windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProgramFiles)\ARM\Mali Developer Tools\OpenGL ES Emulator v1.3.0\include;C:\Users\Public\boost;$(SolutionDir)..\..\freetype2\freetype2-windows\include;$(SolutionDir)..\..\libpng\libpng-windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
