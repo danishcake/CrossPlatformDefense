@@ -67,8 +67,9 @@
 					<fileInfo id="com.qnx.qcc.configuration.exe.debug.2028761836.1700441435" name="WindowsFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.debug.2028761836.916078913" name="AndroidFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/AndroidFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.debug.2028761836.105642920" name="WindowsInputProcessor.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsInputProcessor.h" toolsToInvoke=""/>
+					<fileInfo id="com.qnx.qcc.configuration.exe.debug.2028761836.911626092" name="ControlPopup.h" rcbsApplicability="disable" resourcePath="src/Components/GUI/Prototype/ControlPopup.h" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="Components/GUI/Prototype/ControlPopup.h|Components/GUI/Prototype/ControlPopup.cpp|PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -139,8 +140,9 @@
 					<fileInfo id="com.qnx.qcc.configuration.exe.release.382162043.1104002670" name="WindowsFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.release.382162043.1870513665" name="AndroidFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/AndroidFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.release.382162043.1287136891" name="WindowsInputProcessor.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsInputProcessor.h" toolsToInvoke=""/>
+					<fileInfo id="com.qnx.qcc.configuration.exe.release.382162043.471236727" name="ControlPopup.h" rcbsApplicability="disable" resourcePath="src/Components/GUI/Prototype/ControlPopup.h" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="Components/GUI/Prototype/ControlPopup.h|Components/GUI/Prototype/ControlPopup.cpp|PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -203,8 +205,9 @@
 					<fileInfo id="com.qnx.qcc.configuration.exe.profile.1663981897.2056363839" name="WindowsFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.profile.1663981897.1454638931" name="AndroidFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/AndroidFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.profile.1663981897.325005096" name="WindowsInputProcessor.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsInputProcessor.h" toolsToInvoke=""/>
+					<fileInfo id="com.qnx.qcc.configuration.exe.profile.1663981897.2132344643" name="ControlPopup.h" rcbsApplicability="disable" resourcePath="src/Components/GUI/Prototype/ControlPopup.h" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="Components/GUI/Prototype/ControlPopup.h|Components/GUI/Prototype/ControlPopup.cpp|PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -267,8 +270,9 @@
 					<fileInfo id="com.qnx.qcc.configuration.exe.profile.coverage.1442151502.492731101" name="WindowsFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.profile.coverage.1442151502.75228265" name="AndroidFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/AndroidFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.profile.coverage.1442151502.1791240719" name="WindowsInputProcessor.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsInputProcessor.h" toolsToInvoke=""/>
+					<fileInfo id="com.qnx.qcc.configuration.exe.profile.coverage.1442151502.1252154162" name="ControlPopup.h" rcbsApplicability="disable" resourcePath="src/Components/GUI/Prototype/ControlPopup.h" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="Components/GUI/Prototype/ControlPopup.h|Components/GUI/Prototype/ControlPopup.cpp|PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -328,8 +332,9 @@
 					<fileInfo id="com.qnx.qcc.configuration.exe.debug.1806089183.168810728" name="WindowsFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.debug.1806089183.2042181211" name="AndroidFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/AndroidFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.debug.1806089183.1922975816" name="WindowsInputProcessor.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsInputProcessor.h" toolsToInvoke=""/>
+					<fileInfo id="com.qnx.qcc.configuration.exe.debug.1806089183.658656055" name="ControlPopup.h" rcbsApplicability="disable" resourcePath="src/Components/GUI/Prototype/ControlPopup.h" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="Components/GUI/Prototype/ControlPopup.h|Components/GUI/Prototype/ControlPopup.cpp|PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -391,8 +396,9 @@
 					<fileInfo id="com.qnx.qcc.configuration.exe.profile.388962209.801081910" name="WindowsFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.profile.388962209.1341091161" name="AndroidFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/AndroidFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.profile.388962209.214235385" name="WindowsInputProcessor.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsInputProcessor.h" toolsToInvoke=""/>
+					<fileInfo id="com.qnx.qcc.configuration.exe.profile.388962209.507054483" name="ControlPopup.h" rcbsApplicability="disable" resourcePath="src/Components/GUI/Prototype/ControlPopup.h" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="Components/GUI/Prototype/ControlPopup.h|Components/GUI/Prototype/ControlPopup.cpp|PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -454,8 +460,9 @@
 					<fileInfo id="com.qnx.qcc.configuration.exe.profile.coverage.351396489.2094061919" name="WindowsFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.profile.coverage.351396489.693048076" name="AndroidFile.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/AndroidFile.h" toolsToInvoke=""/>
 					<fileInfo id="com.qnx.qcc.configuration.exe.profile.coverage.351396489.1024095459" name="WindowsInputProcessor.h" rcbsApplicability="disable" resourcePath="src/PlatformSpecific/WindowsInputProcessor.h" toolsToInvoke=""/>
+					<fileInfo id="com.qnx.qcc.configuration.exe.profile.coverage.351396489.1123664193" name="ControlPopup.h" rcbsApplicability="disable" resourcePath="src/Components/GUI/Prototype/ControlPopup.h" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="Components/GUI/Prototype/ControlPopup.h|Components/GUI/Prototype/ControlPopup.cpp|PlatformSpecific/WindowsInputProcessor.h|PlatformSpecific/WindowsInputProcessor.cpp|PlatformSpecific/WindowsFile.h|PlatformSpecific/WindowsFile.cpp|PlatformSpecific/Windows.cpp|PlatformSpecific/AndroidFile.cpp|PlatformSpecific/AndroidFile.h|PlatformSpecific/AndroidInputProcessor.cpp|PlatformSpecific/AndroidInputProcessor.h|PlatformSpecific/NativeActivity.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
