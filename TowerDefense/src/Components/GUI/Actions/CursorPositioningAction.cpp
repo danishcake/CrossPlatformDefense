@@ -29,8 +29,11 @@ void CursorPositioningAction::Tick(TickParameters& tp)
 
       //Now check if collision occurs on each block
       Vector3f intersect_point;
+      Vector3f intersection_normal;
       Vector3f closest_intersect_point;
+      Vector3f closest_intersect_normal;
       float intersect_distance;
+      
       float min_intersect_distance = FLT_MAX;
       for (int x = 0; x < WORLD_WIDTH; x++)
       {
@@ -43,11 +46,13 @@ void CursorPositioningAction::Tick(TickParameters& tp)
                Block block = col.Get(y);
                if(block.blockType.Value() == BlockType::Empty)
                   continue;
-               if(Collisions3f::RayIntersectsAABB(ray_origin, ray_unit, Vector3f(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z)), Vector3f(1.0f, 1.0f, 1.0f), intersect_point, intersect_distance))
+               
+               if(Collisions3f::RayIntersectsAABB(ray_origin, ray_unit, Vector3f(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z)), Vector3f(1.0f, 1.0f, 1.0f), intersect_point, intersect_distance, intersection_normal))
                {
                   if(min_intersect_distance > intersect_distance)
                   {
-                     closest_intersect_point = intersect_point;
+                     closest_intersect_point = Vector3f(x, y, z);
+                     closest_intersect_normal = intersection_normal;
                      min_intersect_distance = intersect_distance;
                   }
                }
@@ -55,13 +60,13 @@ void CursorPositioningAction::Tick(TickParameters& tp)
          }
       }
 
-      if(min_intersect_distance < FLT_MAX)
+      if (min_intersect_distance < FLT_MAX)
       {
-         Vector3f floor_intersection(std::floor(closest_intersect_point.x), 
-                                     std::floor(closest_intersect_point.y),
-                                     std::floor(closest_intersect_point.z));
-         tp.msg.GetHub<CursorMoveMessage>().Broadcast(CursorMoveMessage(floor_intersection));
-         Log::Debug(__FILE__, "Intersection at (%f,%f,%f)", floor_intersection.x, floor_intersection.y, floor_intersection.z);
+         // Cursor to top of stack
+         Column col = mWorld->getColumn(closest_intersect_point.x, closest_intersect_point.z);
+         closest_intersect_point.y = col.GetHeight() + 1;
+         tp.msg.GetHub<CursorMoveMessage>().Broadcast(CursorMoveMessage(closest_intersect_point));
+         Log::Debug(__FILE__, "Intersection at (%f,%f,%f)", closest_intersect_point.x, closest_intersect_point.y, closest_intersect_point.z);
       }
    }
 }

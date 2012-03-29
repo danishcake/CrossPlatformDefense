@@ -5,6 +5,12 @@
 #include <cfloat>
 #include <algorithm>
 
+/* Sign extractor */
+template <typename T> int sgn(T val) {
+    return (T(0) < val) - (val < T(0));
+}
+
+
 /**
 * Class for 2D collisions.
 * @note If you use a Vector3 derivative then the z component is ignored
@@ -582,9 +588,13 @@ public:
     * Finds the intersection between a ray and an AABB
     * Algorithm as per Realtime Collision Detection Page 181
     * Intersection point is only valid if true returned
+    * Ditto normal
     * TODO: FLT_MAX init should account for double overload
     */
-   static bool RayIntersectsAABB(const Vector3<T> ray_origin, const Vector3<T> ray_unit, const Vector3<T> AABB_origin, const Vector3<T> AABB_size, Vector3<T>& intersection, T& intersection_distance)
+   static bool RayIntersectsAABB(const Vector3<T> ray_origin, const Vector3<T> ray_unit, 
+                                 const Vector3<T> AABB_origin, const Vector3<T> AABB_size,
+                                 Vector3<T>& intersection, T& intersection_distance,
+                                 Vector3<T>& normal)
    {
       T t_min = 0;
       T t_max = FLT_MAX;
@@ -605,7 +615,7 @@ public:
             T ood = 1.0f / ray_unit[i];
             T t1 = (AABB_origin[i] - ray_origin[i]) * ood;
             T t2 = (AABB_end[i]    - ray_origin[i]) * ood;
-            
+
             // Ensure t1 is the intersection to the near plane and t2 with far plane
             if (t1 > t2)
             {
@@ -613,7 +623,13 @@ public:
             }
 
             // Expand the limits
-            t_min = std::max(t_min, t1);
+            if(t1 > t_min)
+            {
+               normal = Vector3<T>();
+               normal[i] = sgn(ray_unit[i]);
+               t_min = t1;
+            }
+            //t_min = std::max(t_min, t1);
             t_max = std::min(t_max, t2);
 
             // When the minimum ray length is greater than the maximum then a collision can't occur

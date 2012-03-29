@@ -62,7 +62,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
       GameObject* cursor = new GameObject();
       cursor->AddComponent(new Position(), tp);
       cursor->AddComponent(new CursorDrawer(), tp);
-      cursor->AddComponent(new CursorEventReceiver(), tp);
+      cursor->AddComponent(new CursorEventReceiver(CursorAction::DeleteTop, mBlocks), tp);
       tp.Spawn(cursor);
 
       //Spawn drag area for Camera manipulation, tap detection (with callback)
