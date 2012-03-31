@@ -242,7 +242,8 @@ Matrix4f Camera::GetView()
 
 Matrix4f Camera::GetProjection()
 {
-   return Matrix4f::createPerspective(mFOV, static_cast<float>(mResolution.x) / static_cast<float>(mResolution.y), 0.01f, 10240.0f);
+   return Matrix4f::createTranslation(-(GetAspect() - 1.0f) / 2.0f, 0, 0) *
+          Matrix4f::createPerspective(mFOV, GetAspect(), 0.01f, 10240.0f);
 }
 
 Matrix4f Camera::GetViewProjection()
@@ -258,6 +259,11 @@ void Camera::SetResolution(Vector2f resolution)
 Vector2f Camera::GetResolution() const
 {
    return mResolution;
+}
+
+float Camera::GetAspect() const
+{
+   return static_cast<float>(mResolution.x) / static_cast<float>(mResolution.y);
 }
 
 void Camera::GetRay(Vector2i tap_position, Vector3f& ray_origin, Vector3f& ray_unit)
