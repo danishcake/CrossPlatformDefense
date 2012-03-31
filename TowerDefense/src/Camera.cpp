@@ -89,38 +89,14 @@ void Camera::RotateAxis(float x, float y)
 
 void Camera::Pan(float x, float y, float dx, float dy)
 {
-   /*
-    * Panning occurs in the x,z plane only
-    * y is zeroed.
-    * To calculate scaling assume 1 pixel moved in each axis from centre
-    * Calculate where that lands relative to the centred value
-    */
-   Matrix4f inv_vp = GetViewProjection().inverse();
-   Vector4f tap_pos_screen = Vector4f((x - mResolution.x * 0.5f) / (mResolution.x * 0.5f), 
-                                     -(y - mResolution.y * 0.5f) / (mResolution.y * 0.5f),
-                                      1.0f, 1.0f);
-   Vector4f tap_pos_world = inv_vp * tap_pos_screen;
-   tap_pos_world /= tap_pos_world.w;
-   Vector4f tap_ray = tap_pos_world - mCameraVector;
-   Vector3f tap_unit = Vector3f(tap_ray.x, tap_ray.y, tap_ray.z);
-   tap_unit.normalize();
+   Vector3f origin;
+   Vector3f unit;
 
-   Vector3f tap_intersection = mCameraVector - tap_unit * (mCameraVector.y / tap_unit.y);
+   GetRay(Vector2i(x, y), origin, unit);
+   Vector3f tap_intersection = origin - unit * (origin.y / unit.y);
 
-
-
-
-   //Calculate world drag end position
-   Vector4f drag_pos_screen = Vector4f(((x - dx) - mResolution.x * 0.5f) / (mResolution.x * 0.5f), 
-                                      -((y - dy) - mResolution.y * 0.5f) / (mResolution.y * 0.5f),
-                                      1.0f, 1.0f);
-   Vector4f drag_pos_world = inv_vp * drag_pos_screen;
-   drag_pos_world /= drag_pos_world.w;
-   Vector4f drag_ray = drag_pos_world - mCameraVector;
-   Vector3f drag_unit = Vector3f(drag_ray.x, drag_ray.y, drag_ray.z);
-   drag_unit.normalize();
-
-   Vector3f drag_intersection = mCameraVector - drag_unit * (mCameraVector.y / drag_unit.y);
+   GetRay(Vector2i(x - dx, y - dy), origin, unit);
+   Vector3f drag_intersection = origin - unit * (origin.y / unit.y);
 
 
    Vector3f delta = drag_intersection - tap_intersection;
