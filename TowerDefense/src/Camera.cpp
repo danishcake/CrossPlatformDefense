@@ -2,6 +2,7 @@
 #include "CommonDefs.h"
 #include <GLES2/gl2.h>
 #include "Log.h"
+#include <algorithm>
 
 static const Quatf makeQuat(const float hdg, const float pitch, const float roll)
 {
@@ -48,7 +49,9 @@ Camera::Camera() :
    mResolution(320, 240),
    mZoomTransitionTimer(0), mZoomedIn(false),
    mFOVStart(sFOVWide), mFOVEnd(sFOVWide),
-   mPanCamera(false)
+   mPanCamera(false),
+   mCameraOriginStart(WORLD_WIDTH / 2, 0, WORLD_BREADTH / 2),
+   mCameraOriginEnd(WORLD_WIDTH / 2, 0, WORLD_BREADTH / 2)
 {
    mCameraQuaternionStart = sQuats[mCameraPosition];
    mCameraQuaternionEnd   = sQuats[mCameraPosition];
@@ -103,15 +106,15 @@ void Camera::Pan(float x, float y, float dx, float dy)
 
    mCameraOriginEnd += delta;
    mCameraOriginStart += delta;
-   mCameraOriginStart.x = mCameraOriginStart.x < -0.5f * WORLD_WIDTH ? -0.5f * WORLD_WIDTH : mCameraOriginStart.x;
-   mCameraOriginStart.x = mCameraOriginStart.x >  0.5f * WORLD_WIDTH ?  0.5f * WORLD_WIDTH : mCameraOriginStart.x;
-   mCameraOriginStart.z = mCameraOriginStart.z < -0.5f * WORLD_BREADTH ? -0.5f * WORLD_BREADTH : mCameraOriginStart.z;
-   mCameraOriginStart.z = mCameraOriginStart.z >  0.5f * WORLD_BREADTH ?  0.5f * WORLD_BREADTH : mCameraOriginStart.z;
+   mCameraOriginStart.x = std::max(mCameraOriginStart.x, 0.0f);
+   mCameraOriginStart.x = std::min(mCameraOriginStart.x, (float)WORLD_WIDTH);
+   mCameraOriginStart.z = std::max(mCameraOriginStart.z, 0.0f);
+   mCameraOriginStart.z = std::min(mCameraOriginStart.z , (float)WORLD_BREADTH);
 
-   mCameraOriginEnd.x = mCameraOriginEnd.x < -0.5f * WORLD_WIDTH ? -0.5f * WORLD_WIDTH : mCameraOriginEnd.x;
-   mCameraOriginEnd.x = mCameraOriginEnd.x >  0.5f * WORLD_WIDTH ?  0.5f * WORLD_WIDTH : mCameraOriginEnd.x;
-   mCameraOriginEnd.z = mCameraOriginEnd.z < -0.5f * WORLD_BREADTH ? -0.5f * WORLD_BREADTH : mCameraOriginEnd.z;
-   mCameraOriginEnd.z = mCameraOriginEnd.z >  0.5f * WORLD_BREADTH ?  0.5f * WORLD_BREADTH : mCameraOriginEnd.z;
+   mCameraOriginEnd.x = std::max(mCameraOriginEnd.x, 0.0f);
+   mCameraOriginEnd.x = std::min(mCameraOriginEnd.x, (float)WORLD_WIDTH);
+   mCameraOriginEnd.z = std::max(mCameraOriginEnd.z, 0.0f);
+   mCameraOriginEnd.z = std::min(mCameraOriginEnd.z , (float)WORLD_BREADTH);
 }
 
 void Camera::PanOrRotate(float x, float y, float dx, float dy)
@@ -207,13 +210,13 @@ void Camera::Tick(TickParameters &tp)
 
    //Now calculate camera position by taking a vector and rotating it by the quaternion
    Matrix4f transform = mCameraQuaternion.transform();
-   mCameraVector = transform * Vector3f(-WORLD_WIDTH, 0, 0) + Vector3f(0.5f * WORLD_WIDTH, 0, 0.5f * WORLD_BREADTH) + mCameraOrigin;
+   mCameraVector = transform * Vector3f(-WORLD_WIDTH, 0, 0) + mCameraOrigin;
    mCameraUp = transform * Vector3f(0, 1, 0);
 }
 
 Matrix4f Camera::GetView()
 {
-   return Matrix4f::createLookAt(mCameraVector, Vector3f(0.5f * WORLD_WIDTH, 0, 0.5f * WORLD_BREADTH) + mCameraOrigin, mCameraUp);
+   return Matrix4f::createLookAt(mCameraVector, mCameraOrigin, mCameraUp);
 }
 
 Matrix4f Camera::GetProjection()

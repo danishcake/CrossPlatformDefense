@@ -2,6 +2,7 @@
  * This is largely lifted from ARM OpenGL ES 2.0 emulator examples
  */
 #define WIN32_LEAN_AND_MEAN 1
+#define NOMINMAX
 #include <windows.h>
 #include "GLES2/gl2.h"
 #include "EGL/egl.h"

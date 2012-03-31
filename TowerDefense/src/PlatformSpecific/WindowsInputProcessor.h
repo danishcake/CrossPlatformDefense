@@ -2,6 +2,7 @@
 
 #include "../Input/IInputProcessor.h"
 #define WIN32_LEAN_AND_MEAN 1
+#define NOMINMAX
 #include <windows.h>
 
 class WindowsInputProcessor : public IInputProcessor
