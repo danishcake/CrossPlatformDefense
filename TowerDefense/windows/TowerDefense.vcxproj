@@ -60,7 +60,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>freetype248MT_D.lib;libEGL.lib;libGLESv2.lib;libpng15.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\ARM\Mali Developer Tools\OpenGL ES Emulator v1.3.0\lib;$(SolutionDir)..\..\freetype2\freetype2-windows\objs\win32\vc2010;$(SolutionDir)..\..\libpng\libpng-windows\projects\vstudio\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProgramFiles)\ARM\Mali Developer Tools\OpenGL ES Emulator v1.3.0\lib;$(SolutionDir)..\..\freetype2\freetype2-windows\objs\win32\vc2010;$(SolutionDir)..\..\libpng\libpng-windows\projects\vstudio\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

@@ -30,13 +30,23 @@ void CursorEventReceiver::Tick(TickParameters& tp)
             break;
          case CursorAction::DeleteTop:
             if(mPositionLTV == it->cursor_position &&
-               it->cursor_position.y > 0)
+               it->cursor_position.y > 1)
             {
                Column col = mBlocks->getColumn(it->cursor_position.x, it->cursor_position.z);
                col.Set(col.GetHeight(), BlockType::Empty);
+               if (it->cursor_position.y > 2)
+               {
+                  Column col = mBlocks->getColumn(it->cursor_position.x, it->cursor_position.z);
+                  col.Set(col.GetHeight(), BlockType::Grass);
+               }
+               
+               mPositionLTV = it->cursor_position + Vector3f(0, -1, 0);
+               mPosition->SetPosition(mPositionLTV);
+            } else
+            {
+               mPositionLTV = it->cursor_position;
+               mPosition->SetPosition(mPositionLTV);
             }
-            mPosition->SetPosition(it->cursor_position);
-            mPositionLTV = it->cursor_position;
 
             break;
          }

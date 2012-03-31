@@ -187,22 +187,14 @@ void WorldDrawer::Tick(TickParameters& tp)
    {
       for(int z = 0; z < WORLD_BREADTH / COLUMN_SIZE; z++)
       {
-         bool invalidated = false;
-         for(int sx = 0; sx < COLUMN_SIZE && !invalidated; sx++)
-         {
-            for(int sz = 0; sz < COLUMN_SIZE && !invalidated; sz++)
-            {
-               Column column = mWorldBlocks->getColumn(x * COLUMN_SIZE + sx, z * COLUMN_SIZE + sz);
-               invalidated |= mInvalidationWatcher.CheckInvalidation(column);
-            }
-         }
-         if(invalidated)
+         if(mInvalidationWatcher.CheckRange(*mWorldBlocks, x * COLUMN_SIZE - 1, z * COLUMN_SIZE - 1, COLUMN_SIZE + 2, COLUMN_SIZE + 2))
          {
             Log::Debug("WorldDrawer::Tick", "Updating VBO: %d,%d", x, z);
             buildColumn(x * COLUMN_SIZE, z * COLUMN_SIZE, x * WORLD_BREADTH / COLUMN_SIZE + z);
          }
       }
    }
+   mInvalidationWatcher.AcknowledgeChanges(*mWorldBlocks);
    tp.draw_list.AddToLayer(DrawLayer::Game, this);
 }
 

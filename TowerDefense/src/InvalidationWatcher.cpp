@@ -44,3 +44,34 @@ bool InvalidationWatcher::CheckInvalidation(WorldBlocks& world)
    }
    return changed;
 }
+
+bool InvalidationWatcher::CheckRange(WorldBlocks& world, int sx, int sz, int dx, int dz)
+{
+   for(int x = std::max(sx, 0); x < WORLD_WIDTH && x < sx + dx; x++)
+   {
+      for(int z = std::max(sz, 0); z < WORLD_BREADTH && z < sz + dz; z++)
+      {
+         if(world.getColumn(x, z).GetInvalidated() > mInvalidationCounters[x][z])
+         {
+            return true;
+         }
+      }
+   }
+   return false;
+}
+
+void InvalidationWatcher::AcknowledgeChanges(WorldBlocks& world)
+{
+   for(int x = 0; x < WORLD_WIDTH; x++)
+   {
+      for(int z = 0; z < WORLD_BREADTH; z++)
+      {
+         int invalidation_count = world.getColumn(x, z).GetInvalidated();
+         if(invalidation_count > mInvalidationCounters[x][z])
+         {
+            mInvalidationCounters[x][z] = invalidation_count;
+         }
+      }
+   }
+}
+
