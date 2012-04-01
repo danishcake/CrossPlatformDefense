@@ -21,3 +21,19 @@ libpng/libpng-windows/projects/vstudio/pnglibconf/Release/
 libpng/libpng-windows/projects/vstudio/pngtest/Debug/
 libpng/libpng-windows/projects/vstudio/pngvalid/Debug/
 libpng/libpng-windows/projects/vstudio/zlib/Debug/
+libpng/libpng-windows/projects/vstudio/Debug Library/
+libpng/libpng-windows/projects/vstudio/Release Library/
+libpng/libpng-windows/projects/vstudio/Release/
+libpng/libpng-windows/projects/vstudio/libpng/Debug Library/
+libpng/libpng-windows/projects/vstudio/libpng/Release Library/
+libpng/libpng-windows/projects/vstudio/libpng/Release/
+libpng/libpng-windows/projects/vstudio/pngtest/Debug Library/
+libpng/libpng-windows/projects/vstudio/pngtest/Release Library/
+libpng/libpng-windows/projects/vstudio/pngtest/Release/
+libpng/libpng-windows/projects/vstudio/pngvalid/Debug Library/
+libpng/libpng-windows/projects/vstudio/pngvalid/Release Library/
+libpng/libpng-windows/projects/vstudio/pngvalid/Release/
+libpng/libpng-windows/projects/vstudio/zlib/Debug Library/
+libpng/libpng-windows/projects/vstudio/zlib/Release Library/
+libpng/libpng-windows/projects/vstudio/zlib/Release/
+libpng/zlib-1.2.5/contrib/vstudio/vc10/x86/
