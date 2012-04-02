@@ -1,5 +1,6 @@
 #pragma once
 #include <map>
+#include "TouchData.h"
 
 /*
  * InputAction. Defines a basic message type that can be passed around.
@@ -12,61 +13,27 @@ public:
    {
       CameraRotateLeft,
       CameraRotateRight,
-      Tap,
-      HoldStart,
       HoldMove,
-      HoldEnd,
       Click
    };
 
    InputAction::Enum action;
 
-   union
+   struct
    {
       //No CameraRotateLeftData payload
       //No CameraRotateRightData payload
-      struct
-      {
-         int x;               //Position
-         int y;
-      } TapData;
 
       struct
       {
-         int x;               //Start position
-         int y;
-      } HoldStartData;
-
-      struct
-      {
-         int sx;              //Start position
-         int sy;
-         int x;               //Current position
-         int y;
-         int dx;              //Change since last report
-         int dy;
-         int max_displacement;
-         int ms_held;         //Time held
+         TouchData start;
+         TouchData prev;
+         TouchData current;
       } HoldMoveData;
 
       struct
       {
-         int sx;              //Start position
-         int sy;
-         int ex;              //End position
-         int ey;
-         int max_displacement;
-         int ms_held;         //Time held
-      } HoldEndData;
-
-      struct
-      {
-         int sx;              //Start position
-         int sy;
-         int ex;              //End position
-         int ey;
-         int max_displacement;
-         int ms_held;         //Time held
+         TouchData end;
       } ClickData;
 
    } data;

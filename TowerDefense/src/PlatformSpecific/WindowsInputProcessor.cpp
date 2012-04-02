@@ -31,10 +31,7 @@ void WindowsInputProcessor::GetActions(ActionMap& held, ActionMap& pressed, Acti
    if(mLeftDown)
    {
       InputAction action;
-      action.action = InputAction::Tap;
-      action.data.TapData.x = mX;
-      action.data.TapData.y = mY;
-      mActions[InputAction::Tap] = action;
+      mCurrentTouch = TouchData(Vector2i(mX, mY));
    }
 
 

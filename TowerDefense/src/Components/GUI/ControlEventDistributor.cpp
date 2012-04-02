@@ -24,23 +24,29 @@ void ControlEventDistributor::Tick(TickParameters& tp)
 
       if(tp.input_pressed.count(InputAction::Click))
       {
-         int x = tp.input_pressed[InputAction::Click].data.ClickData.ex;
-         int y = tp.input_pressed[InputAction::Click].data.ClickData.ey;
-         if(control_rcvr->WithinArea(tp, x, y))
-            control_rcvr->SetClicked(x, y);
+         Vector2i pos = tp.input_pressed[InputAction::Click].data.ClickData.end.GetTouchCentre();
+         if(control_rcvr->WithinArea(tp, pos.x, pos.y))
+            control_rcvr->SetClicked(pos.x, pos.y);
       }
 
       if(tp.input_held.count(InputAction::HoldMove))
       {
-         int x = tp.input_held[InputAction::HoldMove].data.HoldMoveData.x;
-         int y = tp.input_held[InputAction::HoldMove].data.HoldMoveData.y;
-         int dx = tp.input_held[InputAction::HoldMove].data.HoldMoveData.dx;
-         int dy = tp.input_held[InputAction::HoldMove].data.HoldMoveData.dy;
-         int sx = tp.input_held[InputAction::HoldMove].data.HoldMoveData.sx;
-         int sy = tp.input_held[InputAction::HoldMove].data.HoldMoveData.sy;
-         if(control_rcvr->WithinArea(tp, sx, sy))
+         // Two finger pan/zoom
+         if (tp.input_held[InputAction::HoldMove].data.HoldMoveData.current.GetTouchCount() == 2)
          {
-            control_rcvr->SetDrag(x, y, sx, sy, dx, dy);
+         }
+         // One finger rotate
+         if (tp.input_held[InputAction::HoldMove].data.HoldMoveData.current.GetTouchCount() == 1)
+         {
+            Vector2i c_pos = tp.input_held[InputAction::HoldMove].data.HoldMoveData.current.GetTouchCentre();
+            Vector2i s_pos= tp.input_held[InputAction::HoldMove].data.HoldMoveData.start.GetTouchCentre();
+            Vector2i p_pos = tp.input_held[InputAction::HoldMove].data.HoldMoveData.prev.GetTouchCentre();
+            Vector2i d_pos = c_pos - p_pos;
+
+            if(control_rcvr->WithinArea(tp, s_pos.x, s_pos.y))
+            {
+               control_rcvr->SetDrag(c_pos.x, c_pos.y, s_pos.x, s_pos.y, d_pos.x, d_pos.y);
+            }
          }
       }
 

@@ -4,6 +4,8 @@
 class IInputProcessor
 {
 protected:
+   TouchData mCurrentTouch;
+
    ActionMap mActions;
    ActionMap mActionsLastTime;
 public:

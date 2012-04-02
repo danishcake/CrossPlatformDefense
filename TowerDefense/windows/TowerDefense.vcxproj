@@ -127,6 +127,7 @@
     <ClInclude Include="..\src\GameObject.h" />
     <ClInclude Include="..\src\Input\IInputProcessor.h" />
     <ClInclude Include="..\src\Input\InputActions.h" />
+    <ClInclude Include="..\src\Input\TouchData.h" />
     <ClInclude Include="..\src\InvalidationWatcher.h" />
     <ClInclude Include="..\src\Log.h" />
     <ClInclude Include="..\src\MembershipManager.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\GameObject.cpp" />
     <ClCompile Include="..\src\Input\IInputProcessor.cpp" />
+    <ClCompile Include="..\src\Input\TouchData.cpp" />
     <ClCompile Include="..\src\InvalidationWatcher.cpp" />
     <ClCompile Include="..\src\Log.cpp" />
     <ClCompile Include="..\src\MembershipManager.cpp" />
