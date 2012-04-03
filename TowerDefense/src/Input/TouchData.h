@@ -14,11 +14,16 @@ private:
 
 public:
    TouchData();
-   TouchData(Vector2i position);
-   TouchData(TouchData original, Vector2i position);
+
+   void AddTouch(Vector2i position);
 
    int GetTouchCount() const;
+
    int GetMaxTouchCount() const;
+   void SetMaxTouchCount(int count);
+
    Vector2i GetTouchCentre() const;
    Vector2i GetTouch(int index) const;
+
+   float GetTouchDistance() const;
 };

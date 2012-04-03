@@ -3,9 +3,10 @@
 #include "../ControlText.h"
 #include "../../../GameObject.h"
 #include "../../../Camera.h"
+#include "../../../Log.h"
 
 CameraRotateAction::CameraRotateAction(CameraAction::Enum action)
-   : mAction(action)
+   : mAction(action), mLastDoubleTouch(false), mStartDoubleTouchDistance(0)
 {
 
 }
@@ -23,12 +24,48 @@ void CameraRotateAction::Tick(TickParameters& tp)
    {
       if(mEventRcvr->GetDrag() && mAction == CameraAction::TurnAxis)
       {
-         tp.camera->PanOrRotate(static_cast<float>(mEventRcvr->GetDragX()),
-                                static_cast<float>(mEventRcvr->GetDragY()),
-                                static_cast<float>(mEventRcvr->GetDragDX()),
-                                static_cast<float>(mEventRcvr->GetDragDY()));
+         TouchData td = mEventRcvr->GetDragCurrent();
+         TouchData td_prev = mEventRcvr->GetDragPrev();
+         Vector2i delta = td.GetTouchCentre() - td_prev.GetTouchCentre();
 
+         if(td.GetTouchCount() == 1)
+         {
+            tp.camera->RotateAxis(delta.x, delta.y);
+            mLastDoubleTouch = false;
+         } else if(td.GetTouchCount() == 2)
+         {
+            Log::Debug(__FILE__, "Pan by (%d, %d)", delta.x, delta.y);
+
+
+            float touch_distance = td.GetTouchDistance();
+            if(!mLastDoubleTouch)
+            {
+               mStartDoubleTouchDistance = touch_distance;
+               mTouchDistanceThresholdReached = false;
+            }
+
+            if(std::abs(touch_distance - mStartDoubleTouchDistance) > 30)
+            {
+               mTouchDistanceThresholdReached = true;
+            }
+
+            if(mTouchDistanceThresholdReached)
+            {
+               tp.camera->ZoomScale(20.0f * (mLastDoubleTouchDistance - touch_distance) / mStartDoubleTouchDistance);
+            } else
+            {
+               tp.camera->Pan(td.GetTouchCentre().x, td.GetTouchCentre().y, delta.x, delta.y);
+            }
+
+            mLastDoubleTouchDistance = touch_distance;
+            mLastDoubleTouch = true;
+         }
+      } else
+      {
+         mLastDoubleTouch = false;
       }
+
+
       if(mEventRcvr->GetClicked())
       {
          if(mAction == CameraAction::TurnLeft)

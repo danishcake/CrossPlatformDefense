@@ -2,11 +2,15 @@
 #include "../Input/IInputProcessor.h"
 #include <bps/event.h>
 
+/*
+ * PlaybookInputProcessor tracks up to two touch positions
+ */
 class PlaybookInputProcessor : public IInputProcessor
 {
 private:
-   bool mDown;
-   int mXY[2];
+   Vector2i mTouchPosition[2];
+   bool mDown[2];
+   bool mSet[2];
 public:
    PlaybookInputProcessor();
    virtual void GetActions(ActionMap& held, ActionMap& pressed, ActionMap& released);

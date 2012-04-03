@@ -164,6 +164,14 @@ void Camera::ZoomToggle()
    }
 }
 
+void Camera::ZoomScale(float zoom)
+{
+   mFOVEnd += zoom;
+   mFOVStart += zoom;
+   mFOVEnd = clamp(mFOVEnd, sFOVNarrow, sFOVWide);
+   mFOVStart = clamp(mFOVStart, sFOVNarrow, sFOVWide);
+}
+
 bool Camera::IsZoomed()
 {
    return mZoomedIn;

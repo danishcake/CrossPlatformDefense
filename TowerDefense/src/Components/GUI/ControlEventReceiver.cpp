@@ -43,11 +43,10 @@ bool ControlEventReceiver::WithinArea(TickParameters& tp, int x, int y)
 
 
 //Click stuff
-void ControlEventReceiver::SetClicked(int x, int y)
+void ControlEventReceiver::SetClicked(TouchData td)
 {
    mClicked = true;
-   mClickX = x;
-   mClickY = y;
+   mClick = td;
 }
 
 bool ControlEventReceiver::GetClicked()
@@ -55,27 +54,19 @@ bool ControlEventReceiver::GetClicked()
    return mClicked;
 }
 
-int ControlEventReceiver::GetClickX()
+TouchData ControlEventReceiver::GetClick()
 {
-   return mClickX;
-}
-
-int ControlEventReceiver::GetClickY()
-{
-   return mClickY;
+   return mClick;
 }
 
 
 //Drag stuff
-void ControlEventReceiver::SetDrag(int x, int y, int sx, int sy, int dx, int dy)
+void ControlEventReceiver::SetDrag(TouchData start, TouchData prev, TouchData current)
 {
    mDrag = true;
-   mDragX = x;
-   mDragY = y;
-   mDragSX = sx;
-   mDragSY = sy;
-   mDragDX = dx;
-   mDragDY = dy;
+   mDragStart = start;
+   mDragPrev = prev;
+   mDragCurrent = current;
 }
 
 bool ControlEventReceiver::GetDrag()
@@ -83,34 +74,19 @@ bool ControlEventReceiver::GetDrag()
    return mDrag;
 }
 
-int ControlEventReceiver::GetDragX()
+TouchData ControlEventReceiver::GetDragStart()
 {
-   return mDragX;
+   return mDragStart;
 }
 
-int ControlEventReceiver::GetDragY()
+TouchData ControlEventReceiver::GetDragPrev()
 {
-   return mDragY;
+   return mDragPrev;
 }
 
-int ControlEventReceiver::GetDragSX()
+TouchData ControlEventReceiver::GetDragCurrent()
 {
-   return mDragSX;
-}
-
-int ControlEventReceiver::GetDragSY()
-{
-   return mDragSY;
-}
-
-int ControlEventReceiver::GetDragDX()
-{
-   return mDragDX;
-}
-
-int ControlEventReceiver::GetDragDY()
-{
-   return mDragDY;
+   return mDragCurrent;
 }
 
 

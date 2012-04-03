@@ -20,6 +20,11 @@ private:
    ControlEventReceiver* mEventRcvr;
    ControlText* mText;
 
+   bool mLastDoubleTouch;
+   bool mTouchDistanceThresholdReached;
+   float mStartDoubleTouchDistance;
+   float mLastDoubleTouchDistance;
+
 public:
    CameraRotateAction(CameraAction::Enum action);
 

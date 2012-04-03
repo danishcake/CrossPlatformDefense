@@ -25,7 +25,8 @@ void CursorPositioningAction::Tick(TickParameters& tp)
    {
       Vector3f ray_origin;
       Vector3f ray_unit;
-      tp.camera->GetRay(Vector2i(mEventRcvr->GetClickX(), mEventRcvr->GetClickY()), ray_origin, ray_unit);
+      TouchData td = mEventRcvr->GetClick();
+      tp.camera->GetRay(td.GetTouchCentre(), ray_origin, ray_unit);
 
       //Now check if collision occurs on each block
       Vector3f intersect_point;

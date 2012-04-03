@@ -26,27 +26,21 @@ void ControlEventDistributor::Tick(TickParameters& tp)
       {
          Vector2i pos = tp.input_pressed[InputAction::Click].data.ClickData.end.GetTouchCentre();
          if(control_rcvr->WithinArea(tp, pos.x, pos.y))
-            control_rcvr->SetClicked(pos.x, pos.y);
+            control_rcvr->SetClicked(tp.input_pressed[InputAction::Click].data.ClickData.end);
       }
 
       if(tp.input_held.count(InputAction::HoldMove))
       {
-         // Two finger pan/zoom
-         if (tp.input_held[InputAction::HoldMove].data.HoldMoveData.current.GetTouchCount() == 2)
-         {
-         }
-         // One finger rotate
-         if (tp.input_held[InputAction::HoldMove].data.HoldMoveData.current.GetTouchCount() == 1)
-         {
-            Vector2i c_pos = tp.input_held[InputAction::HoldMove].data.HoldMoveData.current.GetTouchCentre();
-            Vector2i s_pos= tp.input_held[InputAction::HoldMove].data.HoldMoveData.start.GetTouchCentre();
-            Vector2i p_pos = tp.input_held[InputAction::HoldMove].data.HoldMoveData.prev.GetTouchCentre();
-            Vector2i d_pos = c_pos - p_pos;
+         Vector2i c_pos = tp.input_held[InputAction::HoldMove].data.HoldMoveData.current.GetTouchCentre();
+         Vector2i s_pos= tp.input_held[InputAction::HoldMove].data.HoldMoveData.start.GetTouchCentre();
+         Vector2i p_pos = tp.input_held[InputAction::HoldMove].data.HoldMoveData.prev.GetTouchCentre();
+         Vector2i d_pos = c_pos - s_pos;
 
-            if(control_rcvr->WithinArea(tp, s_pos.x, s_pos.y))
-            {
-               control_rcvr->SetDrag(c_pos.x, c_pos.y, s_pos.x, s_pos.y, d_pos.x, d_pos.y);
-            }
+         if(control_rcvr->WithinArea(tp, s_pos.x, s_pos.y) && d_pos.lengthSq() >= 100)
+         {
+            control_rcvr->SetDrag(tp.input_held[InputAction::HoldMove].data.HoldMoveData.start,
+                                  tp.input_held[InputAction::HoldMove].data.HoldMoveData.prev,
+                                  tp.input_held[InputAction::HoldMove].data.HoldMoveData.current);
          }
       }
 

@@ -51,6 +51,7 @@ public:
    void ZoomIn();
    void ZoomOut();
    void ZoomToggle();
+   void ZoomScale(float zoom);
    bool IsZoomed();
 
    void PanRotateToggle();

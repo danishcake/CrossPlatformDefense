@@ -6,23 +6,14 @@
 TouchData::TouchData()
 {
    mTouchCount = 0;
-   mMaxTouchCount = 0;
 }
 
-TouchData::TouchData(Vector2i position)
+void TouchData::AddTouch(Vector2i position)
 {
-   mTouchCount = 1;
-   mMaxTouchCount = 1;
-   mTouchPosition[0] = position;
-}
-
-TouchData::TouchData(TouchData original, Vector2i position)
-{
-   if(original.mTouchCount < 2)
+   if(mTouchCount < 2)
    {
       mTouchPosition[mTouchCount] = position;
-      mTouchCount = original.mTouchCount + 1;
-      mMaxTouchCount = std::max(mTouchCount, original.mMaxTouchCount);
+      mTouchCount++;
    } else
    {
       Log::Debug(__FILE__, "Can only handle 2 touch points");
@@ -37,6 +28,11 @@ int TouchData::GetTouchCount() const
 int TouchData::GetMaxTouchCount() const
 {
    return mMaxTouchCount;
+}
+
+void TouchData::SetMaxTouchCount(int count)
+{
+   mMaxTouchCount = count;
 }
 
 Vector2i TouchData::GetTouchCentre() const
@@ -55,4 +51,11 @@ Vector2i TouchData::GetTouch(int index) const
 {
    assert(mTouchCount > index); // If this fails you need to check your call index against GetTouchCount
    return mTouchPosition[index];
+}
+
+float TouchData::GetTouchDistance() const
+{
+   assert(mTouchCount == 2);
+   return (mTouchPosition[1] - mTouchPosition[0]).length();
+
 }

@@ -52,7 +52,7 @@ void IInputProcessor::GetActions(ActionMap& held, ActionMap& pressed, ActionMap&
    {
       TouchData td_current = mActionsLastTime[InputAction::HoldMove].data.HoldMoveData.current;
       TouchData td_start = mActionsLastTime[InputAction::HoldMove].data.HoldMoveData.current;
-      if (td_current.GetTouchCount() == 1 && td_current.GetMaxTouchCount() == 1)
+      if (td_current.GetTouchCount() == 1)
       {
          Vector2i delta = td_current.GetTouch(0) - td_start.GetTouch(0);
          if (delta.lengthSq() < 100)

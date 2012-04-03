@@ -14,16 +14,12 @@ class ControlEventReceiver : public Component
 private:
    ControlArea* mControlArea;
    bool mClicked;
-   int mClickX;
-   int mClickY;
+   TouchData mClick;
 
    bool mDrag;
-   int mDragX;
-   int mDragY;
-   int mDragSX;
-   int mDragSY;
-   int mDragDX;
-   int mDragDY;
+   TouchData mDragStart;
+   TouchData mDragPrev;
+   TouchData mDragCurrent;
 
 public:
    ControlEventReceiver();
@@ -35,19 +31,15 @@ public:
    void ClearEvents();
    bool WithinArea(TickParameters& tp, int x, int y);
 
-   void SetClicked(int x, int y);
+   void SetClicked(TouchData td);
 
    bool GetClicked();
-   int GetClickX();
-   int GetClickY();
-   
-   void SetDrag(int x, int y, int sx, int sy, int dx, int dy);
+   TouchData GetClick();
+
+   void SetDrag(TouchData start, TouchData prev, TouchData current);
 
    bool GetDrag();
-   int GetDragX();
-   int GetDragY();
-   int GetDragSX();
-   int GetDragSY();
-   int GetDragDX();
-   int GetDragDY();
+   TouchData GetDragStart();
+   TouchData GetDragPrev();
+   TouchData GetDragCurrent();
 };

@@ -20,6 +20,7 @@ void SignalAction::Tick(TickParameters& tp)
 {
    if(mEventRcvr && mEventRcvr->GetClicked())
    {
-      mOnClick(mEventRcvr->GetClickX(), mEventRcvr->GetClickY(), tp);
+      TouchData td = mEventRcvr->GetClick();
+      mOnClick(td.GetTouchCentre().x, td.GetTouchCentre().y, tp);
    }
 }
