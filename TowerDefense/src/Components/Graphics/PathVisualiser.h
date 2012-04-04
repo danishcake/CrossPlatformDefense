@@ -4,6 +4,7 @@
 #include <GLES2/gl2.h>
 #include "Effect.h"
 #include "../../PotentialMap.h"
+#include "../../InvalidationWatcher.h"
 
 class WorldBlocks;
 
@@ -22,8 +23,11 @@ private:
    GLint mPositionAttributeHandle;
    GLint mTransformUniformHandle;
 
+   InvalidationWatcher mInvalidationWatcher;
    PotentialMap mPotentialMap;
    WorldBlocks* mWorldBlocks;
+
+   void BuildMap();
 
 public:
    PathVisualiser(WorldBlocks* world_blocks);

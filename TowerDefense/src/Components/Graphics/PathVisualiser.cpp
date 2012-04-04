@@ -23,6 +23,13 @@ void PathVisualiser::InitialiseGraphics(TickParameters& tp)
    //Initialise VBO
    glGenBuffers(1, &mVBO);
    
+   BuildMap();
+
+}
+
+void PathVisualiser::BuildMap()
+{
+
    mVBOsize = 0;
    Vector4f* verts = new Vector4f[WORLD_WIDTH * WORLD_BREADTH * 3];
    //Build VBO
@@ -66,6 +73,12 @@ void PathVisualiser::InitialiseGraphics(TickParameters& tp)
 
 void PathVisualiser::Tick(TickParameters& tp)
 {
+   if(mInvalidationWatcher.CheckInvalidation(*mWorldBlocks))
+   {
+      mPotentialMap.Evaluate();
+      BuildMap();
+   }
+
    tp.draw_list.AddToLayer(DrawLayer::Game, this);
    //TODO invalidate on change
 }
