@@ -12,12 +12,6 @@ static int LargestOf(const int a, const int b)
       return std::abs(b);
 }
 
-static int LargestOf(const int a, const int b, const int c)
-{
-   return LargestOf(LargestOf(a, b), c);
-}
-
-
 void IInputProcessor::GetActions(ActionMap& held, ActionMap& pressed, ActionMap& released)
 {
    if (mCurrentTouch.GetTouchCount() > 0)

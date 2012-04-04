@@ -1,5 +1,3 @@
-#pragma once
-
 #include "MenuGS.h"
 #include "BuildGS.h"
 #include "../StateListener.h"
@@ -20,8 +18,8 @@ static const float TransitionTime = 0.5f;
 
 MenuGS::MenuGS()
    : mFirst(true),
-     mTransitionTimer(0),
-     mTransitioningToBuild(false)
+     mTransitioningToBuild(false),
+     mTransitionTimer(0)
 {
    
 }

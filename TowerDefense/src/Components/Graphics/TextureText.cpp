@@ -166,7 +166,7 @@ void Texture::InitialiseText(TickParameters& tp)
    if(w > max_texture_size || h > max_texture_size)
    {
       Log::Error(__FILE__, "TextTexture size %dx%d larger than supported %dx%d. Cannot render %s", 
-                 w, h, max_texture_size, max_texture_size, mTextDef.mText);
+                 w, h, max_texture_size, max_texture_size, mTextDef.mText.c_str());
       return;
    }
 

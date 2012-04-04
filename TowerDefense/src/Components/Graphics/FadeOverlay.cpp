@@ -4,8 +4,8 @@
 FadeOverlay::FadeOverlay(FadeType::Enum fade_type, Vector3f fade_color, float fade_time)
    :  mEffect(Effect::GetEffect("glsl/FullscreenVertex.glsl", "glsl/Fade.glsl")),
       mFadeColor(fade_color),
-      mFadeTimer(fade_time),
       mFadeTime(0),
+      mFadeTimer(fade_time),
       mFadeScalar(0),
       mFadeType(fade_type)
 {

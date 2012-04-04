@@ -13,8 +13,8 @@ struct ControlTextVertex
 
 ControlText::ControlText(std::string text, std::string font, Vector4f color)
  : mEffect(Effect::GetEffect("glsl/GUITextTransform.glsl", "glsl/GUITextFragment.glsl")),
-   mText(text),
    mFont(font),
+   mText(text),
    mColor(color),
    mControlArea(0)
 {

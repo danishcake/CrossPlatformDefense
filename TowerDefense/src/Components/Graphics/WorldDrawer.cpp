@@ -10,9 +10,9 @@ struct WorldVertex
 };
 
 WorldDrawer::WorldDrawer(WorldBlocks* blocks)
- : mWorldBlocks(blocks),
+ : mTexture(Texture::GetTexture("textures/TerrainTexture.png")),
    mEffect(Effect::GetEffect("glsl/WorldVertex.glsl", "glsl/WorldFragment.glsl")),
-   mTexture(Texture::GetTexture("textures/TerrainTexture.png"))
+   mWorldBlocks(blocks)
 {
 }
 

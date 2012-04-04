@@ -45,13 +45,13 @@ const float Camera::sFOVNarrow = 45.0f;
 const float Camera::sFOVWide = 90.0f;
 
 Camera::Camera() :
-   mTransitionTimer(0), mCameraPosition(0),
-   mResolution(320, 240),
+   mResolution(320, 240), mTransitionTimer(0),
+   mCameraPosition(0),
    mZoomTransitionTimer(0), mZoomedIn(false),
    mFOVStart(sFOVWide), mFOVEnd(sFOVWide),
-   mPanCamera(false),
    mCameraOriginStart(WORLD_WIDTH / 2, 0, WORLD_BREADTH / 2),
-   mCameraOriginEnd(WORLD_WIDTH / 2, 0, WORLD_BREADTH / 2)
+   mCameraOriginEnd(WORLD_WIDTH / 2, 0, WORLD_BREADTH / 2),
+   mPanCamera(false)
 {
    mCameraQuaternionStart = sQuats[mCameraPosition];
    mCameraQuaternionEnd   = sQuats[mCameraPosition];

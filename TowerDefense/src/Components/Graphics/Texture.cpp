@@ -122,16 +122,16 @@ void Texture::CacheTick(TickParameters& tp, TextureClearLevel::Enum clear_level)
 
 
 Texture::Texture(std::string texture_file)
-   : mInitialised(false),
-     mTextureFile(texture_file),
-     mTextDef("","", UDim())
+   : mTextureFile(texture_file),
+     mTextDef("","", UDim()),
+     mInitialised(false)
 {
 }
 
 Texture::Texture(std::string text, std::string font, UDim size)
-   : mInitialised(false),
-     mTextureFile(""),
-     mTextDef(text, font, size)
+   : mTextureFile(""),
+     mTextDef(text, font, size),
+     mInitialised(false)
 {
 }
 

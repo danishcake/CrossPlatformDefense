@@ -1,4 +1,3 @@
-#pragma once
 #include "SignalAction.h"
 #include "../../../GameObject.h"
 #include "../ControlEventReceiver.h"

@@ -11,8 +11,8 @@ struct WorldVertex
 };
 
 CubeDrawer::CubeDrawer()
- : mEffect(Effect::GetEffect("glsl/CubeVertex.glsl", "glsl/CubeFragment.glsl")),
-   mTexture(Texture::GetTexture("textures/CubeTexture.png")),
+ : mTexture(Texture::GetTexture("textures/CubeTexture.png")),
+   mEffect(Effect::GetEffect("glsl/CubeVertex.glsl", "glsl/CubeFragment.glsl")),
    mPosition(0)
 {
 }

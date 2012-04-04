@@ -7,9 +7,10 @@
 
 
 PathVisualiser::PathVisualiser(WorldBlocks* blocks)
- : mWorldBlocks(blocks),
+ :
+   mEffect(Effect::GetEffect("glsl/Vector4fTransform.glsl", "glsl/SolidRed.glsl")),
    mPotentialMap(blocks, 1, 1),
-   mEffect(Effect::GetEffect("glsl/Vector4fTransform.glsl", "glsl/SolidRed.glsl"))
+   mWorldBlocks(blocks)
 {
 }
 

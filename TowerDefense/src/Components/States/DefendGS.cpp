@@ -1,5 +1,3 @@
-#pragma once
-
 #include "DefendGS.h"
 #include "../../GameObject.h"
 #include "../StateListener.h"

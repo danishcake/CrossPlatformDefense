@@ -6,14 +6,14 @@ UDim::UDim() :
 }
 
 UDim::UDim(Vector2f relative, Vector2f absolute)
- : mRelative(relative), mAbsolute(absolute),
-   mObjectEdge(Edge::None)
+ : mObjectEdge(Edge::None), mRelative(relative),
+   mAbsolute(absolute)
 {
 }
 
 UDim::UDim(Vector2f relative, Vector2f absolute, Edge::Enum object_edge)
- : mRelative(relative), mAbsolute(absolute),
-   mObjectEdge(object_edge)
+ : mObjectEdge(object_edge), mRelative(relative),
+   mAbsolute(absolute)
 {
 }
 

@@ -9,14 +9,14 @@ struct V2Textured {
 };
 
 TexturedQuad::TexturedQuad() :
-   mTexture(Texture::GetTexture("textures/TerrainTexture.png")),
-   mEffect(Effect::GetEffect("glsl/FullscreenTexturedVertex.glsl", "glsl/FlatTextured.glsl"))
+   mEffect(Effect::GetEffect("glsl/FullscreenTexturedVertex.glsl", "glsl/FlatTextured.glsl")),
+   mTexture(Texture::GetTexture("textures/TerrainTexture.png"))
 {
 }
 
 TexturedQuad::TexturedQuad(TexturePtr texture)
-   : mTexture(texture),
-     mEffect(Effect::GetEffect("glsl/FullscreenTexturedVertex.glsl", "glsl/FlatTextured.glsl"))
+   : mEffect(Effect::GetEffect("glsl/FullscreenTexturedVertex.glsl", "glsl/FlatTextured.glsl")),
+     mTexture(texture)
 {
 
 }
