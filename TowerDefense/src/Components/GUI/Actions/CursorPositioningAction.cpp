@@ -52,7 +52,7 @@ void CursorPositioningAction::Tick(TickParameters& tp)
                {
                   if(min_intersect_distance > intersect_distance)
                   {
-                     closest_intersect_point = Vector3f(x, y, z);
+                     closest_intersect_point = Vector3f(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
                      closest_intersect_normal = intersection_normal;
                      min_intersect_distance = intersect_distance;
                   }
@@ -64,8 +64,8 @@ void CursorPositioningAction::Tick(TickParameters& tp)
       if (min_intersect_distance < FLT_MAX)
       {
          // Cursor to top of stack
-         Column col = mWorld->getColumn(closest_intersect_point.x, closest_intersect_point.z);
-         closest_intersect_point.y = col.GetHeight() + 1;
+         Column col = mWorld->getColumn(static_cast<int>(closest_intersect_point.x), static_cast<int>(closest_intersect_point.z));
+         closest_intersect_point.y = static_cast<float>(col.GetHeight()) + 1.0f;
          tp.msg.GetHub<CursorMoveMessage>().Broadcast(CursorMoveMessage(closest_intersect_point));
          Log::Debug(__FILE__, "Intersection at (%f,%f,%f)", closest_intersect_point.x, closest_intersect_point.y, closest_intersect_point.z);
       }

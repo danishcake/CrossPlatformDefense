@@ -562,6 +562,14 @@ public:
 	}
 };
 
+
+
+// Specialised template for length for integers as std::sqrt ambiguous
+int Vector2<int>::length() const
+{
+	return (int) std::sqrt((float)(x * x + y * y));
+}
+
 //--------------------------------------
 // Typedef shortcuts for 2D vector
 //-------------------------------------

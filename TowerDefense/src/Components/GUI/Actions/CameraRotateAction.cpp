@@ -30,7 +30,7 @@ void CameraRotateAction::Tick(TickParameters& tp)
 
          if(td.GetTouchCount() == 1)
          {
-            tp.camera->RotateAxis(delta.x, delta.y);
+            tp.camera->RotateAxis(static_cast<float>(delta.x), static_cast<float>(delta.y));
             mLastDoubleTouch = false;
          } else if(td.GetTouchCount() == 2)
          {
@@ -54,7 +54,7 @@ void CameraRotateAction::Tick(TickParameters& tp)
                tp.camera->ZoomScale(20.0f * (mLastDoubleTouchDistance - touch_distance) / mStartDoubleTouchDistance);
             } else
             {
-               tp.camera->Pan(td.GetTouchCentre().x, td.GetTouchCentre().y, delta.x, delta.y);
+               tp.camera->Pan(static_cast<float>(td.GetTouchCentre().x), static_cast<float>(td.GetTouchCentre().y), static_cast<float>(delta.x), static_cast<float>(delta.y));
             }
 
             mLastDoubleTouchDistance = touch_distance;

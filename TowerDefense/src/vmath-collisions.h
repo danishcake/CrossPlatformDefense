@@ -6,8 +6,8 @@
 #include <algorithm>
 
 /* Sign extractor */
-template <typename T> int sgn(T val) {
-    return (T(0) < val) - (val < T(0));
+template <typename T> T sgn(T val) {
+    return (T)((T(0) < val) - (val < T(0)));
 }
 
 
@@ -626,7 +626,7 @@ public:
             if(t1 > t_min)
             {
                normal = Vector3<T>();
-               normal[i] = sgn(ray_unit[i]);
+               normal[i] = sgn<float>(ray_unit[i]);
                t_min = t1;
             }
             //t_min = std::max(t_min, t1);

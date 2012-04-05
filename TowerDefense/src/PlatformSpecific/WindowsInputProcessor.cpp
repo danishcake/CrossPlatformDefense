@@ -31,7 +31,8 @@ void WindowsInputProcessor::GetActions(ActionMap& held, ActionMap& pressed, Acti
    if(mLeftDown)
    {
       InputAction action;
-      mCurrentTouch = TouchData(Vector2i(mX, mY));
+      mCurrentTouch = TouchData();
+      mCurrentTouch.AddTouch(Vector2i(mX, mY));
    }
 
 

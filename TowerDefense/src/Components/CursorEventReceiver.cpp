@@ -32,7 +32,7 @@ void CursorEventReceiver::Tick(TickParameters& tp)
             if(mPositionLTV == it->cursor_position &&
                it->cursor_position.y > 1)
             {
-               Column col = mBlocks->getColumn(it->cursor_position.x, it->cursor_position.z);
+               Column col = mBlocks->getColumn(static_cast<int>(it->cursor_position.x), static_cast<int>(it->cursor_position.z));
                col.Set(col.GetHeight(), BlockType::Empty);
                if (it->cursor_position.y > 2)
                {
