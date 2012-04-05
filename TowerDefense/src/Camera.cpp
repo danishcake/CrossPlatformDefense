@@ -95,10 +95,10 @@ void Camera::Pan(float x, float y, float dx, float dy)
    Vector3f origin;
    Vector3f unit;
 
-   GetRay(Vector2i(x, y), origin, unit);
+   GetRay(Vector2i(static_cast<int>(x), static_cast<int>(y)), origin, unit);
    Vector3f tap_intersection = origin - unit * (origin.y / unit.y);
 
-   GetRay(Vector2i(x - dx, y - dy), origin, unit);
+   GetRay(Vector2i(static_cast<int>(x - dx), static_cast<int>(y - dy)), origin, unit);
    Vector3f drag_intersection = origin - unit * (origin.y / unit.y);
 
 
