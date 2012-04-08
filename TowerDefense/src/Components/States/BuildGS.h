@@ -11,6 +11,7 @@ class BuildGS : public Component
 private:
    bool mFirst;
    void SpawnMenuObjects(TickParameters& tp);
+   void TransitionToDefend(int x, int y, TickParameters& tp);
    
    WorldBlocks* mBlocks;
    SharedState mSharedState;

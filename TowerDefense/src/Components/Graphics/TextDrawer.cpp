@@ -155,4 +155,5 @@ void TextDrawer::Draw(TickParameters& tp)
 void TextDrawer::TeardownGraphics(TickParameters& tp)
 {
    glDeleteBuffers(1, &mVBO);
+   tp.draw_list.RemoveFromLayer(DrawLayer::GUI, this);
 }

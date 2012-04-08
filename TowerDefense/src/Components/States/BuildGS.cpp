@@ -112,6 +112,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
       btn_go->AddComponent(new ControlOutline(), tp);
       btn_go->AddComponent(new ControlText("GO", "fonts/OrbitronLight.ttf", Vector4f(1.0f, 1.0f, 1.0f, 1)), tp);
       btn_go->AddComponent(new StateListener(GameStates::Build, true), tp);
+      btn_go->AddComponent(new SignalAction(boost::bind(&BuildGS::TransitionToDefend, this, _1, _2, _3)), tp);
       tp.Spawn(btn_go);
    }
 
@@ -132,3 +133,11 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    tp.Spawn(walker);
 
 }
+
+
+void BuildGS::TransitionToDefend(int x, int y, TickParameters& tp)
+{
+   tp.msg.GetHub<StateChangeMessage>().Broadcast(StateChangeMessage(GameStates::Defend));
+
+}
+

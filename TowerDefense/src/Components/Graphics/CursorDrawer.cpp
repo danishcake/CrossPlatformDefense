@@ -73,5 +73,5 @@ void CursorDrawer::Draw(TickParameters& tp)
 void CursorDrawer::TeardownGraphics(TickParameters& tp)
 {
    glDeleteBuffers(1, &mVBO);
-   tp.draw_list.RemoveFromLayer(DrawLayer::Game, this);
+   tp.draw_list.RemoveFromLayer(DrawLayer::GUI, this);
 }
