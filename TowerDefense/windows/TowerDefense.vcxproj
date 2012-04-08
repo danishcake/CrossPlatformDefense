@@ -120,6 +120,7 @@
     <ClInclude Include="..\src\Components\States\BuildGS.h" />
     <ClInclude Include="..\src\Components\States\DefendGS.h" />
     <ClInclude Include="..\src\Components\States\MenuGS.h" />
+    <ClInclude Include="..\src\Components\States\SharedState.h" />
     <ClInclude Include="..\src\Components\UberComponent.h" />
     <ClInclude Include="..\src\Components\WorldHandle.h" />
     <ClInclude Include="..\src\DrawList.h" />

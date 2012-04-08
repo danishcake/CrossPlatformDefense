@@ -16,6 +16,7 @@ void CursorEventReceiver::Initialise(TickParameters& tp, GameObject* owner)
 
 void CursorEventReceiver::Tick(TickParameters& tp)
 {
+   // Handle cursor positioning messages to move and action cursor
    std::vector<CursorMoveMessage> messages = mCursorMoveSubscriber.GetMessages();
 
    if(messages.size() > 0)
@@ -39,7 +40,7 @@ void CursorEventReceiver::Tick(TickParameters& tp)
                   Column col = mBlocks->getColumn(static_cast<int>(it->cursor_position.x), static_cast<int>(it->cursor_position.z));
                   col.Set(col.GetHeight(), BlockType::Grass);
                }
-               
+
                mPositionLTV = it->cursor_position + Vector3f(0, -1, 0);
                mPosition->SetPosition(mPositionLTV);
             } else
@@ -47,10 +48,46 @@ void CursorEventReceiver::Tick(TickParameters& tp)
                mPositionLTV = it->cursor_position;
                mPosition->SetPosition(mPositionLTV);
             }
+            break;
+         case CursorAction::AddTop:
+            if(mPositionLTV == it->cursor_position)
+            {
+               Column col = mBlocks->getColumn(static_cast<int>(it->cursor_position.x), static_cast<int>(it->cursor_position.z));
+               if (col.GetHeight() < WORLD_HEIGHT - 1)
+               {
+                  col.Set(col.GetHeight() + 1, BlockType::Grass);
+               }
 
+               if (it->cursor_position.y > 2)
+               {
+                  Column col = mBlocks->getColumn(static_cast<int>(it->cursor_position.x), static_cast<int>(it->cursor_position.z));
+                  col.Set(col.GetHeight() - 1, BlockType::Dirt);
+               }
+
+               mPositionLTV = it->cursor_position + Vector3f(0, 1, 0);
+               mPosition->SetPosition(mPositionLTV);
+            } else
+            {
+               mPositionLTV = it->cursor_position;
+               mPosition->SetPosition(mPositionLTV);
+            }
             break;
          }
-         
       }
    }
+}
+
+void CursorEventReceiver::SetDeleteMode(int x, int y, TickParameters& tp)
+{
+   mAction = CursorAction::DeleteTop;
+}
+
+void CursorEventReceiver::SetAddMode(int x, int y, TickParameters& tp)
+{
+   mAction = CursorAction::AddTop;
+}
+
+void CursorEventReceiver::SetPositionMode(int x, int y, TickParameters& tp)
+{
+   mAction = CursorAction::PositionCursor;
 }

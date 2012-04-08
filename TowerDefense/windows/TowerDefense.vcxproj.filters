@@ -263,17 +263,20 @@
     <ClInclude Include="..\src\Messaging\CursorMoveMessage.h">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Components\CursorEventReceiver.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Components\GUI\Actions\CursorPositioningAction.h">
-      <Filter>Header Files\Components\GUI\Actions</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\vmath-collisions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Input\TouchData.h">
       <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\States\SharedState.h">
+      <Filter>Header Files\Components\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\CursorEventReceiver.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\GUI\Actions\CursorPositioningAction.h">
+      <Filter>Header Files\Components\GUI\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -424,14 +427,14 @@
     <ClCompile Include="..\src\Components\Graphics\CursorDrawer.cpp">
       <Filter>Source Files\Components\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Components\CursorEventReceiver.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Components\GUI\Actions\CursorPositioningAction.cpp">
       <Filter>Source Files\Components\GUI\Actions</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Input\TouchData.cpp">
       <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\CursorEventReceiver.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -74,7 +74,7 @@ void MenuGS::SpawnMenuObjects(TickParameters& tp)
 void MenuGS::TransitionToBuild(TickParameters& tp)
 {
    GameObject* build_gs = new GameObject();
-   build_gs->AddComponent(new BuildGS(0), tp);
+   build_gs->AddComponent(new BuildGS(), tp);
    tp.Spawn(build_gs);
 
    mOwner->Kill();

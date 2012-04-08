@@ -20,11 +20,18 @@
 #include "../../WorldBlocks.h"
 
 
-
-BuildGS::BuildGS(WorldBlocks* world)
-   : mFirst(true), mBlocks(world)
+BuildGS::BuildGS()
+   : mFirst(true), mBlocks(NULL)
 {
-   mFromMenu = world == 0;
+   mSharedState.WaveID = 0;
+   mSharedState.BlockStock = 5;
+   mSharedState.DeleteMoves = 5;
+}
+
+BuildGS::BuildGS(WorldBlocks* world, SharedState shared_state)
+   : mFirst(false), mBlocks(world), mSharedState(shared_state)
+{
+   mSharedState.DeleteMoves = 5;
 }
 
 void BuildGS::Tick(TickParameters& tp)
@@ -43,8 +50,9 @@ void BuildGS::Teardown(TickParameters& tp)
 
 void BuildGS::SpawnMenuObjects(TickParameters& tp)
 {
+   bool from_menu = mBlocks == 0;
    //Load the world
-   if(mBlocks == 0)
+   if(from_menu)
    {
       mBlocks = WorldBlocks::LoadFromPNG(tp, "heightmaps/map2.png");
 
@@ -56,13 +64,15 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    }
 
    //Spawn GUI controls
-   if(mFromMenu)
+   if(from_menu)
    {
       //Spawn cursor
       GameObject* cursor = new GameObject();
       cursor->AddComponent(new Position(), tp);
       cursor->AddComponent(new CursorDrawer(), tp);
-      cursor->AddComponent(new CursorEventReceiver(CursorAction::DeleteTop, mBlocks), tp);
+      CursorEventReceiver* cursor_event_receiver = new CursorEventReceiver(CursorAction::DeleteTop, mBlocks);
+      cursor->AddComponent(cursor_event_receiver, tp);
+      cursor->AddComponent(new StateListener(GameStates::Build, true), tp);
       tp.Spawn(cursor);
 
       //Spawn drag area for Camera manipulation, tap detection (with callback)
@@ -72,50 +82,37 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
       drag_area->AddComponent(new ControlEventReceiver(), tp);
       drag_area->AddComponent(new CameraRotateAction(CameraAction::TurnAxis), tp);
       drag_area->AddComponent(new CursorPositioningAction(mBlocks), tp);
-      drag_area->AddComponent(new StateListener(GameStates::Build, GameStates::Defend, true), tp);
+      drag_area->AddComponent(new StateListener(GameStates::Build, true), tp);
       tp.Spawn(drag_area);
-      
-      //Spawn camera controls
-      GameObject* gui_right = new GameObject();
-      gui_right->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 1.0f), Vector2f(-10.0f, -10.0f), Edge::BottomRight),
-                                              UDim(Vector2f(0.20f, 0.1f), Vector2f( 0.0f,  10.0f))), tp);
-      gui_right->AddComponent(new ControlEventReceiver(), tp);
-      gui_right->AddComponent(new ControlOutline(), tp);
-      gui_right->AddComponent(new CameraRotateAction(CameraAction::TurnRight), tp);
-      gui_right->AddComponent(new ControlText(">", "fonts/OrbitronLight.ttf", Vector4f(1, 1, 1, 1)), tp);
-      gui_right->AddComponent(new StateListener(GameStates::Build, true), tp);
-      tp.Spawn(gui_right);
 
-      GameObject* gui_left = new GameObject();
-      gui_left->AddComponent(new ControlArea(UDim(Vector2f(0.0f, 1.0f), Vector2f(10.0f, -10.0f), Edge::BottomLeft),
-                                             UDim(Vector2f(0.20f, 0.1f), Vector2f( 0.0f,  10.0f))), tp);
-      gui_left->AddComponent(new ControlEventReceiver(), tp);
-      gui_left->AddComponent(new ControlOutline(), tp);
-      gui_left->AddComponent(new CameraRotateAction(CameraAction::TurnLeft), tp);
-      gui_left->AddComponent(new ControlText("<", "fonts/OrbitronLight.ttf", Vector4f(1, 1, 1, 1)), tp);
-      gui_left->AddComponent(new StateListener(GameStates::Build, true), tp);
-      tp.Spawn(gui_left);
+      GameObject* btn_delete = new GameObject();
+      btn_delete->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 1.0f), Vector2f(-10.0f, -10.0f), Edge::BottomRight),
+                                                 UDim(Vector2f(0.15f, 0.1f), Vector2f( 0.0f, 0.0f))), tp);
+      btn_delete->AddComponent(new ControlEventReceiver(), tp);
+      btn_delete->AddComponent(new ControlOutline(), tp);
+      btn_delete->AddComponent(new ControlText("Clr", "fonts/OrbitronLight.ttf", Vector4f(0.707f, 0.137f, 0.137f, 1)), tp);
+      btn_delete->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetDeleteMode, cursor_event_receiver, _1, _2, _3)), tp);
+      btn_delete->AddComponent(new StateListener(GameStates::Build, true), tp);
+      tp.Spawn(btn_delete);
 
-      GameObject* gui_zoom = new GameObject();
-      gui_zoom->AddComponent(new ControlArea(UDim(Vector2f(0.2f, 1.0f), Vector2f(20.0f, -10.0f), Edge::BottomLeft),
-                                             UDim(Vector2f(0.20f, 0.1f), Vector2f( 0.0f,  10.0f))), tp);
-      gui_zoom->AddComponent(new ControlEventReceiver(), tp);
-      gui_zoom->AddComponent(new ControlOutline(), tp);
-      gui_zoom->AddComponent(new CameraRotateAction(CameraAction::ZoomToggle), tp);
-      gui_zoom->AddComponent(new ControlText("+", "fonts/OrbitronLight.ttf", Vector4f(1, 1, 1, 1)), tp);
-      gui_zoom->AddComponent(new StateListener(GameStates::Build, true), tp);
-      tp.Spawn(gui_zoom);
+      GameObject* btn_add = new GameObject();
+      btn_add->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 0.9f), Vector2f(-10.0f, -30.0f), Edge::BottomRight),
+                                              UDim(Vector2f(0.15f, 0.1f), Vector2f( 0.0f, 0.0f))), tp);
+      btn_add->AddComponent(new ControlEventReceiver(), tp);
+      btn_add->AddComponent(new ControlOutline(), tp);
+      btn_add->AddComponent(new ControlText("Add", "fonts/OrbitronLight.ttf", Vector4f(0.137f, 0.707f, 0.137f, 1)), tp);
+      btn_add->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetAddMode, cursor_event_receiver, _1, _2, _3)), tp);
+      btn_add->AddComponent(new StateListener(GameStates::Build, true), tp);
+      tp.Spawn(btn_add);
 
-      
-      GameObject* gui_mode = new GameObject();
-      gui_mode->AddComponent(new ControlArea(UDim(Vector2f(0.8f, 1.0f), Vector2f(-20.0f, -10.0f), Edge::BottomRight),
-                                             UDim(Vector2f(0.20f, 0.1f), Vector2f( 0.0f,  10.0f))), tp);
-      gui_mode->AddComponent(new ControlEventReceiver(), tp);
-      gui_mode->AddComponent(new ControlOutline(), tp);
-      gui_mode->AddComponent(new CameraRotateAction(CameraAction::PanRotateToggle), tp);
-      gui_mode->AddComponent(new ControlText("R", "fonts/OrbitronLight.ttf", Vector4f(1, 1, 1, 1)), tp);
-      gui_mode->AddComponent(new StateListener(GameStates::Build, true), tp);
-      tp.Spawn(gui_mode);
+      GameObject* btn_go = new GameObject();
+      btn_go->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 0.0f), Vector2f(-10.0f, 10.0f), Edge::TopRight),
+                                           UDim(Vector2f(0.15f, 0.1f), Vector2f( 0.0f, 0.0f))), tp);
+      btn_go->AddComponent(new ControlEventReceiver(), tp);
+      btn_go->AddComponent(new ControlOutline(), tp);
+      btn_go->AddComponent(new ControlText("GO", "fonts/OrbitronLight.ttf", Vector4f(1.0f, 1.0f, 1.0f, 1)), tp);
+      btn_go->AddComponent(new StateListener(GameStates::Build, true), tp);
+      tp.Spawn(btn_go);
    }
 
    GameObject* path_vis = new GameObject();

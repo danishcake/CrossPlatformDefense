@@ -12,7 +12,8 @@ namespace CursorAction
    enum Enum
    {
       PositionCursor,
-      DeleteTop
+      DeleteTop,
+      AddTop
    };
 }
 
@@ -33,4 +34,8 @@ public:
    virtual void Initialise(TickParameters& tp, GameObject* owner);
    virtual void Tick(TickParameters& tp);
    virtual void Teardown(TickParameters& tp) {}
+
+   void SetDeleteMode(int x, int y, TickParameters& tp);
+   void SetAddMode(int x, int y, TickParameters& tp);
+   void SetPositionMode(int x, int y, TickParameters& tp);
 };
