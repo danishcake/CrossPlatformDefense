@@ -15,7 +15,6 @@ void CameraRotateAction::Initialise(TickParameters& tp, GameObject* owner)
 {
    Component::Initialise(tp, owner);
    mEventRcvr = owner->GetComponent<ControlEventReceiver>();
-   mText = owner->GetComponent<ControlText>();
 }
 
 void CameraRotateAction::Tick(TickParameters& tp)
@@ -79,32 +78,11 @@ void CameraRotateAction::Tick(TickParameters& tp)
          else if(mAction == CameraAction::ZoomToggle)
          {
             tp.camera->ZoomToggle();
-            if(mText)
-            {
-               if(tp.camera->IsZoomed())
-               {
-                  mText->SetText(tp, "-");
-               } else
-               {
-                  mText->SetText(tp, "+");
-               }
-            }
          }
          else if(mAction == CameraAction::PanRotateToggle)
          {
             tp.camera->PanRotateToggle();
-            if(mText)
-            {
-               if(tp.camera->IsPanning())
-               {
-                  mText->SetText(tp, "P");
-               } else
-               {
-                  mText->SetText(tp, "R");
-               }
-            }
          }
-
       }
    }
 }

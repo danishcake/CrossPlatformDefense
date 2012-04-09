@@ -278,6 +278,9 @@
     <ClInclude Include="..\src\Components\GUI\Actions\CursorPositioningAction.h">
       <Filter>Header Files\Components\GUI\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Messaging\WalkerDeathMessage.h">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Components\Graphics\CubeDrawer.cpp">

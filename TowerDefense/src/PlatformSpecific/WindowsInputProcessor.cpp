@@ -28,12 +28,13 @@ void WindowsInputProcessor::GetActions(ActionMap& held, ActionMap& pressed, Acti
 
 
    // Mouse held calculations
+   mCurrentTouch = TouchData();
    if(mLeftDown)
    {
       InputAction action;
-      mCurrentTouch = TouchData();
       mCurrentTouch.AddTouch(Vector2i(mX, mY));
    }
+
 
 
    //Calculate deltas

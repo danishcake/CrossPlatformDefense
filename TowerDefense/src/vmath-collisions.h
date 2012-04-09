@@ -641,6 +641,24 @@ public:
       intersection_distance = t_min;
       return true;
    }
+   /*
+    * Find the intersection between a ray and a sphere
+    * Algorithm as per Realtime Collision Detection Page 179
+    */
+
+   static bool RayIntersectsSphere(const Vector3<T> ray_origin, const Vector3<T> ray_unit,
+                                   const Vector3<T> sphere_origin, T sphere_radius)
+   {
+      Vector3<T> m = ray_origin - sphere_origin;
+      T c = m.dotProduct(m) - sphere_radius * sphere_radius;
+      if (c <= (T)0.0) return true;
+
+      T b = m.dotProduct(ray_unit);
+      if (b > (T)0.0) return false;
+
+      T disc = b * b - c;
+      return disc >= (T)0.0;
+   }
 };
 
 typedef Collisions3<float> Collisions3f;

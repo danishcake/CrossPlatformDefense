@@ -3,11 +3,8 @@
 #include "../GUI/Actions/SignalAction.h"
 #include "../Graphics/WorldDrawer.h"
 #include "../Graphics/PathVisualiser.h"
-#include "../Graphics/CubeDrawer.h"
 #include "../Graphics/CursorDrawer.h"
 #include "../Position.h"
-#include "../Navigator.h"
-#include "../WorldHandle.h"
 #include "../CursorEventReceiver.h"
 #include "../GUI/ControlArea.h"
 #include "../GUI/ControlOutline.h"
@@ -18,6 +15,7 @@
 #include "../GUI/Actions/CursorPositioningAction.h"
 #include "../StateListener.h"
 #include "../../WorldBlocks.h"
+#include "DefendGS.h"
 
 
 BuildGS::BuildGS()
@@ -120,24 +118,15 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    path_vis->AddComponent(new PathVisualiser(mBlocks), tp);
    path_vis->AddComponent(new StateListener(GameStates::Build, true), tp);
    tp.Spawn(path_vis);
-
-   //Spawn a walker (move to defend GS when done)
-   GameObject* walker = new GameObject();
-   Position* pos = new Position();
-   pos->SetPosition(Vector3f(0, 0, 0));
-   walker->AddComponent(pos, tp);
-   walker->AddComponent(new Navigator(), tp);
-   walker->AddComponent(new CubeDrawer(), tp);
-   walker->AddComponent(new WorldHandle(mBlocks), tp);
-   walker->AddComponent(new StateListener(GameStates::Build, GameStates::Defend, true), tp); //Ditto make defend only
-   tp.Spawn(walker);
-
 }
 
 
 void BuildGS::TransitionToDefend(int x, int y, TickParameters& tp)
 {
    tp.msg.GetHub<StateChangeMessage>().Broadcast(StateChangeMessage(GameStates::Defend));
-
+   
+   GameObject* defend = new GameObject();
+   defend->AddComponent(new DefendGS(mBlocks, mSharedState), tp);
+   tp.Spawn(defend);
 }
 

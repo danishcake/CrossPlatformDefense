@@ -137,6 +137,7 @@
     <ClInclude Include="..\src\Messaging\GuiTransitionControlMessage.h" />
     <ClInclude Include="..\src\Messaging\MessageHub.h" />
     <ClInclude Include="..\src\Messaging\StateChangeMessage.h" />
+    <ClInclude Include="..\src\Messaging\WalkerDeathMessage.h" />
     <ClInclude Include="..\src\PlatformSpecific\AndroidFile.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

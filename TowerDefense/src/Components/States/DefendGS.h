@@ -1,6 +1,9 @@
 #pragma once
 
 #include "../Component.h"
+#include "SharedState.h"
+#include "../../Messaging/MessageHub.h"
+#include "../../Messaging/WalkerDeathMessage.h"
 
 class GameObject;
 class WorldBlocks;
@@ -26,11 +29,23 @@ class DefendGS : public Component
 private:
    bool mFirst;
    WorldBlocks* mBlocks;
+   SharedState mSharedState;
+   Subscriber<WalkerDeathMessage> mDeathSubscriber;
+
+   int mSpawnCount;
+   int mDeathCount;
+   float mSpawnTime;
+   float mBackToBuildTimer;
 
    void SpawnObjects(TickParameters& tp);
+   void SpawnWalker(TickParameters& tp);
+   void TransitionToBuild(TickParameters& tp);
+   void TapToKill(int x, int y, TickParameters& tp);
+
 
 public:
-   DefendGS(WorldBlocks* world);
+   DefendGS(WorldBlocks* world, SharedState state);
+   virtual void Initialise(TickParameters& tp, GameObject* owner);
    virtual void Tick(TickParameters& tp);
    virtual void Teardown(TickParameters& tp);
 };

@@ -34,10 +34,6 @@ void IInputProcessor::GetActions(ActionMap& held, ActionMap& pressed, ActionMap&
          }
       }
 
-      
-      
-
-
       mActions[InputAction::HoldMove] = move;
    }
 
@@ -45,7 +41,7 @@ void IInputProcessor::GetActions(ActionMap& held, ActionMap& pressed, ActionMap&
    if (!mActions.count(InputAction::HoldMove) && mActionsLastTime.count(InputAction::HoldMove))
    {
       TouchData td_current = mActionsLastTime[InputAction::HoldMove].data.HoldMoveData.current;
-      TouchData td_start = mActionsLastTime[InputAction::HoldMove].data.HoldMoveData.current;
+      TouchData td_start = mActionsLastTime[InputAction::HoldMove].data.HoldMoveData.start;
       if (td_current.GetTouchCount() == 1)
       {
          Vector2i delta = td_current.GetTouch(0) - td_start.GetTouch(0);
