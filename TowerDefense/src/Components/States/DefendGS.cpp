@@ -58,7 +58,7 @@ void DefendGS::Tick(TickParameters& tp)
 
    mMaxSpawn = (mSharedState.WaveID + 2) * 3;
    mMaxSpawn = std::min(mMaxSpawn, 100);
-   float spawn_interval = 7.5f / (mSharedState.WaveID + 4);
+   float spawn_interval = 1.5f / (mSharedState.WaveID + 4);
    spawn_interval = std::max(spawn_interval, 0.2f);
 
    if (mSpawnCount < mMaxSpawn)
@@ -121,6 +121,7 @@ void DefendGS::SpawnObjects(TickParameters& tp)
                                                 UDim(Vector2f(0.3f, 0.05f), Vector2f( 0.0f, 0.0f))), tp);
    mWalkerCountText = new ControlText("000/000", "fonts/OrbitronLight.ttf", Vector4f(1.0f, 1.0f, 1.0f, 1.0f));
    walker_counter->AddComponent(mWalkerCountText, tp);
+   walker_counter->AddComponent(new StateListener(GameStates::Defend, true), tp);
    tp.Spawn(walker_counter);
 }
 
@@ -160,7 +161,6 @@ void DefendGS::TapToKill(int x, int y, TickParameters& tp)
          if (Collisions3f::RayIntersectsSphere(ray_origin, ray_unit, pos->GetPosition() + Vector3f(0.5f, 0.5f, 0.5f), 1.0f))
          {
             (*it)->Kill();
-            UpdateWalkerText(tp);
          }
       }
    }

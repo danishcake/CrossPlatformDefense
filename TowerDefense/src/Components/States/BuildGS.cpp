@@ -27,7 +27,7 @@ BuildGS::BuildGS()
 }
 
 BuildGS::BuildGS(WorldBlocks* world, SharedState shared_state)
-   : mFirst(false), mBlocks(world), mSharedState(shared_state)
+   : mFirst(true), mBlocks(world), mSharedState(shared_state)
 {
    mSharedState.DeleteMoves = 5;
 }

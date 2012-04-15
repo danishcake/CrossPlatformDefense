@@ -50,10 +50,10 @@ struct TextDefinitionComparer
       {
          return false;
       }
-      bool left_less = (left.mFont < right.mFont ||
-                        left.mText < right.mText ||
-                        !(left.mSize == right.mSize));
-      return !left_less;
+      bool left_less = (left.mFont < right.mFont) || 
+                        (left.mFont == right.mFont && left.mText < right.mText) ||
+                        (left.mFont == right.mFont && left.mText == right.mText && !(left.mSize == right.mSize));
+      return left_less;
    }
 };
 
