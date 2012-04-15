@@ -4,6 +4,7 @@
 #include "../GUI/Actions/CameraRotateAction.h"
 #include "../GUI/Actions/SignalAction.h"
 #include "../GUI/ControlArea.h"
+#include "../GUI/ControlText.h"
 #include "../GUI/ControlEventReceiver.h"
 #include "../GUI/ControlEventDistributor.h"
 #include "../Graphics/CubeDrawer.h"
@@ -16,7 +17,10 @@
 #include "../Position.h"
 #include "../../Camera.h"
 #include "../../vmath-collisions.h"
+#include "../SendOnDeath.h"
 #include "BuildGS.h"
+#include <sstream>
+#include <iomanip>
 
 
 DefendGS::DefendGS(WorldBlocks* world, SharedState state)
@@ -48,24 +52,26 @@ void DefendGS::Tick(TickParameters& tp)
    for(std::vector<WalkerDeathMessage>::iterator it = deaths.begin(); it != deaths.end(); ++it)
    {
       mDeathCount++;
+      UpdateWalkerText(tp);
    }
 
 
-   int max_spawn = (mSharedState.WaveID + 4) * 3;
-   max_spawn = std::min(max_spawn, 100);
-   float spawn_interval = 10.0f / (mSharedState.WaveID + 4);
+   mMaxSpawn = (mSharedState.WaveID + 2) * 3;
+   mMaxSpawn = std::min(mMaxSpawn, 100);
+   float spawn_interval = 7.5f / (mSharedState.WaveID + 4);
    spawn_interval = std::max(spawn_interval, 0.2f);
 
-   if (mSpawnCount < max_spawn)
+   if (mSpawnCount < mMaxSpawn)
    {
       if (mSpawnTime <= 0)
       {
          mSpawnTime = spawn_interval;
          SpawnWalker(tp);
+         UpdateWalkerText(tp);
       }
    }
 
-   if(mDeathCount >= max_spawn)
+   if(mDeathCount >= mMaxSpawn)
    {
       float ltv_back_timer = mBackToBuildTimer;
       mBackToBuildTimer += tp.timespan;
@@ -92,6 +98,7 @@ void DefendGS::SpawnWalker(TickParameters& tp)
    walker->AddComponent(new WorldHandle(mBlocks), tp);
    walker->AddComponent(new StateListener(GameStates::Build, GameStates::Defend, true), tp); //Ditto make defend only
    walker->AddComponent(new Membership<MembershipType::BadGuy>(), tp);
+   walker->AddComponent(new SendOnDeath<WalkerDeathMessage>(), tp);
    tp.Spawn(walker);
 
    mSpawnCount++;
@@ -108,15 +115,32 @@ void DefendGS::SpawnObjects(TickParameters& tp)
    drag_area->AddComponent(new SignalAction(boost::bind(&DefendGS::TapToKill, this, _1, _2, _3)), tp);
    drag_area->AddComponent(new StateListener(GameStates::Defend, true), tp);
    tp.Spawn(drag_area);
+
+   GameObject* walker_counter = new GameObject();
+   walker_counter->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 0.0f), Vector2f( -10.0f, 10.0f), Edge::TopRight),
+                                                UDim(Vector2f(0.3f, 0.05f), Vector2f( 0.0f, 0.0f))), tp);
+   mWalkerCountText = new ControlText("000/000", "fonts/OrbitronLight.ttf", Vector4f(1.0f, 1.0f, 1.0f, 1.0f));
+   walker_counter->AddComponent(mWalkerCountText, tp);
+   tp.Spawn(walker_counter);
+}
+
+void DefendGS::UpdateWalkerText(TickParameters& tp)
+{
+   std::ostringstream stm;
+   stm << std::setfill('0') << std::setw(3) << mSpawnCount << "/" <<
+          std::setfill('0') << std::setw(3) << mMaxSpawn;
+
+   mWalkerCountText->SetText(tp, stm.str());
 }
 
 void DefendGS::TransitionToBuild(TickParameters& tp)
 {
    tp.msg.GetHub<StateChangeMessage>().Broadcast(StateChangeMessage(GameStates::Build));
-   
+
    GameObject* build = new GameObject();
    build->AddComponent(new BuildGS(mBlocks, mSharedState), tp);
    tp.Spawn(build);
+   mOwner->Kill();
 }
 
 void DefendGS::TapToKill(int x, int y, TickParameters& tp)
@@ -136,6 +160,7 @@ void DefendGS::TapToKill(int x, int y, TickParameters& tp)
          if (Collisions3f::RayIntersectsSphere(ray_origin, ray_unit, pos->GetPosition() + Vector3f(0.5f, 0.5f, 0.5f), 1.0f))
          {
             (*it)->Kill();
+            UpdateWalkerText(tp);
          }
       }
    }

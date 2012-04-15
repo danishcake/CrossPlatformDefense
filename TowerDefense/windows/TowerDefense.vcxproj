@@ -116,6 +116,7 @@
     <ClInclude Include="..\src\Components\Membership.h" />
     <ClInclude Include="..\src\Components\Navigator.h" />
     <ClInclude Include="..\src\Components\Position.h" />
+    <ClInclude Include="..\src\Components\SendOnDeath.h" />
     <ClInclude Include="..\src\Components\StateListener.h" />
     <ClInclude Include="..\src\Components\States\BuildGS.h" />
     <ClInclude Include="..\src\Components\States\DefendGS.h" />

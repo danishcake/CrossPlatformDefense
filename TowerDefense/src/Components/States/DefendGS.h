@@ -7,7 +7,7 @@
 
 class GameObject;
 class WorldBlocks;
-//class
+class ControlText;
 
 /*
  * DefendGS is created by BuildGS. It spawns walkers at the map edge who 
@@ -33,14 +33,18 @@ private:
    Subscriber<WalkerDeathMessage> mDeathSubscriber;
 
    int mSpawnCount;
+   int mMaxSpawn;
    int mDeathCount;
    float mSpawnTime;
    float mBackToBuildTimer;
+
+   ControlText* mWalkerCountText;
 
    void SpawnObjects(TickParameters& tp);
    void SpawnWalker(TickParameters& tp);
    void TransitionToBuild(TickParameters& tp);
    void TapToKill(int x, int y, TickParameters& tp);
+   void UpdateWalkerText(TickParameters& tp);
 
 
 public:

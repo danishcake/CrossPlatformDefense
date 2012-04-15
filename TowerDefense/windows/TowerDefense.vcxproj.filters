@@ -281,6 +281,9 @@
     <ClInclude Include="..\src\Messaging\WalkerDeathMessage.h">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Components\SendOnDeath.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Components\Graphics\CubeDrawer.cpp">

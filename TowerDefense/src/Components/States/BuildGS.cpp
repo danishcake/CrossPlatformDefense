@@ -62,57 +62,54 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    }
 
    //Spawn GUI controls
-   if(from_menu)
-   {
-      //Spawn cursor
-      GameObject* cursor = new GameObject();
-      cursor->AddComponent(new Position(), tp);
-      cursor->AddComponent(new CursorDrawer(), tp);
-      CursorEventReceiver* cursor_event_receiver = new CursorEventReceiver(CursorAction::DeleteTop, mBlocks);
-      cursor->AddComponent(cursor_event_receiver, tp);
-      cursor->AddComponent(new StateListener(GameStates::Build, true), tp);
-      tp.Spawn(cursor);
+   //Spawn cursor
+   GameObject* cursor = new GameObject();
+   cursor->AddComponent(new Position(), tp);
+   cursor->AddComponent(new CursorDrawer(), tp);
+   CursorEventReceiver* cursor_event_receiver = new CursorEventReceiver(CursorAction::DeleteTop, mBlocks);
+   cursor->AddComponent(cursor_event_receiver, tp);
+   cursor->AddComponent(new StateListener(GameStates::Build, true), tp);
+   tp.Spawn(cursor);
 
-      //Spawn drag area for Camera manipulation, tap detection (with callback)
-      GameObject* drag_area = new GameObject();
-      drag_area->AddComponent(new ControlArea(UDim(Vector2f(0.0f, 0.0f), Vector2f( 0.0f,  0.0f), Edge::TopLeft),
-                                              UDim(Vector2f(1.0f, 0.9f), Vector2f( 0.0f, -20.0f))), tp);
-      drag_area->AddComponent(new ControlEventReceiver(), tp);
-      drag_area->AddComponent(new CameraRotateAction(CameraAction::TurnAxis), tp);
-      drag_area->AddComponent(new CursorPositioningAction(mBlocks), tp);
-      drag_area->AddComponent(new StateListener(GameStates::Build, true), tp);
-      tp.Spawn(drag_area);
+   //Spawn drag area for Camera manipulation, tap detection (with callback)
+   GameObject* drag_area = new GameObject();
+   drag_area->AddComponent(new ControlArea(UDim(Vector2f(0.0f, 0.0f), Vector2f( 0.0f,  0.0f), Edge::TopLeft),
+                                             UDim(Vector2f(1.0f, 0.9f), Vector2f( 0.0f, -20.0f))), tp);
+   drag_area->AddComponent(new ControlEventReceiver(), tp);
+   drag_area->AddComponent(new CameraRotateAction(CameraAction::TurnAxis), tp);
+   drag_area->AddComponent(new CursorPositioningAction(mBlocks), tp);
+   drag_area->AddComponent(new StateListener(GameStates::Build, true), tp);
+   tp.Spawn(drag_area);
 
-      GameObject* btn_delete = new GameObject();
-      btn_delete->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 1.0f), Vector2f(-10.0f, -10.0f), Edge::BottomRight),
-                                                 UDim(Vector2f(0.15f, 0.1f), Vector2f( 0.0f, 0.0f))), tp);
-      btn_delete->AddComponent(new ControlEventReceiver(), tp);
-      btn_delete->AddComponent(new ControlOutline(), tp);
-      btn_delete->AddComponent(new ControlText("Clr", "fonts/OrbitronLight.ttf", Vector4f(0.707f, 0.137f, 0.137f, 1)), tp);
-      btn_delete->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetDeleteMode, cursor_event_receiver, _1, _2, _3)), tp);
-      btn_delete->AddComponent(new StateListener(GameStates::Build, true), tp);
-      tp.Spawn(btn_delete);
+   GameObject* btn_delete = new GameObject();
+   btn_delete->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 1.0f), Vector2f(-10.0f, -10.0f), Edge::BottomRight),
+                                                UDim(Vector2f(0.15f, 0.1f), Vector2f( 0.0f, 0.0f))), tp);
+   btn_delete->AddComponent(new ControlEventReceiver(), tp);
+   btn_delete->AddComponent(new ControlOutline(), tp);
+   btn_delete->AddComponent(new ControlText("Clr", "fonts/OrbitronLight.ttf", Vector4f(0.707f, 0.137f, 0.137f, 1)), tp);
+   btn_delete->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetDeleteMode, cursor_event_receiver, _1, _2, _3)), tp);
+   btn_delete->AddComponent(new StateListener(GameStates::Build, true), tp);
+   tp.Spawn(btn_delete);
 
-      GameObject* btn_add = new GameObject();
-      btn_add->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 0.9f), Vector2f(-10.0f, -30.0f), Edge::BottomRight),
-                                              UDim(Vector2f(0.15f, 0.1f), Vector2f( 0.0f, 0.0f))), tp);
-      btn_add->AddComponent(new ControlEventReceiver(), tp);
-      btn_add->AddComponent(new ControlOutline(), tp);
-      btn_add->AddComponent(new ControlText("Add", "fonts/OrbitronLight.ttf", Vector4f(0.137f, 0.707f, 0.137f, 1)), tp);
-      btn_add->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetAddMode, cursor_event_receiver, _1, _2, _3)), tp);
-      btn_add->AddComponent(new StateListener(GameStates::Build, true), tp);
-      tp.Spawn(btn_add);
+   GameObject* btn_add = new GameObject();
+   btn_add->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 0.9f), Vector2f(-10.0f, -30.0f), Edge::BottomRight),
+                                             UDim(Vector2f(0.15f, 0.1f), Vector2f( 0.0f, 0.0f))), tp);
+   btn_add->AddComponent(new ControlEventReceiver(), tp);
+   btn_add->AddComponent(new ControlOutline(), tp);
+   btn_add->AddComponent(new ControlText("Add", "fonts/OrbitronLight.ttf", Vector4f(0.137f, 0.707f, 0.137f, 1)), tp);
+   btn_add->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetAddMode, cursor_event_receiver, _1, _2, _3)), tp);
+   btn_add->AddComponent(new StateListener(GameStates::Build, true), tp);
+   tp.Spawn(btn_add);
 
-      GameObject* btn_go = new GameObject();
-      btn_go->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 0.0f), Vector2f(-10.0f, 10.0f), Edge::TopRight),
-                                           UDim(Vector2f(0.15f, 0.1f), Vector2f( 0.0f, 0.0f))), tp);
-      btn_go->AddComponent(new ControlEventReceiver(), tp);
-      btn_go->AddComponent(new ControlOutline(), tp);
-      btn_go->AddComponent(new ControlText("GO", "fonts/OrbitronLight.ttf", Vector4f(1.0f, 1.0f, 1.0f, 1)), tp);
-      btn_go->AddComponent(new StateListener(GameStates::Build, true), tp);
-      btn_go->AddComponent(new SignalAction(boost::bind(&BuildGS::TransitionToDefend, this, _1, _2, _3)), tp);
-      tp.Spawn(btn_go);
-   }
+   GameObject* btn_go = new GameObject();
+   btn_go->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 0.0f), Vector2f(-10.0f, 10.0f), Edge::TopRight),
+                                          UDim(Vector2f(0.15f, 0.1f), Vector2f( 0.0f, 0.0f))), tp);
+   btn_go->AddComponent(new ControlEventReceiver(), tp);
+   btn_go->AddComponent(new ControlOutline(), tp);
+   btn_go->AddComponent(new ControlText("GO", "fonts/OrbitronLight.ttf", Vector4f(1.0f, 1.0f, 1.0f, 1)), tp);
+   btn_go->AddComponent(new StateListener(GameStates::Build, true), tp);
+   btn_go->AddComponent(new SignalAction(boost::bind(&BuildGS::TransitionToDefend, this, _1, _2, _3)), tp);
+   tp.Spawn(btn_go);
 
    GameObject* path_vis = new GameObject();
    path_vis->AddComponent(new PathVisualiser(mBlocks), tp);
@@ -128,5 +125,6 @@ void BuildGS::TransitionToDefend(int x, int y, TickParameters& tp)
    GameObject* defend = new GameObject();
    defend->AddComponent(new DefendGS(mBlocks, mSharedState), tp);
    tp.Spawn(defend);
+   mOwner->Kill();
 }
 
