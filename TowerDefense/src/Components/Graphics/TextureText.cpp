@@ -216,7 +216,7 @@ void Texture::InitialiseText(TickParameters& tp)
          Log::Error(__FILE__, "Error measuring string");
          return;
       }
-      if(text_size.x > screen_size.x && text_size.y > screen_size.y)
+      if(text_size.x > screen_size.x || text_size.y > screen_size.y)
          break;
       else
       {
