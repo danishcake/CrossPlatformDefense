@@ -5,6 +5,7 @@
 #include "../GUI/Actions/SignalAction.h"
 #include "../GUI/ControlArea.h"
 #include "../GUI/ControlText.h"
+#include "../GUI/ControlTransition.h"
 #include "../GUI/ControlEventReceiver.h"
 #include "../GUI/ControlEventDistributor.h"
 #include "../Graphics/CubeDrawer.h"
@@ -23,9 +24,12 @@
 #include <iomanip>
 
 
+static const float TransitionTime = 0.25f;
+
 DefendGS::DefendGS(WorldBlocks* world, SharedState state)
    : mFirst(true), mBlocks(world), mSharedState(state),
-     mSpawnCount(0), mDeathCount(0), mBackToBuildTimer(0.0f)
+     mSpawnCount(0), mDeathCount(0),
+     mTransitioningToBuild(false), mTransitionTimer(0.0f)
 {
    mSpawnTime = 3.0f; // First spawn in 3s
 }
@@ -71,11 +75,16 @@ void DefendGS::Tick(TickParameters& tp)
       }
    }
 
-   if(mDeathCount >= mMaxSpawn)
+   if (mDeathCount >= mMaxSpawn && !mTransitioningToBuild)
    {
-      float ltv_back_timer = mBackToBuildTimer;
-      mBackToBuildTimer += tp.timespan;
-      if (mBackToBuildTimer >= 2.0f && ltv_back_timer < 2.0f)
+      mTransitioningToBuild = true;
+      tp.msg.GetHub<GuiTransitionControlMessage>().Broadcast(GuiTransitionControlMessage(1, GuiTransition::TransitionOut));
+   }
+
+   if (mTransitioningToBuild)
+   {
+      mTransitionTimer += tp.timespan;
+      if (mTransitionTimer >= TransitionTime)
       {
          TransitionToBuild(tp);
       }
@@ -122,6 +131,7 @@ void DefendGS::SpawnObjects(TickParameters& tp)
    mWalkerCountText = new ControlText("000/000", "fonts/OrbitronLight.ttf", Vector4f(1.0f, 1.0f, 1.0f, 1.0f));
    walker_counter->AddComponent(mWalkerCountText, tp);
    walker_counter->AddComponent(new StateListener(GameStates::Defend, true), tp);
+   walker_counter->AddComponent(new ControlTransition(ControlTransitionState::TransIn, TransitionTime, 1), tp);
    tp.Spawn(walker_counter);
 }
 

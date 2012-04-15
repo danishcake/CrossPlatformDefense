@@ -36,7 +36,9 @@ private:
    int mMaxSpawn;
    int mDeathCount;
    float mSpawnTime;
-   float mBackToBuildTimer;
+
+   bool mTransitioningToBuild;
+   float mTransitionTimer;
 
    ControlText* mWalkerCountText;
 

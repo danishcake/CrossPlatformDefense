@@ -14,7 +14,7 @@
 #include "../StateListener.h"
 #include "../Graphics/FadeOverlay.h"
 
-static const float TransitionTime = 0.5f;
+static const float TransitionTime = 0.25f;
 
 MenuGS::MenuGS()
    : mFirst(true),

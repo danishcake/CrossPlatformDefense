@@ -27,19 +27,6 @@ const Quatf sQuats[] =
    makeQuat(0,    -88, 90)
 };
 
-static float clamp(float v, float min, float max)
-{
-   return v < min ? min : v > max ? max : v;
-}
-
-static float smootherstep(float edge0, float edge1, float x)
-{
-    // Scale, and clamp x to 0..1 range
-    x = clamp((x - edge0)/(edge1 - edge0), 0, 1);
-    // Evaluate polynomial
-    return x*x*x*(x*(x*6 - 15) + 10);
-}
-
 const float Camera::sTransitionTime = 0.3f;
 const float Camera::sFOVNarrow = 45.0f;
 const float Camera::sFOVWide = 90.0f;
@@ -197,7 +184,7 @@ void Camera::Tick(TickParameters &tp)
    }
 
    //Now just interpolate between the two to get the camera orientation
-   float transition_factor = smootherstep(0, 1, mTransitionTimer / sTransitionTime);
+   float transition_factor = smootherstep(0.0f, 1.0f, mTransitionTimer / sTransitionTime);
    mCameraQuaternion = mCameraQuaternionStart.slerp(transition_factor, mCameraQuaternionEnd);
 
    //Now handle zooming
@@ -211,7 +198,7 @@ void Camera::Tick(TickParameters &tp)
       mZoomTransitionTimer = 0;
    }
 
-   zoom_scalar = smootherstep(0, 1, mZoomTransitionTimer / sTransitionTime);
+   zoom_scalar = smootherstep(0.0f, 1.0f, mZoomTransitionTimer / sTransitionTime);
 
    mCameraOrigin = mCameraOriginStart + (mCameraOriginEnd - mCameraOriginStart) * zoom_scalar;
    mFOV = mFOVStart + (mFOVEnd - mFOVStart) * zoom_scalar;

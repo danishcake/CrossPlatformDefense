@@ -12,6 +12,9 @@ private:
    bool mFirst;
    void SpawnMenuObjects(TickParameters& tp);
    void TransitionToDefend(int x, int y, TickParameters& tp);
+
+   bool mTransitioningToDefend;
+   float mTransitionTimer;
    
    WorldBlocks* mBlocks;
    SharedState mSharedState;

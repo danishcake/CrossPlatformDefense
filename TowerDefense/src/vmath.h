@@ -3501,6 +3501,21 @@ public:
 typedef Quaternion<float> Quatf;
 typedef Quaternion<double> Quatd;
 
+template <class T>
+inline T clamp(T v, T min, T max)
+{
+   return v < min ? min : v > max ? max : v;
+}
+
+template <class T>
+inline T smootherstep(T edge0, T edge1, T x)
+{
+    // Scale, and clamp x to 0..1 range
+    x = clamp((x - edge0)/(edge1 - edge0), 0.0f, 1.0f);
+    // Evaluate polynomial
+    return x*x*x*(x*(x*6 - 15) + 10);
+}
+
 #ifdef VMATH_NAMESPACE
 }
 #endif

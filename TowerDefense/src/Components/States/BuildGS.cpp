@@ -11,15 +11,19 @@
 #include "../GUI/ControlEventReceiver.h"
 #include "../GUI/ControlEventDistributor.h"
 #include "../GUI/ControlText.h"
+#include "../GUI/ControlTransition.h"
 #include "../GUI/Actions/CameraRotateAction.h"
 #include "../GUI/Actions/CursorPositioningAction.h"
 #include "../StateListener.h"
 #include "../../WorldBlocks.h"
 #include "DefendGS.h"
 
+static const float TransitionTime = 0.25f;
+
 
 BuildGS::BuildGS()
-   : mFirst(true), mBlocks(NULL)
+   : mFirst(true), mBlocks(NULL), 
+     mTransitionTimer(0), mTransitioningToDefend(false)
 {
    mSharedState.WaveID = 0;
    mSharedState.BlockStock = 5;
@@ -27,7 +31,8 @@ BuildGS::BuildGS()
 }
 
 BuildGS::BuildGS(WorldBlocks* world, SharedState shared_state)
-   : mFirst(true), mBlocks(world), mSharedState(shared_state)
+   : mFirst(true), mBlocks(world), mSharedState(shared_state),
+     mTransitionTimer(0), mTransitioningToDefend(false)
 {
    mSharedState.DeleteMoves = 5;
 }
@@ -38,6 +43,19 @@ void BuildGS::Tick(TickParameters& tp)
    {
       SpawnMenuObjects(tp);
       mFirst = false;
+   }
+
+   if (mTransitioningToDefend)
+   {
+      mTransitionTimer += tp.timespan;
+      if (mTransitionTimer > TransitionTime)
+      {
+         tp.msg.GetHub<StateChangeMessage>().Broadcast(StateChangeMessage(GameStates::Defend));
+         GameObject* defend = new GameObject();
+         defend->AddComponent(new DefendGS(mBlocks, mSharedState), tp);
+         tp.Spawn(defend);
+         mOwner->Kill();
+      }
    }
 }
 
@@ -88,6 +106,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    btn_delete->AddComponent(new ControlOutline(), tp);
    btn_delete->AddComponent(new ControlText("Clr", "fonts/OrbitronLight.ttf", Vector4f(0.707f, 0.137f, 0.137f, 1)), tp);
    btn_delete->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetDeleteMode, cursor_event_receiver, _1, _2, _3)), tp);
+   btn_delete->AddComponent(new ControlTransition(ControlTransitionState::TransIn, TransitionTime, 1), tp);
    btn_delete->AddComponent(new StateListener(GameStates::Build, true), tp);
    tp.Spawn(btn_delete);
 
@@ -98,6 +117,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    btn_add->AddComponent(new ControlOutline(), tp);
    btn_add->AddComponent(new ControlText("Add", "fonts/OrbitronLight.ttf", Vector4f(0.137f, 0.707f, 0.137f, 1)), tp);
    btn_add->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetAddMode, cursor_event_receiver, _1, _2, _3)), tp);
+   btn_add->AddComponent(new ControlTransition(ControlTransitionState::TransIn, TransitionTime, 1), tp);
    btn_add->AddComponent(new StateListener(GameStates::Build, true), tp);
    tp.Spawn(btn_add);
 
@@ -108,6 +128,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    btn_go->AddComponent(new ControlOutline(), tp);
    btn_go->AddComponent(new ControlText("GO", "fonts/OrbitronLight.ttf", Vector4f(1.0f, 1.0f, 1.0f, 1)), tp);
    btn_go->AddComponent(new StateListener(GameStates::Build, true), tp);
+   btn_go->AddComponent(new ControlTransition(ControlTransitionState::TransIn, TransitionTime, 1), tp);
    btn_go->AddComponent(new SignalAction(boost::bind(&BuildGS::TransitionToDefend, this, _1, _2, _3)), tp);
    tp.Spawn(btn_go);
 
@@ -120,11 +141,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
 
 void BuildGS::TransitionToDefend(int x, int y, TickParameters& tp)
 {
-   tp.msg.GetHub<StateChangeMessage>().Broadcast(StateChangeMessage(GameStates::Defend));
-   
-   GameObject* defend = new GameObject();
-   defend->AddComponent(new DefendGS(mBlocks, mSharedState), tp);
-   tp.Spawn(defend);
-   mOwner->Kill();
+   tp.msg.GetHub<GuiTransitionControlMessage>().Broadcast(GuiTransitionControlMessage(1, GuiTransition::TransitionOut));
+   mTransitioningToDefend = true;
 }
 

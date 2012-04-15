@@ -51,16 +51,13 @@ void ControlTransition::Tick(TickParameters& tp)
    switch(mPendingState)
    {
       case ControlTransitionState::TransIn:
-         scalar_alpha = mTransitionTimer / mTransitionPeriod;
-         scalar_alpha = scalar_alpha < 0.0f ? 0.0f : scalar_alpha > 1.0f ? 1.0f : scalar_alpha;
+         scalar_alpha = smootherstep(0.0f, 1.0f, mTransitionTimer / mTransitionPeriod);
          scalar_size = 0.5f + 0.5f * scalar_alpha;
-         scalar_size = scalar_size < 0.0f ? 0.0f : scalar_size > 1.0f ? 1.0f : scalar_size;
          break;
       case ControlTransitionState::TransOut:
-         scalar_alpha = 1.0f - mTransitionTimer / mTransitionPeriod;
-         scalar_alpha = scalar_alpha < 0.0f ? 0.0f : scalar_alpha > 1.0f ? 1.0f : scalar_alpha;
-         scalar_size = 1.0f + 0.5f * mTransitionTimer / mTransitionPeriod;
-         scalar_size = scalar_size < 0.0f ? 0.0f : scalar_size > 1.5f ? 1.5f : scalar_size;
+         scalar_alpha = 1.0f - smootherstep(0.0f, 1.0f, mTransitionTimer / mTransitionPeriod);
+         scalar_size = 1.0f + 0.5f * smootherstep(0.0f, 1.0f, mTransitionTimer / mTransitionPeriod);
+         scalar_size = clamp(scalar_size, 0.0f, 1.5f);
          break;
       case ControlTransitionState::Hidden:
          scalar_alpha = 0.0f;
