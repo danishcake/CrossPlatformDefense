@@ -42,10 +42,14 @@ struct TextDefinitionComparer
     * (A, B) => true
     * (B, A) => false,
     * eg (A, B) = !(B, A)
-    * Also if A==B then return true
+    * Also if A==B then return false
     */
    bool operator()(const TextDefinition& left, const TextDefinition& right) const
    {
+      if (left.mFont == right.mFont && left.mText == right.mText && left.mSize == right.mSize)
+      {
+         return false;
+      }
       bool left_less = (left.mFont < right.mFont ||
                         left.mText < right.mText ||
                         !(left.mSize == right.mSize));
