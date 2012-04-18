@@ -56,6 +56,6 @@ Vector2i TouchData::GetTouch(int index) const
 float TouchData::GetTouchDistance() const
 {
    assert(mTouchCount == 2);
-   return static_cast<float>((mTouchPosition[1] - mTouchPosition[0]).length());
+   return static_cast<float>((mTouchPosition[1] - mTouchPosition[0]).lengthAccurate());
 
 }

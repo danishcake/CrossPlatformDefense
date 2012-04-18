@@ -109,6 +109,7 @@
     <ClInclude Include="..\src\Components\GUI\ControlEventDistributor.h" />
     <ClInclude Include="..\src\Components\GUI\ControlEventReceiver.h" />
     <ClInclude Include="..\src\Components\GUI\ControlOutline.h" />
+    <ClInclude Include="..\src\Components\GUI\ControlProgress.h" />
     <ClInclude Include="..\src\Components\GUI\ControlText.h" />
     <ClInclude Include="..\src\Components\GUI\ControlTransition.h" />
     <ClInclude Include="..\src\Components\GUI\UDim.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="..\src\Components\GUI\ControlEventDistributor.cpp" />
     <ClCompile Include="..\src\Components\GUI\ControlEventReceiver.cpp" />
     <ClCompile Include="..\src\Components\GUI\ControlOutline.cpp" />
+    <ClCompile Include="..\src\Components\GUI\ControlProgress.cpp" />
     <ClCompile Include="..\src\Components\GUI\ControlText.cpp" />
     <ClCompile Include="..\src\Components\GUI\ControlTransition.cpp" />
     <ClCompile Include="..\src\Components\GUI\UDim.cpp" />
@@ -252,6 +254,8 @@
     <None Include="..\assets\glsl\FullscreenTexturedVertex.glsl" />
     <None Include="..\assets\glsl\FullscreenVertex.glsl" />
     <None Include="..\assets\glsl\GUIFragment.glsl" />
+    <None Include="..\assets\glsl\GUIProgressFragment.glsl" />
+    <None Include="..\assets\glsl\GUIProgressTransform.glsl" />
     <None Include="..\assets\glsl\GUITextFragment.glsl" />
     <None Include="..\assets\glsl\GUITextTransform.glsl" />
     <None Include="..\assets\glsl\GUITransform.glsl" />

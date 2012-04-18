@@ -284,6 +284,9 @@
     <ClInclude Include="..\src\Components\SendOnDeath.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Components\GUI\ControlProgress.h">
+      <Filter>Header Files\Components\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Components\Graphics\CubeDrawer.cpp">
@@ -442,6 +445,9 @@
     <ClCompile Include="..\src\Components\CursorEventReceiver.cpp">
       <Filter>Source Files\Components\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Components\GUI\ControlProgress.cpp">
+      <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\assets\textures\TerrainTexture.png">
@@ -517,6 +523,12 @@
       <Filter>Assets\glsl</Filter>
     </None>
     <None Include="..\assets\glsl\CursorVertex.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\GUIProgressFragment.glsl">
+      <Filter>Assets\glsl</Filter>
+    </None>
+    <None Include="..\assets\glsl\GUIProgressTransform.glsl">
       <Filter>Assets\glsl</Filter>
     </None>
   </ItemGroup>

@@ -12,6 +12,7 @@
 #include "../GUI/ControlEventDistributor.h"
 #include "../GUI/ControlText.h"
 #include "../GUI/ControlTransition.h"
+#include "../GUI/ControlProgress.h"
 #include "../GUI/Actions/CameraRotateAction.h"
 #include "../GUI/Actions/CursorPositioningAction.h"
 #include "../StateListener.h"
@@ -104,6 +105,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
                                                 UDim(Vector2f(0.15f, 0.1f), Vector2f( 0.0f, 0.0f))), tp);
    btn_delete->AddComponent(new ControlEventReceiver(), tp);
    btn_delete->AddComponent(new ControlOutline(), tp);
+   btn_delete->AddComponent(new ControlProgress(), tp);
    btn_delete->AddComponent(new ControlText("Clr", "fonts/OrbitronLight.ttf", Vector4f(0.707f, 0.137f, 0.137f, 1)), tp);
    btn_delete->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetDeleteMode, cursor_event_receiver, _1, _2, _3)), tp);
    btn_delete->AddComponent(new ControlTransition(ControlTransitionState::TransIn, TransitionTime, 1), tp);
@@ -111,10 +113,11 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    tp.Spawn(btn_delete);
 
    GameObject* btn_add = new GameObject();
-   btn_add->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 0.9f), Vector2f(-10.0f, -30.0f), Edge::BottomRight),
+   btn_add->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 0.85f), Vector2f(-10.0f, -20.0f), Edge::BottomRight),
                                              UDim(Vector2f(0.15f, 0.1f), Vector2f( 0.0f, 0.0f))), tp);
    btn_add->AddComponent(new ControlEventReceiver(), tp);
    btn_add->AddComponent(new ControlOutline(), tp);
+   btn_add->AddComponent(new ControlProgress(), tp);
    btn_add->AddComponent(new ControlText("Add", "fonts/OrbitronLight.ttf", Vector4f(0.137f, 0.707f, 0.137f, 1)), tp);
    btn_add->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetAddMode, cursor_event_receiver, _1, _2, _3)), tp);
    btn_add->AddComponent(new ControlTransition(ControlTransitionState::TransIn, TransitionTime, 1), tp);
@@ -131,6 +134,17 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    btn_go->AddComponent(new ControlTransition(ControlTransitionState::TransIn, TransitionTime, 1), tp);
    btn_go->AddComponent(new SignalAction(boost::bind(&BuildGS::TransitionToDefend, this, _1, _2, _3)), tp);
    tp.Spawn(btn_go);
+
+   /*
+   GameObject* progress_resource = new GameObject();
+   progress_resource->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 0.9f), Vector2f(-10.0f, -15.0f), Edge::BottomRight),
+                                                   UDim(Vector2f(0.15f, 0.05f), Vector2f( 0.0f, 0.0f))), tp);
+   progress_resource->AddComponent(new ControlOutline(), tp);
+   
+   progress_resource->AddComponent(new StateListener(GameStates::Build, true), tp);
+   progress_resource->AddComponent(new ControlTransition(ControlTransitionState::TransIn, TransitionTime, 1), tp);
+   tp.Spawn(progress_resource);
+   */
 
    GameObject* path_vis = new GameObject();
    path_vis->AddComponent(new PathVisualiser(mBlocks), tp);

@@ -481,6 +481,13 @@ public:
 		return (T) std::sqrt(x * x + y * y);
 	}
 
+   T lengthAccurate() const
+	{
+		return (T) std::sqrt(static_cast<double>(x) * static_cast<double>(x) + 
+                           static_cast<double>(y) * static_cast<double>(y));
+	}
+
+
 	/**
 	 * Normalize vector
 	 */
@@ -562,13 +569,14 @@ public:
 	}
 };
 
+template <typename T>
+class A {
+    template<class R>
+    R getValue(T t) { return get_value_impl<double>::apply(*this, t); }
+    template<class R, class = void>
+    struct get_value_impl; // specialize this
+};
 
-
-// Specialised template for length for integers as std::sqrt ambiguous
-int Vector2<int>::length() const
-{
-	return (int) std::sqrt((float)(x * x + y * y));
-}
 
 //--------------------------------------
 // Typedef shortcuts for 2D vector
