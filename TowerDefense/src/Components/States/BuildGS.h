@@ -5,6 +5,8 @@
 
 class GameObject;
 class WorldBlocks;
+class ControlProgress;
+class CursorEventReceiver;
 
 class BuildGS : public Component
 {
@@ -15,9 +17,12 @@ private:
 
    bool mTransitioningToDefend;
    float mTransitionTimer;
-   
+
    WorldBlocks* mBlocks;
    SharedState mSharedState;
+   ControlProgress* mAddProgress;
+   ControlProgress* mRemoveProgress;
+   CursorEventReceiver* mCursorEventRcvr;
 
 public:
    BuildGS();

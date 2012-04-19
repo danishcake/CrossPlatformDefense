@@ -34,13 +34,9 @@ void ControlProgress::InitialiseGraphics(TickParameters& tp)
    mVertexColorLUTUniformHandle = mEffect->GetUniformLocation("VertexColorLUT");
    mAlphaUniformHandle = mEffect->GetUniformLocation("VertexAlpha");
    mWidthUniformHandle = mEffect->GetUniformLocation("ProgressWidth");
-   
+
    mPositionAttributeHandle = mEffect->GetAttributeLocation("InputPosition");
    mColorAttributeHandle = mEffect->GetAttributeLocation("InputVertexColorIndex");
-   
-
-
-
 
 
    //Initialise VBO for fill
@@ -145,4 +141,6 @@ void ControlProgress::SetAlpha(float a)
 void ControlProgress::SetProgress(float progress)
 {
    mProgress = progress;
+   mProgress = std::max(0.0f, mProgress);
+   mProgress = std::min(1.0f, mProgress);
 }

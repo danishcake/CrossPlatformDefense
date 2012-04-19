@@ -24,7 +24,8 @@ static const float TransitionTime = 0.25f;
 
 BuildGS::BuildGS()
    : mFirst(true), mBlocks(NULL), 
-     mTransitionTimer(0), mTransitioningToDefend(false)
+     mTransitionTimer(0), mTransitioningToDefend(false),
+     mAddProgress(NULL), mRemoveProgress(NULL), mCursorEventRcvr(NULL)
 {
    mSharedState.WaveID = 0;
    mSharedState.BlockStock = 5;
@@ -33,7 +34,8 @@ BuildGS::BuildGS()
 
 BuildGS::BuildGS(WorldBlocks* world, SharedState shared_state)
    : mFirst(true), mBlocks(world), mSharedState(shared_state),
-     mTransitionTimer(0), mTransitioningToDefend(false)
+     mTransitionTimer(0), mTransitioningToDefend(false),
+     mAddProgress(NULL), mRemoveProgress(NULL), mCursorEventRcvr(NULL)
 {
    mSharedState.DeleteMoves = 5;
 }
@@ -45,6 +47,9 @@ void BuildGS::Tick(TickParameters& tp)
       SpawnMenuObjects(tp);
       mFirst = false;
    }
+
+   mAddProgress->SetProgress(mSharedState.BlockStock / 5.0f);
+   mRemoveProgress->SetProgress(mSharedState.DeleteMoves / 5.0f);
 
    if (mTransitioningToDefend)
    {
@@ -85,8 +90,8 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    GameObject* cursor = new GameObject();
    cursor->AddComponent(new Position(), tp);
    cursor->AddComponent(new CursorDrawer(), tp);
-   CursorEventReceiver* cursor_event_receiver = new CursorEventReceiver(CursorAction::DeleteTop, mBlocks);
-   cursor->AddComponent(cursor_event_receiver, tp);
+   mCursorEventRcvr = new CursorEventReceiver(CursorAction::DeleteTop, mBlocks);
+   cursor->AddComponent(mCursorEventRcvr, tp);
    cursor->AddComponent(new StateListener(GameStates::Build, true), tp);
    tp.Spawn(cursor);
 
@@ -105,9 +110,10 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
                                                 UDim(Vector2f(0.15f, 0.1f), Vector2f( 0.0f, 0.0f))), tp);
    btn_delete->AddComponent(new ControlEventReceiver(), tp);
    btn_delete->AddComponent(new ControlOutline(), tp);
-   btn_delete->AddComponent(new ControlProgress(), tp);
+   mRemoveProgress = new ControlProgress();
+   btn_delete->AddComponent(mRemoveProgress, tp);
    btn_delete->AddComponent(new ControlText("Clr", "fonts/OrbitronLight.ttf", Vector4f(0.707f, 0.137f, 0.137f, 1)), tp);
-   btn_delete->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetDeleteMode, cursor_event_receiver, _1, _2, _3)), tp);
+   btn_delete->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetDeleteMode, mCursorEventRcvr, _1, _2, _3)), tp);
    btn_delete->AddComponent(new ControlTransition(ControlTransitionState::TransIn, TransitionTime, 1), tp);
    btn_delete->AddComponent(new StateListener(GameStates::Build, true), tp);
    tp.Spawn(btn_delete);
@@ -117,9 +123,10 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
                                              UDim(Vector2f(0.15f, 0.1f), Vector2f( 0.0f, 0.0f))), tp);
    btn_add->AddComponent(new ControlEventReceiver(), tp);
    btn_add->AddComponent(new ControlOutline(), tp);
-   btn_add->AddComponent(new ControlProgress(), tp);
+   mAddProgress = new ControlProgress();
+   btn_add->AddComponent(mAddProgress, tp);
    btn_add->AddComponent(new ControlText("Add", "fonts/OrbitronLight.ttf", Vector4f(0.137f, 0.707f, 0.137f, 1)), tp);
-   btn_add->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetAddMode, cursor_event_receiver, _1, _2, _3)), tp);
+   btn_add->AddComponent(new SignalAction(boost::bind(&CursorEventReceiver::SetAddMode, mCursorEventRcvr, _1, _2, _3)), tp);
    btn_add->AddComponent(new ControlTransition(ControlTransitionState::TransIn, TransitionTime, 1), tp);
    btn_add->AddComponent(new StateListener(GameStates::Build, true), tp);
    tp.Spawn(btn_add);

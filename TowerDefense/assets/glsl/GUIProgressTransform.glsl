@@ -11,7 +11,7 @@ uniform lowp float VertexAlpha;
 /* 
  * Progress uniform
  */
-uniform medp float ProgressWidth;
+uniform mediump float ProgressWidth;
 
 /* 
  * Color LUT
