@@ -2,6 +2,7 @@
 #include "ControlText.h"
 #include "ControlArea.h"
 #include "ControlOutline.h"
+#include "ControlProgress.h"
 #include "../../Camera.h"
 #include "../../GameObject.h"
 #include "../../Log.h"
@@ -21,6 +22,7 @@ void ControlTransition::Initialise(TickParameters& tp, GameObject* owner)
    mControlArea = owner->GetComponent<ControlArea>();
    mControlOutline = owner->GetComponent<ControlOutline>();
    mControlText = owner->GetComponent<ControlText>();
+   mControlProgress = owner->GetComponent<ControlProgress>();
 }
 
 void ControlTransition::Tick(TickParameters& tp)
@@ -93,6 +95,13 @@ void ControlTransition::Tick(TickParameters& tp)
          //Scale text
          mControlText->SetTransform(scale);
          mControlText->SetAlpha(scalar_alpha);
+      }
+
+      if(mControlProgress)
+      {
+         //Scale progress bar
+         mControlProgress->SetTransform(scale);
+         mControlProgress->SetAlpha(scalar_alpha);
       }
    }
 }

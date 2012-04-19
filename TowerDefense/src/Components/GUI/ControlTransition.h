@@ -6,6 +6,7 @@
 class ControlArea;
 class ControlOutline;
 class ControlText;
+class ControlProgress;
 
 namespace ControlTransitionState
 {
@@ -33,6 +34,7 @@ private:
    ControlArea* mControlArea;
    ControlOutline* mControlOutline;
    ControlText* mControlText;
+   ControlProgress* mControlProgress;
 
    Subscriber<GuiTransitionControlMessage> mTransitionControlSubscriber;
 

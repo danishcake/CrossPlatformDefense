@@ -38,6 +38,7 @@ BuildGS::BuildGS(WorldBlocks* world, SharedState shared_state)
      mAddProgress(NULL), mRemoveProgress(NULL), mCursorEventRcvr(NULL)
 {
    mSharedState.DeleteMoves = 5;
+   mSharedState.BlockStock = 5;
 }
 
 void BuildGS::Tick(TickParameters& tp)
@@ -50,6 +51,10 @@ void BuildGS::Tick(TickParameters& tp)
 
    mAddProgress->SetProgress(mSharedState.BlockStock / 5.0f);
    mRemoveProgress->SetProgress(mSharedState.DeleteMoves / 5.0f);
+   mCursorEventRcvr->SetDeleteAllowed(mSharedState.DeleteMoves > 0);
+   mCursorEventRcvr->SetAddAllowed(mSharedState.BlockStock > 0);
+
+
 
    if (mTransitioningToDefend)
    {
@@ -91,6 +96,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    cursor->AddComponent(new Position(), tp);
    cursor->AddComponent(new CursorDrawer(), tp);
    mCursorEventRcvr = new CursorEventReceiver(CursorAction::DeleteTop, mBlocks);
+   mCursorEventRcvr->SubscribeForAction(boost::bind(&BuildGS::CursorActionPerformed, this, _1, _2));
    cursor->AddComponent(mCursorEventRcvr, tp);
    cursor->AddComponent(new StateListener(GameStates::Build, true), tp);
    tp.Spawn(cursor);
@@ -142,17 +148,6 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    btn_go->AddComponent(new SignalAction(boost::bind(&BuildGS::TransitionToDefend, this, _1, _2, _3)), tp);
    tp.Spawn(btn_go);
 
-   /*
-   GameObject* progress_resource = new GameObject();
-   progress_resource->AddComponent(new ControlArea(UDim(Vector2f(1.0f, 0.9f), Vector2f(-10.0f, -15.0f), Edge::BottomRight),
-                                                   UDim(Vector2f(0.15f, 0.05f), Vector2f( 0.0f, 0.0f))), tp);
-   progress_resource->AddComponent(new ControlOutline(), tp);
-   
-   progress_resource->AddComponent(new StateListener(GameStates::Build, true), tp);
-   progress_resource->AddComponent(new ControlTransition(ControlTransitionState::TransIn, TransitionTime, 1), tp);
-   tp.Spawn(progress_resource);
-   */
-
    GameObject* path_vis = new GameObject();
    path_vis->AddComponent(new PathVisualiser(mBlocks), tp);
    path_vis->AddComponent(new StateListener(GameStates::Build, true), tp);
@@ -166,3 +161,15 @@ void BuildGS::TransitionToDefend(int x, int y, TickParameters& tp)
    mTransitioningToDefend = true;
 }
 
+void BuildGS::CursorActionPerformed(CursorAction::Enum action, TickParameters& tp)
+{
+   switch (action)
+   {
+   case CursorAction::AddTop:
+      mSharedState.BlockStock--;
+      break;
+   case CursorAction::DeleteTop:
+      mSharedState.DeleteMoves--;
+      break;
+   }
+}

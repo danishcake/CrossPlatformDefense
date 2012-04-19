@@ -2,11 +2,11 @@
 
 #include "../Component.h"
 #include "SharedState.h"
+#include "../CursorEventReceiver.h"
 
 class GameObject;
 class WorldBlocks;
 class ControlProgress;
-class CursorEventReceiver;
 
 class BuildGS : public Component
 {
@@ -14,6 +14,7 @@ private:
    bool mFirst;
    void SpawnMenuObjects(TickParameters& tp);
    void TransitionToDefend(int x, int y, TickParameters& tp);
+   void CursorActionPerformed(CursorAction::Enum, TickParameters& tp);
 
    bool mTransitioningToDefend;
    float mTransitionTimer;

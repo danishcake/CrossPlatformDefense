@@ -4,7 +4,7 @@
 #include "../WorldBlocks.h"
 
 CursorEventReceiver::CursorEventReceiver(CursorAction::Enum action, WorldBlocks* blocks) :
-   mAction(action), mBlocks(blocks)
+   mAction(action), mBlocks(blocks), mDeleteAllowed(true), mAddAllowed(true)
 {
 }
 
@@ -19,6 +19,12 @@ void CursorEventReceiver::Tick(TickParameters& tp)
    // Handle cursor positioning messages to move and action cursor
    std::vector<CursorMoveMessage> messages = mCursorMoveSubscriber.GetMessages();
 
+   if ((!mDeleteAllowed && mAction == CursorAction::DeleteTop) ||
+       (!mAddAllowed && mAction == CursorAction::AddTop))
+   {
+      mAction = CursorAction::PositionCursor;
+   }
+
    if(messages.size() > 0)
    {
       for(std::vector<CursorMoveMessage>::iterator it = messages.begin(); it != messages.end(); ++it)
@@ -28,6 +34,7 @@ void CursorEventReceiver::Tick(TickParameters& tp)
          case CursorAction::PositionCursor:
             mPosition->SetPosition(it->cursor_position);
             mPositionLTV = it->cursor_position;
+            mOnClick(CursorAction::PositionCursor, tp);
             break;
          case CursorAction::DeleteTop:
             if(mPositionLTV == it->cursor_position &&
@@ -43,10 +50,12 @@ void CursorEventReceiver::Tick(TickParameters& tp)
 
                mPositionLTV = it->cursor_position + Vector3f(0, -1, 0);
                mPosition->SetPosition(mPositionLTV);
+               mOnClick(CursorAction::DeleteTop, tp);
             } else
             {
                mPositionLTV = it->cursor_position;
                mPosition->SetPosition(mPositionLTV);
+               mOnClick(CursorAction::PositionCursor, tp);
             }
             break;
          case CursorAction::AddTop:
@@ -66,10 +75,12 @@ void CursorEventReceiver::Tick(TickParameters& tp)
 
                mPositionLTV = it->cursor_position + Vector3f(0, 1, 0);
                mPosition->SetPosition(mPositionLTV);
+               mOnClick(CursorAction::AddTop, tp);
             } else
             {
                mPositionLTV = it->cursor_position;
                mPosition->SetPosition(mPositionLTV);
+               mOnClick(CursorAction::PositionCursor, tp);
             }
             break;
          }
@@ -90,4 +101,19 @@ void CursorEventReceiver::SetAddMode(int x, int y, TickParameters& tp)
 void CursorEventReceiver::SetPositionMode(int x, int y, TickParameters& tp)
 {
    mAction = CursorAction::PositionCursor;
+}
+
+void CursorEventReceiver::SetDeleteAllowed(bool allowed)
+{
+   mDeleteAllowed = allowed;
+}
+
+void CursorEventReceiver::SetAddAllowed(bool allowed)
+{
+   mAddAllowed = allowed;
+}
+
+void CursorEventReceiver::SubscribeForAction(OnClickSlotType slot)
+{
+   mOnClick.connect(slot);
 }
