@@ -14,8 +14,12 @@ class PotentialMap
 public:
    PotentialMap(WorldBlocks* wb, int max_drop, int max_rise);
 
-   //Calculate the best direction to travel to get to target
-   void Guide(int x, int y, int& dx, int& dy);
+   // Calculate the best direction to travel to get to target
+   bool Guide(int x, int y, int& dx, int& dy);
+
+   // Find the nearest navigable spot (quite expensive? 
+   // might be worth caching results on Evaluate)
+   void NearestNavigable(int x, int y, int& dx, int& dy);
 
    void Evaluate();
 private:

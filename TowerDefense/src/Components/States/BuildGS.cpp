@@ -81,7 +81,7 @@ void BuildGS::SpawnMenuObjects(TickParameters& tp)
    //Load the world
    if(from_menu)
    {
-      mBlocks = WorldBlocks::LoadFromPNG(tp, "heightmaps/map2.png");
+      mBlocks = WorldBlocks::LoadFromPNG(tp, "heightmaps/map3.png");
 
       //Spawn the world
       GameObject* world = new GameObject();

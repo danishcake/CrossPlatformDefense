@@ -74,13 +74,22 @@ void PotentialMap::Evaluate()
    }
 }
 
-void PotentialMap::Guide(int x, int y, int& dx, int& dy)
+bool PotentialMap::Guide(int x, int y, int& dx, int& dy)
 {
    int neighbours[4];
    neighbours[0] = x <= 0 ? -1                                        : (y + 0) * WORLD_WIDTH + (x - 1);
    neighbours[1] = y <= 0 ? -1                                        : (y - 1) * WORLD_WIDTH + (x - 0);
    neighbours[2] = x >= WORLD_WIDTH - 1 ? -1                          : (y + 0) * WORLD_WIDTH + (x + 1);
    neighbours[3] = y >= WORLD_BREADTH - 1 ? -1                        : (y + 1) * WORLD_WIDTH + (x - 0);
+
+   // If no neighbour is navigable then initialise direction to zero
+   if (neighbours[0] == -1 && neighbours[1] == -1 &&
+       neighbours[2] == -1 && neighbours[3] == -1)
+   {
+      dx = 0;
+      dy = 0;
+      return false;
+   }
 
 
    // Find lowest of the neighbouring cells
@@ -102,6 +111,25 @@ void PotentialMap::Guide(int x, int y, int& dx, int& dy)
             lowest = mPotential[xn][yn];
             dx = xn - x;
             dy = yn - y;
+         }
+      }
+   }
+   return lowest != std::numeric_limits<int>::max();
+}
+
+void PotentialMap::NearestNavigable(int x, int y, int& dx, int& dy)
+{
+   unsigned int min_dist = std::numeric_limits<unsigned int>::max();
+   for (unsigned int sx = 0; sx < WORLD_WIDTH; sx++)
+   {
+      for (unsigned int sy = 0; sy < WORLD_HEIGHT; sy++)
+      {
+         unsigned int test_dist = sx * sx + sy * sy;
+         if (mPotential[sx][sy] != -1 && test_dist < min_dist)
+         {
+            dx = sx;
+            dy = sy;
+            min_dist = test_dist;
          }
       }
    }

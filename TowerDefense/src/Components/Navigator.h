@@ -8,6 +8,16 @@ class PotentialMap;
 class WorldBlocks;
 class WorldHandle;
 
+namespace NavMode
+{
+   enum Enum
+   {
+      Walking,
+      Digging,
+      Building
+   };
+}
+
 class Navigator : public Component
 {
 private:
@@ -15,10 +25,18 @@ private:
    Position* mPosition;
    Vector3i mOrigin;
    Vector3i mDelta;
+   NavMode::Enum mAction;
    float mTimer;
    float mTimestep;
+   
+
    WorldHandle* mWorldHdl;
    InvalidationWatcher mInvalidationWatcher;
+
+   bool FollowPotential();
+   void HandleStuck();
+   void DigThrough();
+   void BuildOver();
 public:
    Navigator();
 

@@ -267,6 +267,7 @@
     <None Include="..\assets\glsl\WorldVertex.glsl" />
     <None Include="..\assets\heightmaps\map1.png" />
     <None Include="..\assets\heightmaps\map2.png" />
+    <None Include="..\assets\heightmaps\map3.png" />
     <None Include="..\assets\textures\CubeTexture.png" />
     <None Include="..\assets\textures\TerrainTexture.png" />
   </ItemGroup>

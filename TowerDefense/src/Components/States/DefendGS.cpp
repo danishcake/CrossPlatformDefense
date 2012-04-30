@@ -99,8 +99,31 @@ void DefendGS::Teardown(TickParameters& tp)
 void DefendGS::SpawnWalker(TickParameters& tp)
 {
    GameObject* walker = new GameObject();
+
+
+   //Generate position around the edge - index 0,0 as 0, the progress down x 
+   int pos_index = rand() % (WORLD_WIDTH * 2 + WORLD_BREADTH * 2);
+   Vector3f spawn_position;
+   if (pos_index < WORLD_WIDTH)
+   {
+      spawn_position.x = pos_index;
+      spawn_position.z = 0;
+   } else if (pos_index < WORLD_WIDTH + WORLD_BREADTH)
+   {
+      spawn_position.x = WORLD_WIDTH - 1;
+      spawn_position.z = pos_index - WORLD_WIDTH;
+   } else if (pos_index < 2 * WORLD_WIDTH + WORLD_BREADTH)
+   {
+      spawn_position.x = pos_index - (WORLD_WIDTH + WORLD_BREADTH);
+      spawn_position.z = WORLD_BREADTH - 1;
+   } else
+   {
+      spawn_position.x = 0;
+      spawn_position.z = pos_index - (2 * WORLD_WIDTH + WORLD_BREADTH);
+   }
+    
    Position* pos = new Position();
-   pos->SetPosition(Vector3f(0, 0, 0));
+   pos->SetPosition(spawn_position);
    walker->AddComponent(pos, tp);
    walker->AddComponent(new Navigator(), tp);
    walker->AddComponent(new CubeDrawer(), tp);
