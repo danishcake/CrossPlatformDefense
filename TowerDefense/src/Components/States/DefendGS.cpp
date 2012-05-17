@@ -14,6 +14,7 @@
 #include "../CursorEventReceiver.h"
 #include "../StateListener.h"
 #include "../Membership.h"
+#include "../BallisticTrajectory.h"
 #include "../../WorldBlocks.h"
 #include "../Position.h"
 #include "../../Camera.h"
@@ -106,20 +107,20 @@ void DefendGS::SpawnWalker(TickParameters& tp)
    Vector3f spawn_position;
    if (pos_index < WORLD_WIDTH)
    {
-      spawn_position.x = pos_index;
-      spawn_position.z = 0;
+      spawn_position.x = static_cast<float>(pos_index);
+      spawn_position.z = 0.0f;
    } else if (pos_index < WORLD_WIDTH + WORLD_BREADTH)
    {
-      spawn_position.x = WORLD_WIDTH - 1;
-      spawn_position.z = pos_index - WORLD_WIDTH;
+      spawn_position.x = static_cast<float>(WORLD_WIDTH - 1);
+      spawn_position.z = static_cast<float>(pos_index - WORLD_WIDTH);
    } else if (pos_index < 2 * WORLD_WIDTH + WORLD_BREADTH)
    {
-      spawn_position.x = pos_index - (WORLD_WIDTH + WORLD_BREADTH);
-      spawn_position.z = WORLD_BREADTH - 1;
+      spawn_position.x = static_cast<float>(pos_index - (WORLD_WIDTH + WORLD_BREADTH));
+      spawn_position.z = static_cast<float>(WORLD_BREADTH - 1);
    } else
    {
-      spawn_position.x = 0;
-      spawn_position.z = pos_index - (2 * WORLD_WIDTH + WORLD_BREADTH);
+      spawn_position.x = 0.0f;
+      spawn_position.z = static_cast<float>(pos_index - (2 * WORLD_WIDTH + WORLD_BREADTH));
    }
     
    Position* pos = new Position();
@@ -179,22 +180,12 @@ void DefendGS::TransitionToBuild(TickParameters& tp)
 
 void DefendGS::TapToKill(int x, int y, TickParameters& tp)
 {
-   // Obtain a ray cast from the camera
-   Vector3f ray_origin, ray_unit;
-   tp.camera->GetRay(Vector2i(x, y), ray_origin, ray_unit);
+   // Spawn a bomb object
+   GameObject* bomb = new GameObject();
+   bomb->AddComponent(new Position(), tp);
+   bomb->AddComponent(new CubeDrawer(), tp);
+   bomb->AddComponent(new BallisticTrajectory(Vector2i(x, y)), tp);
+   bomb->AddComponent(new WorldHandle(mBlocks), tp);
 
-   // Check for intersection with any walkers
-   // TODO: Perhaps chuck a projectile instead?
-   std::vector<GameObject*> walkers = tp.memberships.GetMembers(MembershipType::BadGuy);
-   for (std::vector<GameObject*>::iterator it = walkers.begin(); it != walkers.end(); ++it)
-   {
-      Position* pos = (*it)->GetComponent<Position>();
-      if (pos)
-      {
-         if (Collisions3f::RayIntersectsSphere(ray_origin, ray_unit, pos->GetPosition() + Vector3f(0.5f, 0.5f, 0.5f), 1.0f))
-         {
-            (*it)->Kill();
-         }
-      }
-   }
+   tp.Spawn(bomb);
 }

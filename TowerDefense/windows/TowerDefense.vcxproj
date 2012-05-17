@@ -53,7 +53,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProgramFiles)\ARM\Mali Developer Tools\OpenGL ES Emulator v1.3.0\include;C:\Users\Public\boost;$(SolutionDir)..\..\freetype2\freetype2-windows\include;$(SolutionDir)..\..\libpng\libpng-windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -90,6 +90,7 @@
     <ClInclude Include="..\src\CheckMacros.h" />
     <ClInclude Include="..\src\Column.h" />
     <ClInclude Include="..\src\CommonDefs.h" />
+    <ClInclude Include="..\src\Components\BallisticTrajectory.h" />
     <ClInclude Include="..\src\Components\Component.h" />
     <ClInclude Include="..\src\Components\CursorEventReceiver.h" />
     <ClInclude Include="..\src\Components\Graphics\CubeDrawer.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="..\src\Block.cpp" />
     <ClCompile Include="..\src\Camera.cpp" />
     <ClCompile Include="..\src\Column.cpp" />
+    <ClCompile Include="..\src\Components\BallisticTrajectory.cpp" />
     <ClCompile Include="..\src\Components\CursorEventReceiver.cpp" />
     <ClCompile Include="..\src\Components\Graphics\CubeDrawer.cpp" />
     <ClCompile Include="..\src\Components\Graphics\CursorDrawer.cpp" />

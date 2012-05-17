@@ -54,7 +54,6 @@ Game::Game(TickParameters* tp, screen_context_t ctx)
    GameObject* fade_in = new GameObject();
    fade_in->AddComponent(new FadeOverlay(FadeType::FadeIn, Vector3f(1.0f, 1.0f, 1.0f), 0.5f), *mTP);
    mTP->Spawn(fade_in);
-
 }
 
 Game::~Game()

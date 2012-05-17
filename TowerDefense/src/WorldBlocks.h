@@ -4,6 +4,7 @@
 #include "Column.h"
 #include "CommonDefs.h"
 #include <string>
+#include "vmath.h"
 
 struct TickParameters;
 
@@ -36,6 +37,8 @@ class WorldBlocks
          const int getHeight() const {return mHeight;}
 
          Column getColumn(int x, int y);
+
+         bool CheckRayIntersection(Vector3f ray_origin, Vector3f ray_unit, Vector3f* intersection_point = 0);
 
     private:
         /*

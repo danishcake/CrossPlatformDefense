@@ -287,6 +287,12 @@
     <ClInclude Include="..\src\Components\GUI\ControlProgress.h">
       <Filter>Header Files\Components\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Components\BallisticTrajectory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\vmath-curves.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Components\Graphics\CubeDrawer.cpp">
@@ -447,6 +453,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Components\GUI\ControlProgress.cpp">
       <Filter>Source Files\Components\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\BallisticTrajectory.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
