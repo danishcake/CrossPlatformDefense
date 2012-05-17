@@ -112,6 +112,7 @@
 
 // Modified 2011-06-12, Davide Bacchet (davide.bacchet at gmail dot com)
 //                      added () operators with standard matrix notation (opposite wrt at() ).
+#pragma once
 #ifndef __vmath_Header_File__
 #define __vmath_Header_File__
 

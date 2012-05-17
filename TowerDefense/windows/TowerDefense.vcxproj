@@ -165,6 +165,7 @@
     <ClInclude Include="..\src\RefCnt.h" />
     <ClInclude Include="..\src\TickParameters.h" />
     <ClInclude Include="..\src\vmath-collisions.h" />
+    <ClInclude Include="..\src\vmath-curves.h" />
     <ClInclude Include="..\src\vmath.h" />
     <ClInclude Include="..\src\WorldBlocks.h" />
   </ItemGroup>

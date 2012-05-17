@@ -189,7 +189,7 @@ void WorldDrawer::Tick(TickParameters& tp)
       {
          if(mInvalidationWatcher.CheckRange(*mWorldBlocks, x * COLUMN_SIZE - 1, z * COLUMN_SIZE - 1, COLUMN_SIZE + 2, COLUMN_SIZE + 2))
          {
-            Log::Debug("WorldDrawer::Tick", "Updating VBO: %d,%d", x, z);
+            //Log::Debug("WorldDrawer::Tick", "Updating VBO: %d,%d", x, z);
             buildColumn(x * COLUMN_SIZE, z * COLUMN_SIZE, x * WORLD_BREADTH / COLUMN_SIZE + z);
          }
       }
