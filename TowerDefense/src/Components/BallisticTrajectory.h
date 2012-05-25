@@ -14,12 +14,13 @@ private:
    WorldHandle* mWorldHandle;
 
    float mTimer;
+   float mTimeOfFlight;
    CardinalSpline3f mSpline;
 
    Vector2i mClickPosition;
 
 public:
-   BallisticTrajectory(Vector2i screen_click);
+   BallisticTrajectory(Vector2i screen_click, float time_of_flight);
 
    virtual void Initialise(TickParameters& tp, GameObject* owner);
    virtual void Tick(TickParameters& tp);

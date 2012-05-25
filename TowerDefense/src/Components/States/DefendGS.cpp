@@ -184,7 +184,7 @@ void DefendGS::TapToKill(int x, int y, TickParameters& tp)
    GameObject* bomb = new GameObject();
    bomb->AddComponent(new Position(), tp);
    bomb->AddComponent(new CubeDrawer(), tp);
-   bomb->AddComponent(new BallisticTrajectory(Vector2i(x, y)), tp);
+   bomb->AddComponent(new BallisticTrajectory(Vector2i(x, y), 0.25f), tp);
    bomb->AddComponent(new WorldHandle(mBlocks), tp);
 
    tp.Spawn(bomb);

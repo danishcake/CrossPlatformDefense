@@ -39,21 +39,23 @@ void BallisticTrajectory::Initialise(TickParameters& tp, GameObject* owner)
 
    Vector3f midpoint = (ray_origin + intersection_point) * 0.5f;
    midpoint.y = ray_origin.y * 0.75f + intersection_point.y * 0.25f;
-   mSpline.AddPoint(midpoint, 0.5f);
-   mSpline.AddPoint(intersection_point, 1.0f);
+   mSpline.AddPoint(midpoint, 0.5f * mTimeOfFlight);
+   mSpline.AddPoint(intersection_point, mTimeOfFlight);
+   mSpline.Interpolator().SetTension(1.0f);
 
    mTimer = 0;
 }
 
-BallisticTrajectory::BallisticTrajectory(Vector2i screen_click) :
-   mClickPosition(screen_click)
+BallisticTrajectory::BallisticTrajectory(Vector2i screen_click, float time_of_flight) :
+   mClickPosition(screen_click),
+   mTimeOfFlight(time_of_flight)
 {
 }
 
 void BallisticTrajectory::Tick(TickParameters& tp)
 {
    mTimer += tp.timespan;
-   if (mTimer > 1.0f)
+   if (mTimer > mTimeOfFlight)
    {
       mOwner->Kill();
    }

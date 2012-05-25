@@ -9,6 +9,9 @@
 #include "Components/Graphics/FadeOverlay.h"
 #include "Components/States/MenuGS.h"
 #include "Components/GUI/ControlEventDistributor.h"
+#include <fstream>
+#include "vmath-curves.h"
+
 
 #ifdef ANDROID
 #include <android_native_app_glue.h>
@@ -54,6 +57,28 @@ Game::Game(TickParameters* tp, screen_context_t ctx)
    GameObject* fade_in = new GameObject();
    fade_in->AddComponent(new FadeOverlay(FadeType::FadeIn, Vector3f(1.0f, 1.0f, 1.0f), 0.5f), *mTP);
    mTP->Spawn(fade_in);
+
+/*
+   CardinalSplinef spline;
+   spline.AddPoint(0, 0.0f);
+   spline.AddPoint(1, 0.125f);
+   spline.AddPoint(3, 0.25f);
+   spline.AddPoint(-1, 0.375f);
+   spline.AddPoint(0, 0.5f);
+
+   std::fstream stm("Spline.csv", std::fstream::out);
+   for (float t = -0.1f; t < 0.6f; t += 0.01f)
+   {
+      stm << t;
+      for (float tension = 0.0f; tension < 1.0f; tension += 0.1f)
+      {
+         spline.Interpolator().SetTension(tension);
+         stm << ", " << spline.GetValue(t);
+      }
+      stm << std::endl;
+   }
+   stm.close();
+   */
 }
 
 Game::~Game()
